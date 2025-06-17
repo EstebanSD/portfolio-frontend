@@ -37,7 +37,7 @@ This project uses i18next for language detection and translation.
 Translation files are located in:
 
 ```bash
-src/i18n/locales/{en, es}.json
+src/lib/i18n/locales/{en, es}.json
 ```
 
 ---
