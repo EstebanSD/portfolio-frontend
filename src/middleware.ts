@@ -1,25 +1,26 @@
-import { NextRequest, NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
+import { NextResponse } from 'next/server';
+import { auth as middleware } from './auth';
 import { languages, fallbackLng, i18CookieName } from './lib/i18n/settings';
 
-export function middleware(request: NextRequest) {
-  const pathname = request.nextUrl.pathname;
+export default middleware((req: NextRequest) => {
+  const pathname = req.nextUrl.pathname;
 
-  // Check if the pathname already includes a supported language
+  // 1. FIRST: Manage i18n
   const pathnameHasLocale = languages.some(
     (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`,
   );
 
   if (!pathnameHasLocale) {
-    // Obtain the user's preferred language
     let locale = fallbackLng;
 
     // Check language cookie
-    const cookieLocale = request.cookies.get(i18CookieName)?.value;
+    const cookieLocale = req.cookies.get(i18CookieName)?.value;
     if (cookieLocale && languages.includes(cookieLocale)) {
       locale = cookieLocale;
     } else {
       // Use Accept-Language header
-      const acceptLanguage = request.headers.get('accept-language');
+      const acceptLanguage = req.headers.get('accept-language');
       if (acceptLanguage) {
         const preferredLocale = acceptLanguage
           .split(',')
@@ -33,11 +34,39 @@ export function middleware(request: NextRequest) {
     }
 
     // Redirect with the language in the URL
-    const redirectUrl = new URL(`/${locale}${pathname}`, request.url);
+    const redirectUrl = new URL(`/${locale}${pathname}`, req.url);
     return NextResponse.redirect(redirectUrl);
   }
-}
+
+  // 2. SECOND: Handling authentication
+
+  // Extract the path without language to verify if it is a protected path.
+  const pathWithoutLocale = pathname.replace(/^\/[a-z]{2}(\/|$)/, '/');
+
+  // Define routes that require authentication
+  const protectedRoutes = ['/admin'];
+  const isProtectedRoute = protectedRoutes.some((route) => pathWithoutLocale.startsWith(route));
+
+  if (isProtectedRoute) {
+    // Verify if the user is authenticated
+    if (!req.auth) {
+      // Extract current language from the URL for the redirect
+      const currentLocale = pathname.split('/')[1];
+      const loginUrl = new URL(`/${currentLocale}/auth/login`, req.url);
+      return NextResponse.redirect(loginUrl);
+    }
+
+    // Optional: Check admin role
+    if (req.auth.user?.role !== 'Admin') {
+      const currentLocale = pathname.split('/')[1];
+      const unauthorizedUrl = new URL(`/${currentLocale}/unauthorized`, req.url);
+      return NextResponse.redirect(unauthorizedUrl);
+    }
+  }
+
+  return NextResponse.next();
+});
 
 export const config = {
-  matcher: ['/((?!_next/static|_next/image|favicon.ico|.*\\..*).*)'],
+  matcher: ['/((?!api|_next/static|_next/image|favicon.ico|robots.txt|sitemap.xml).*)'],
 };
