@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import { languages } from '@/lib/i18n/settings';
 import './globals.css';
+import { ThemeProvider } from '@/components/providers';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -30,8 +31,17 @@ export default async function RootLayout({
   params: { lng: string };
 }>) {
   return (
-    <html lang={lng}>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>{children}</body>
+    <html lang={lng} suppressHydrationWarning>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   );
 }
