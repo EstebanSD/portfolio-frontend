@@ -22,6 +22,9 @@ i18next
     lng: undefined, // let detect the language on client side
     detection: {
       order: ['path', 'htmlTag', 'cookie', 'navigator'],
+      // caches: ['cookie'], // Important to remember the preference
+      // cookieMinutes: 525600, // 1 year in minutes (optional)
+      // cookieOptions: { path: '/', sameSite: 'lax', secure: true },
     },
     preload: runsOnServerSide ? languages : [],
   });

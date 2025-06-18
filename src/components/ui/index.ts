@@ -4,3 +4,4 @@ export * from './input';
 export * from './form';
 export * from './label';
 export * from './card';
+export * from './select';
