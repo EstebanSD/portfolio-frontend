@@ -5,21 +5,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { LoginFormData, useLogin } from '@/hooks/use-login';
 import { useTranslation } from '@/lib/i18n/client';
 import { Loader2 } from 'lucide-react';
-import {
-  Form,
-  Button,
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-  Input,
-} from '../ui';
+import { Form, Button, Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui';
+import { FormInput } from '../common';
 
 interface LoginFormProps {
   lng: string;
@@ -50,42 +37,21 @@ export function LoginForm({ lng }: LoginFormProps) {
       <CardContent>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-            <FormField
+            <FormInput
               control={form.control}
               name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{t('login.page.emailLabel')}</FormLabel>
-                  <FormControl>
-                    <Input
-                      type="email"
-                      placeholder="admin@example.com"
-                      autoComplete="email"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
+              label={t('login.page.emailLabel')}
+              placeholder="example@example.com"
+              type="email"
+              autoComplete="email"
             />
 
-            <FormField
+            <FormInput
               control={form.control}
               name="password"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{t('login.page.passwordLabel')}</FormLabel>
-                  <FormControl>
-                    <Input
-                      type="password"
-                      placeholder="••••••••"
-                      autoComplete="current-password"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
+              label={t('login.page.passwordLabel')}
+              placeholder="••••••••"
+              type="password"
             />
 
             {error && <p className="mt-1 text-sm text-destructive">{error}</p>}
