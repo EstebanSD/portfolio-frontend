@@ -33,7 +33,7 @@ export function ModeToggle() {
           <span className="sr-only">Toggle theme</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="bg-white dark:bg-gray-800">
+      <DropdownMenuContent align="end" className="bg-background dark:bg-gray-800">
         {THEME_VALUES.map(({ value, label }, idx) => {
           return (
             <DropdownMenuItem key={idx} onClick={() => setTheme(value)}>

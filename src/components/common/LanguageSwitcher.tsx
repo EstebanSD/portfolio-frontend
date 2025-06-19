@@ -19,10 +19,10 @@ export function LanguageSwitcher() {
 
   return (
     <Select onValueChange={handleLanguageChange} defaultValue={lng}>
-      <SelectTrigger className="w-fit">
+      <SelectTrigger className="w-fit bg-background">
         <SelectValue placeholder={lng} />
       </SelectTrigger>
-      <SelectContent className="bg-white dark:bg-gray-800">
+      <SelectContent className="bg-background dark:bg-gray-800">
         <SelectGroup>
           {languages.map((language) => (
             <SelectItem key={language} value={language}>
