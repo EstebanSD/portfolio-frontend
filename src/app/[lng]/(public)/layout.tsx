@@ -9,10 +9,10 @@ export default async function PublicLayout({
 }) {
   const { lng } = await params;
   return (
-    // Adjusted padding to account for fixed header
-    <div className="pt-16">
+    <>
       <PublicHeader lng={lng} />
-      {children}
-    </div>
+      {/* Adjusted padding to account for fixed header */}
+      <main className="pt-16">{children}</main>
+    </>
   );
 }
