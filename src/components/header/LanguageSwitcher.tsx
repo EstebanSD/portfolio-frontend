@@ -19,7 +19,7 @@ export function LanguageSwitcher() {
 
   return (
     <Select onValueChange={handleLanguageChange} defaultValue={lng}>
-      <SelectTrigger className="w-fit bg-background">
+      <SelectTrigger className="w-fit bg-background hover:border-ring dark:hover:bg-gray-800 outline-none focus-visible:ring-0">
         <SelectValue placeholder={lng} />
       </SelectTrigger>
       <SelectContent className="bg-background dark:bg-gray-800">

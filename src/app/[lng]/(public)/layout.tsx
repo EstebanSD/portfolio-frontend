@@ -1,9 +1,17 @@
-import { PublicHeader } from '@/components/common';
+import { PublicHeader } from '@/components/header';
 
-export default async function PublicLayout({ children }: { children: React.ReactNode }) {
+export default async function PublicLayout({
+  children,
+  params,
+}: {
+  children: React.ReactNode;
+  params: Promise<{ lng: string }>;
+}) {
+  const { lng } = await params;
   return (
+    // Adjusted padding to account for fixed header
     <div className="pt-16">
-      <PublicHeader />
+      <PublicHeader lng={lng} />
       {children}
     </div>
   );

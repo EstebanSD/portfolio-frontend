@@ -24,7 +24,7 @@ export async function PublicProjects({ lng }: { lng: string }) {
     const projects = await response.json();
 
     return (
-      <section className="pt-2">
+      <section id="projects" className="pt-2">
         {projects.map((project: { _id: string; description: string }) => (
           <div key={project._id}>{project.description}</div>
         ))}
