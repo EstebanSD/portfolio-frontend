@@ -3,8 +3,9 @@ import Link from 'next/link';
 import { ChevronsDownIcon } from 'lucide-react';
 
 import { serverTranslation } from '@/lib/i18n';
-import { ProjectsSkeleton, PublicProjects } from '@/components/projects';
 import { ButtonLink } from '@/components/common';
+import { ProjectsSkeleton, PublicProjects } from '@/components/projects';
+import { AboutSkeleton, PublicAbout } from '@/components/about';
 
 type Props = {
   params: Promise<{ lng: string }>;
@@ -45,6 +46,10 @@ export default async function HomePage({ params }: Props) {
           </div>
         </div>
       </section>
+
+      <Suspense fallback={<AboutSkeleton />}>
+        <PublicAbout lng={lng} />
+      </Suspense>
 
       <Suspense fallback={<ProjectsSkeleton />}>
         <PublicProjects lng={lng} />
