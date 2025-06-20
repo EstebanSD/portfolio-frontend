@@ -14,8 +14,7 @@ Designed to be fully internationalized, responsive, and easily scalable — both
 - **i18next** – Internationalization support
 - **React Query** – Data fetching and caching
 - **Zod** + **React Hook Form** – Schema-based form validation
-- **NextAuth.js** (TBD) – Authentication (possibly using JWT strategy to integrate with external backend API)
-- **Axios** or `fetch` – HTTP client for API communication (TBD)
+- **NextAuth.js** – Authentication
 
 ---
 
@@ -37,15 +36,8 @@ This project uses i18next for language detection and translation.
 Translation files are located in:
 
 ```bash
-src/lib/i18n/locales/{en, es}.json
+src/lib/i18n/locales/
 ```
-
----
-
-## 🔐 Authentication
-
-Auth layer is still under consideration.
-The most likely approach is to use NextAuth.js with JWT strategy, delegating token validation to a NestJS backend API.
 
 ---
 

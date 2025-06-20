@@ -1,0 +1,10 @@
+{
+  "page": {
+    "title1": "Acerca de",
+    "title2": "Mí",
+    "principalStack": "Stack Principal"
+  },
+  "errors": {
+    "errorMessage": "Lo siento, algo ha ido mal al cargar esta sección."
+  }
+}

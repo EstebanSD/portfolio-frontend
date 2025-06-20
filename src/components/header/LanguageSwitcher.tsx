@@ -14,7 +14,9 @@ export function LanguageSwitcher() {
     segments[1] = newLng;
     const newPath = segments.join('/');
 
-    router.push(newPath);
+    const hash = typeof window !== 'undefined' ? window.location.hash : '';
+
+    router.push(newPath + hash);
   };
 
   return (
