@@ -1,0 +1,13 @@
+{
+  "sections": {
+    "about": "Acerca mi",
+    "projects": "Proyectos",
+    "skills": "Habilidades",
+    "experiences": "Experiencias"
+  },
+  "mode": {
+    "light": "Claro",
+    "dark": "Oscuro",
+    "system": "Sistema"    
+  }    
+}

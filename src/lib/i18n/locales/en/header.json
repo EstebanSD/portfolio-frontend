@@ -1,0 +1,13 @@
+{
+  "sections": {
+    "about": "About",
+    "projects": "Projects",
+    "skills": "Skills",
+    "experiences": "Experiences"
+  },
+  "mode": {
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"    
+  }    
+}
