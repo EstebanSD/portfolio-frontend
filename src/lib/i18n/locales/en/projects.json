@@ -1,6 +1,26 @@
 {
-  "error":{
-    "title": "We were unable to load the projects",
-    "retry": "Try reloading the page"
+  "page": {
+    "title1": "My",
+    "title2": "Projects"
+  },
+  "card": {
+    "preview": "Project preview",
+    "start": "Start",
+    "end": "End",
+    "website": "Website",
+    "github": "Code",
+    "type": {
+      "personal": "Personal",
+      "company": "Company",
+      "freelance": "Freelance"
+    },
+    "status": {
+      "in_progress": "In progress",
+      "completed": "Completed",
+      "paused": "Paused"
+    }
+  },
+  "errors": {
+    "errorMessage": "Sorry, something went wrong loading this section."
   }
 }

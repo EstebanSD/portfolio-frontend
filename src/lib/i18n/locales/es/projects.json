@@ -1,6 +1,26 @@
 {
-  "error":{
-    "title": "No pudimos cargar los proyectos",
-    "retry": "Intenta recargar la página"
+  "page": {
+    "title1": "Mis",
+    "title2": "Proyectos"
+  },
+  "card": {
+    "preview": "Vista previa del proyecto",
+    "start": "Inicio",
+    "end": "Fin",
+    "website": "Sitio web",
+    "github": "Código",
+    "type": {
+      "personal": "Personal",
+      "company": "Empresa",
+      "freelance": "Freelance"
+    },
+    "status": {
+      "in_progress": "En desarrollo",
+      "completed": "Finalizado",
+      "paused": "En pausa"
+    }
+  },
+  "errors": {
+    "errorMessage": "Lo siento, algo ha ido mal al cargar esta sección."
   }
 }
