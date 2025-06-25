@@ -6,6 +6,7 @@ import { serverTranslation } from '@/lib/i18n';
 import { ButtonLink } from '@/components/common';
 import { ProjectsSkeleton, PublicProjects } from '@/components/projects';
 import { AboutSkeleton, PublicAbout } from '@/components/about';
+import { PublicSkills, PublicSkillsSkeleton } from '@/components/skills';
 
 type Props = {
   params: Promise<{ lng: string }>;
@@ -53,6 +54,10 @@ export default async function HomePage({ params }: Props) {
 
       <Suspense fallback={<ProjectsSkeleton />}>
         <PublicProjects lng={lng} />
+      </Suspense>
+
+      <Suspense fallback={<PublicSkillsSkeleton lng={lng} />}>
+        <PublicSkills lng={lng} />
       </Suspense>
     </div>
   );
