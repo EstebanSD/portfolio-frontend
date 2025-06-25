@@ -1,0 +1,14 @@
+{
+  "page": {
+    "title1": "Habilidades",
+    "title2": "Técnicas",
+    "subtitle": "Tecnologías, herramientas y metodologías que utilizo en mi trabajo diario."
+  },
+  "empty": {
+    "title": "Sin habilidades disponibles",
+    "description": "Cuando se agreguen, aparecerán en esta sección"
+  },
+  "errors": {
+    "errorMessage": "Sorry, something went wrong loading this section."
+  }
+}
