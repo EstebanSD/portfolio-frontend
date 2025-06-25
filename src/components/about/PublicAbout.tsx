@@ -21,7 +21,6 @@ export async function PublicAbout({ lng }: { lng: string }) {
       },
     });
 
-    await new Promise((resolve) => setTimeout(resolve, 3000)); // Simulate loading delay
     if (!response.ok) {
       throw new Error(`Error HTTP: ${response.status}`);
     }
@@ -29,7 +28,7 @@ export async function PublicAbout({ lng }: { lng: string }) {
     const about: About = await response.json();
 
     return (
-      <section id="about" className="scroll-mt-24 py-20 px-8">
+      <section id="about" className="scroll-mt-24 min-h-screen py-20 px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-light text-foreground mb-4">
             {t('page.title1')} <span className="text-accent">{t('page.title2')}</span>
@@ -59,7 +58,7 @@ export async function PublicAbout({ lng }: { lng: string }) {
           <p className="text-base sm:text-lg whitespace-pre-line">{about.bio}</p>
           {about?.tagline && (
             <p className="mt-6 text-lg italic text-accent leading-relaxed">
-              &ldquo; {about.tagline}&rdquo;
+              &ldquo;{about.tagline}&rdquo;
             </p>
           )}
           <div className="clear-both" />
@@ -81,7 +80,7 @@ export async function PublicAbout({ lng }: { lng: string }) {
     console.error('Error loading about data:', error);
 
     return (
-      <section id="about" className="scroll-mt-24 py-20 px-8">
+      <section id="about" className="scroll-mt-24 min-h-48 py-20 px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-light text-foreground mb-4">
             {t('page.title1')} <span className="text-accent">{t('page.title2')}</span>

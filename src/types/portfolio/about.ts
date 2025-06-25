@@ -1,7 +1,4 @@
-export interface FileMetadata {
-  publicId: string;
-  url: string;
-}
+import { FileMetadata } from './image';
 
 export interface About {
   _id: string;
