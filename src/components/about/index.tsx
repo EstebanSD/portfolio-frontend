@@ -1,2 +1,2 @@
 export * from './PublicAbout';
-export * from './AboutSkeleton';
+export * from './PublicAboutSkeleton';

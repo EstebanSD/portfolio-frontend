@@ -3,6 +3,10 @@
     "title1": "My",
     "title2": "Projects"
   },
+  "empty": {
+    "title": "No Projects available",
+    "description": "When they are added, they will appear in this section"
+  },
   "card": {
     "preview": "Project preview",
     "start": "Start",

@@ -1,3 +1,3 @@
 export * from './PublicProjects';
-export * from './ProjectsSkeleton';
+export * from './PublicProjectsSkeleton';
 export * from './ProjectCard';

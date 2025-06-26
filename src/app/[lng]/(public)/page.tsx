@@ -4,8 +4,8 @@ import { ChevronsDownIcon } from 'lucide-react';
 
 import { serverTranslation } from '@/lib/i18n';
 import { ButtonLink } from '@/components/common';
-import { ProjectsSkeleton, PublicProjects } from '@/components/projects';
-import { AboutSkeleton, PublicAbout } from '@/components/about';
+import { PublicProjects, PublicProjectsSkeleton } from '@/components/projects';
+import { PublicAbout, PublicAboutSkeleton } from '@/components/about';
 import { PublicSkills, PublicSkillsSkeleton } from '@/components/skills';
 
 type Props = {
@@ -48,11 +48,11 @@ export default async function HomePage({ params }: Props) {
         </div>
       </section>
 
-      <Suspense fallback={<AboutSkeleton />}>
+      <Suspense fallback={<PublicAboutSkeleton lng={lng} />}>
         <PublicAbout lng={lng} />
       </Suspense>
 
-      <Suspense fallback={<ProjectsSkeleton />}>
+      <Suspense fallback={<PublicProjectsSkeleton lng={lng} />}>
         <PublicProjects lng={lng} />
       </Suspense>
 
