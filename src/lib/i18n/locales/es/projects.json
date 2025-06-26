@@ -3,6 +3,10 @@
     "title1": "Mis",
     "title2": "Proyectos"
   },
+  "empty": {
+    "title": "Sin Proyectos disponibles",
+    "description": "Cuando se agreguen, aparecerán en esta sección"
+  },
   "card": {
     "preview": "Vista previa del proyecto",
     "start": "Inicio",

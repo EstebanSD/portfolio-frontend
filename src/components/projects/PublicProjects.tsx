@@ -1,7 +1,7 @@
 import { serverTranslation } from '@/lib/i18n';
 import { Project } from '@/types';
 import { ProjectCard } from './ProjectCard';
-import { CustomCarousel } from '../common';
+import { CustomCarousel, EmptyCard } from '../common';
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL!;
 
@@ -45,15 +45,19 @@ export async function PublicProjects({ lng }: { lng: string }) {
           </ButtonLink>
         </div> */}
 
-        <CustomCarousel
-          autoplay
-          showDots
-          navigationStyle="none"
-          itemClassName="pt-4 pb-8"
-          items={projects.map((project) => (
-            <ProjectCard key={project._id} project={project} />
-          ))}
-        />
+        {projects.length > 0 ? (
+          <CustomCarousel
+            autoplay
+            showDots
+            navigationStyle="none"
+            itemClassName="pt-4 pb-8"
+            items={projects.map((project) => (
+              <ProjectCard key={project._id} project={project} />
+            ))}
+          />
+        ) : (
+          <EmptyCard t={t} />
+        )}
       </section>
     );
   } catch (error) {
