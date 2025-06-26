@@ -1,0 +1,23 @@
+{
+  "page": {
+    "title1": "Mis",
+    "title2": "Experiencias"
+  },
+  "empty": {
+    "title": "No hay experiencias disponibles",
+    "description": "Cuando se agreguen, aparecerán en esta sección"
+  },
+  "card": {
+    "present": "Presente",
+    "type": {
+      "employment": "Empleo",
+      "freelance": "Freelance",
+      "internship": "Prácticas",
+      "volunteering": "Voluntariado",
+      "contract": "Contrato"
+    }
+  },
+  "errors": {
+    "errorMessage": "Lo siento, algo ha ido mal al cargar esta sección."
+  }
+}

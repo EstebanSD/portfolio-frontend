@@ -10,7 +10,7 @@ export async function PublicHeader({ lng }: { lng: string }) {
     { key: 'about', label: t('sections.about') },
     { key: 'projects', label: t('sections.projects') },
     { key: 'skills', label: t('sections.skills') },
-    { key: 'experience', label: t('sections.experiences') },
+    { key: 'experiences', label: t('sections.experiences') },
   ];
 
   return (

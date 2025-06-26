@@ -7,6 +7,7 @@ import { ButtonLink } from '@/components/common';
 import { PublicProjects, PublicProjectsSkeleton } from '@/components/projects';
 import { PublicAbout, PublicAboutSkeleton } from '@/components/about';
 import { PublicSkills, PublicSkillsSkeleton } from '@/components/skills';
+import { PublicExperiences, PublicExperiencesSkeleton } from '@/components/experiences';
 
 type Props = {
   params: Promise<{ lng: string }>;
@@ -58,6 +59,10 @@ export default async function HomePage({ params }: Props) {
 
       <Suspense fallback={<PublicSkillsSkeleton lng={lng} />}>
         <PublicSkills lng={lng} />
+      </Suspense>
+
+      <Suspense fallback={<PublicExperiencesSkeleton lng={lng} />}>
+        <PublicExperiences lng={lng} />
       </Suspense>
     </div>
   );
