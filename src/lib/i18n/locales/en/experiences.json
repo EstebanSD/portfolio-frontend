@@ -1,0 +1,23 @@
+{
+  "page": {
+    "title1": "My",
+    "title2": "Experiences"
+  },
+  "empty": {
+    "title": "No Experiences available",
+    "description": "When they are added, they will appear in this section"
+  },
+  "card": {
+    "present": "Present",
+    "type": {
+      "employment": "Employment",
+      "freelance": "Freelance",
+      "internship": "Internship",
+      "volunteering": "Volunteering",
+      "contract": "Contract"
+    }
+  },
+  "errors": {
+    "errorMessage": "Sorry, something went wrong loading this section."
+  }
+}
