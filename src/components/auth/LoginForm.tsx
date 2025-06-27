@@ -2,7 +2,7 @@
 
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { LoginFormData, useLogin } from '@/hooks/use-login';
+import { LoginFormData, useLogin } from '@/hooks';
 import { useTranslation } from '@/lib/i18n/client';
 import { Loader2 } from 'lucide-react';
 import { Form, Button, Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui';

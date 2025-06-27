@@ -1,0 +1,14 @@
+{
+  "contact": {
+    "title": "Contact"    
+  },
+  "social": {
+    "title": "Follow me"
+  },
+  "more": {
+    "title": "More",
+    "description": "Personal portfolio developed with Next.js and TypeScript. Open source code available on GitHub."
+  },
+  "builtWith": "Develop with",
+  "fallback": "Contact information temporarily unavailable"
+}

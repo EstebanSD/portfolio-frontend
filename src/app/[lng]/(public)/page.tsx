@@ -18,7 +18,7 @@ export default async function HomePage({ params }: Props) {
   const { t } = await serverTranslation(lng, 'hero');
 
   return (
-    <div className="px-4 py-8 md:px-10 md:py-12 lg:px-20 lg:py-16">
+    <div className="px-4 md:px-10 lg:px-20">
       <section className="min-h-screen rounded-sm flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-background">
         <div className="text-center px-4">
           <h1 className="text-5xl md:text-7xl font-light text-foreground mb-6 text-shadow">
