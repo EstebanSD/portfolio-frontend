@@ -1,4 +1,5 @@
 import { PublicHeader } from '@/components/header';
+import { PublicFooter } from '@/components/footer';
 
 export default async function PublicLayout({
   children,
@@ -13,6 +14,7 @@ export default async function PublicLayout({
       <PublicHeader lng={lng} />
       {/* Adjusted padding to account for fixed header */}
       <main className="pt-16">{children}</main>
+      <PublicFooter lng={lng} />
     </>
   );
 }
