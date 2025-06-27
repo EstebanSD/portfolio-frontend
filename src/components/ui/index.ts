@@ -7,3 +7,7 @@ export * from './card';
 export * from './select';
 export * from './dropdown-menu';
 export * from './skeleton';
+export * from './separator';
+export * from './carousel';
+export * from './avatar';
+export * from './sheet';

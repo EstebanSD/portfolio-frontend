@@ -3,6 +3,16 @@ import Image from 'next/image';
 import { serverTranslation } from '@/lib/i18n';
 import { LanguageSwitcher } from './LanguageSwitcher';
 import { ModeToggle } from './ModeToggle';
+import {
+  Button,
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '../ui';
+import { MenuIcon } from 'lucide-react';
 
 export async function PublicHeader({ lng }: { lng: string }) {
   const { t } = await serverTranslation(lng, 'header');
@@ -10,13 +20,14 @@ export async function PublicHeader({ lng }: { lng: string }) {
     { key: 'about', label: t('sections.about') },
     { key: 'projects', label: t('sections.projects') },
     { key: 'skills', label: t('sections.skills') },
-    { key: 'experience', label: t('sections.experiences') },
+    { key: 'experiences', label: t('sections.experiences') },
   ];
 
   return (
     <header className="fixed top-0 w-full z-50 bg-background border-b border-gray-200 dark:border-gray-700">
       <div className="mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
+          {/* Logo */}
           <Link
             href={`/${lng}`}
             aria-label="Go to homepage"
@@ -32,6 +43,7 @@ export async function PublicHeader({ lng }: { lng: string }) {
             />
           </Link>
 
+          {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-8">
             {sections.map((section) => (
               <Link
@@ -44,10 +56,48 @@ export async function PublicHeader({ lng }: { lng: string }) {
             ))}
           </nav>
 
-          <div className="flex items-center space-x-4">
+          {/* Desktop Controls */}
+          <div className="hidden md:flex items-center space-x-4">
             <LanguageSwitcher />
-
             <ModeToggle />
+          </div>
+
+          {/* Mobile Navigation */}
+          <div className="md:hidden flex items-center space-x-2">
+            <LanguageSwitcher />
+            <ModeToggle />
+
+            <Sheet>
+              <SheetTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-10 w-10"
+                  aria-label="Open navigation menu"
+                >
+                  <MenuIcon className="h-5 w-5" />
+                </Button>
+              </SheetTrigger>
+
+              <SheetContent side="right" className="w-80">
+                <SheetHeader>
+                  <SheetTitle className="text-left">{t('navigation')}</SheetTitle>
+                </SheetHeader>
+
+                <nav className="flex flex-col space-y-4 mt-8">
+                  {sections.map((section) => (
+                    <SheetClose asChild key={section.key}>
+                      <Link
+                        href={`/${lng}#${section.key}`}
+                        className="text-lg font-medium text-foreground hover:text-primary transition-colors py-2 px-4 rounded-md hover:bg-muted block"
+                      >
+                        {section.label}
+                      </Link>
+                    </SheetClose>
+                  ))}
+                </nav>
+              </SheetContent>
+            </Sheet>
           </div>
         </div>
       </div>

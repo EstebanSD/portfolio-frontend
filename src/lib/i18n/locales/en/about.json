@@ -1,0 +1,10 @@
+{
+  "page": {
+    "title1": "About",
+    "title2": "Me",
+    "principalStack": "Principal Stack"
+  },
+  "errors": {
+    "errorMessage": "Sorry, something went wrong loading this section."
+  }
+}

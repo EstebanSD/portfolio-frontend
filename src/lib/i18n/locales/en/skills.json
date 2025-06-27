@@ -1,0 +1,14 @@
+{
+  "page": {
+    "title1": "Technical",
+    "title2": "Skills",
+    "subtitle": "The technologies, tools and methodologies that I use in my day-to-day work."
+  },
+  "empty": {
+    "title": "No skills available",
+    "description": "When they are added, they will appear in this section"
+  },
+  "errors": {
+    "errorMessage": "Sorry, something went wrong loading this section."
+  }
+}
