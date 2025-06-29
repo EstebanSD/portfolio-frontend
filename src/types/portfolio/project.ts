@@ -9,6 +9,7 @@ export type ProjectType = (typeof PROJECT_TYPES)[number];
 export interface Project {
   _id: string;
   locale: string;
+  summary: string;
   description: string;
   general: {
     _id: string;

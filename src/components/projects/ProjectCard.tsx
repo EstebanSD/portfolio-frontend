@@ -56,7 +56,7 @@ interface ProductCardProps {
 }
 
 export function ProjectCard({ project }: ProductCardProps) {
-  const { general, description } = project;
+  const { general, summary } = project;
   const imageUrl = general.images && general.images.length ? general.images[0].url : null;
 
   const { t } = useTranslation(project.locale, 'projects');
@@ -110,7 +110,7 @@ export function ProjectCard({ project }: ProductCardProps) {
           </CardTitle>
         </div>
         <CardDescription className="text-muted-foreground line-clamp-2 text-sm leading-relaxed">
-          {description}
+          {summary}
         </CardDescription>
       </CardHeader>
 
