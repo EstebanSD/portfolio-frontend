@@ -1,5 +1,7 @@
 {
   "navigation": "Navigation",
+  "navDescription": "Select one to navigate.",
+  "downloadCv": "Resume",
   "sections": {
     "about": "About",
     "projects": "Projects",
