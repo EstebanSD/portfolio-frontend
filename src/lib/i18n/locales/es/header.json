@@ -1,5 +1,7 @@
 {
   "navigation": "Navegación",
+  "navDescription": "Seleccioná una para navegar.",
+  "downloadCv": "CV",
   "sections": {
     "about": "Acerca",
     "projects": "Proyectos",
