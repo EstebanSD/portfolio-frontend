@@ -3,11 +3,13 @@ import Image from 'next/image';
 import { serverTranslation } from '@/lib/i18n';
 import { LanguageSwitcher } from './LanguageSwitcher';
 import { ModeToggle } from './ModeToggle';
+import { DownloadCv } from './DownloadCv';
 import {
   Button,
   Sheet,
   SheetClose,
   SheetContent,
+  SheetDescription,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
@@ -58,6 +60,7 @@ export async function PublicHeader({ lng }: { lng: string }) {
 
           {/* Desktop Controls */}
           <div className="hidden md:flex items-center space-x-4">
+            <DownloadCv lng={lng} label={t('downloadCv')} />
             <LanguageSwitcher />
             <ModeToggle />
           </div>
@@ -82,6 +85,9 @@ export async function PublicHeader({ lng }: { lng: string }) {
               <SheetContent side="right" className="w-80">
                 <SheetHeader>
                   <SheetTitle className="text-left">{t('navigation')}</SheetTitle>
+                  <SheetDescription className="text-left text-sm text-muted-foreground">
+                    {t('navDescription')}
+                  </SheetDescription>
                 </SheetHeader>
 
                 <nav className="flex flex-col space-y-4 mt-8">
@@ -96,6 +102,8 @@ export async function PublicHeader({ lng }: { lng: string }) {
                     </SheetClose>
                   ))}
                 </nav>
+
+                <DownloadCv className="mt-12 mx-4" lng={lng} label={t('downloadCv')} />
               </SheetContent>
             </Sheet>
           </div>
