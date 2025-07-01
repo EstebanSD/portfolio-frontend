@@ -70,7 +70,7 @@ export const SkillCard = ({ category, skills }: SkillCardProps) => {
             <Badge
               key={skill._id}
               variant="secondary"
-              className="text-xs hover:bg-gray-200 transition-colors cursor-default"
+              className="text-xs hover:bg-gray-200 dark:hover:bg-accent transition-colors cursor-default"
             >
               {skill.icon ? (
                 <Image
