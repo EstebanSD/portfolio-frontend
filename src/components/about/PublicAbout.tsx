@@ -28,7 +28,7 @@ export async function PublicAbout({ lng }: { lng: string }) {
     const about: About = await response.json();
 
     return (
-      <section id="about" className="scroll-mt-24 min-h-screen py-20 px-8">
+      <section id="about" className="scroll-mt-24 min-h-screen py-20 px-2 md:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-light text-foreground mb-4">
             {t('page.title1')} <span className="text-primary">{t('page.title2')}</span>
@@ -78,7 +78,7 @@ export async function PublicAbout({ lng }: { lng: string }) {
     console.error('Error loading about data:', error);
 
     return (
-      <section id="about" className="scroll-mt-24 min-h-48 py-20 px-8">
+      <section id="about" className="scroll-mt-24 min-h-48 py-20 px-2 md:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-light text-foreground mb-4">
             {t('page.title1')} <span className="text-primary">{t('page.title2')}</span>
