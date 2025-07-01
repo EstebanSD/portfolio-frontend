@@ -60,7 +60,7 @@ export function ProjectCard({ project }: ProductCardProps) {
 
   return (
     // TODO onCLick
-    <Card className="max-w-sm md:max-w-md lg:max-w-lg group pt-0 overflow-hidden border-0 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-background dark:bg-gray-900">
+    <Card className="h-full max-w-sm md:max-w-md lg:max-w-lg group pt-0 overflow-hidden border-0 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-background dark:bg-gray-900">
       <div className="relative h-48 overflow-hidden">
         {imageUrl ? (
           <Image
@@ -152,7 +152,7 @@ export function ProjectCard({ project }: ProductCardProps) {
       <CardFooter className="pt-0 flex justify-between items-center">
         <div className="flex gap-2">
           {general.links?.website && (
-            <Button variant="default" size="sm" asChild>
+            <Button variant="secondary" size="sm" asChild>
               <a
                 href={general.links.website}
                 target="_blank"
@@ -166,7 +166,7 @@ export function ProjectCard({ project }: ProductCardProps) {
           )}
 
           {general.links?.github && (
-            <Button variant="outline" size="sm" asChild>
+            <Button variant="secondary" size="sm" asChild>
               <a
                 href={general.links.github}
                 target="_blank"

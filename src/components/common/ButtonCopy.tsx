@@ -50,7 +50,7 @@ export function ButtonCopy({ toCopy, iconName, displayText, className }: ButtonC
       aria-label={`Copy ${displayText || toCopy}`}
     >
       <Icon className="h-4 w-4 text-muted-foreground" />
-      <span className="text-muted-foreground group-hover:text-primary transition-colors">
+      <span className="text-muted-foreground group-hover:text-accent transition-colors">
         {displayText || toCopy}
       </span>
       {copied ? (
