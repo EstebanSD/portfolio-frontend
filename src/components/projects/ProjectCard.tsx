@@ -1,5 +1,6 @@
 'use client';
 
+import { format } from 'date-fns';
 import { Project, ProjectStatus, ProjectType } from '@/types';
 import {
   Badge,
@@ -44,11 +45,7 @@ const getTypeColor = (type: ProjectType) => {
 
 const formatDate = (date: Date | string | undefined) => {
   if (!date) return '';
-  const d = new Date(date);
-  return d.toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'short',
-  });
+  return format(new Date(date), 'MMM yyyy');
 };
 
 interface ProductCardProps {
