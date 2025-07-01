@@ -47,8 +47,9 @@ export async function PublicProjects({ lng }: { lng: string }) {
 
         {projects.length > 0 ? (
           <CustomCarousel
-            autoplay
             showDots
+            autoplay
+            autoplayDelay={4200}
             navigationStyle="none"
             itemClassName="pt-4 pb-8"
             items={projects.map((project) => (

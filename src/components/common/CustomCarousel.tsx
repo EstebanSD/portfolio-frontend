@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Autoplay from 'embla-carousel-autoplay';
 import {
   Carousel,
   CarouselContent,
@@ -32,6 +33,10 @@ export const CustomCarousel: React.FC<CustomCarouselProps> = ({
   navigationStyle = 'default',
   orientation = 'horizontal',
 }) => {
+  const autoplayPlugin = React.useRef(
+    autoplay ? Autoplay({ delay: autoplayDelay, stopOnInteraction: true }) : null,
+  );
+
   const [currentIndex, setCurrentIndex] = React.useState(0);
   const [api, setApi] = React.useState<CarouselApi>();
 
@@ -42,16 +47,6 @@ export const CustomCarousel: React.FC<CustomCarouselProps> = ({
       setCurrentIndex(api.selectedScrollSnap());
     });
   }, [api]);
-
-  React.useEffect(() => {
-    if (!autoplay || !api) return;
-
-    const interval = setInterval(() => {
-      api.scrollNext();
-    }, autoplayDelay);
-
-    return () => clearInterval(interval);
-  }, [api, autoplay, autoplayDelay]);
 
   const getNavigationClasses = () => {
     switch (navigationStyle) {
@@ -75,9 +70,14 @@ export const CustomCarousel: React.FC<CustomCarouselProps> = ({
 
   const navClasses = getNavigationClasses();
 
+  const plugins = autoplayPlugin.current ? [autoplayPlugin.current] : [];
+
   return (
     <div className={cn('relative w-full', className)}>
       <Carousel
+        plugins={plugins}
+        onMouseEnter={() => autoplayPlugin.current?.stop()}
+        onMouseLeave={() => autoplayPlugin.current?.play()}
         setApi={setApi}
         orientation={orientation}
         opts={{
