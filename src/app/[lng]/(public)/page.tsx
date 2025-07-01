@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { ChevronsDownIcon } from 'lucide-react';
 
 import { serverTranslation } from '@/lib/i18n';
-import { ButtonLink } from '@/components/common';
 import { PublicProjects, PublicProjectsSkeleton } from '@/components/projects';
 import { PublicAbout, PublicAboutSkeleton } from '@/components/about';
 import { PublicSkills, PublicSkillsSkeleton } from '@/components/skills';
@@ -29,16 +28,7 @@ export default async function HomePage({ params }: Props) {
             {t('description')}
           </p>
 
-          <ButtonLink
-            href="#projects"
-            variant={'ghost'}
-            className="mt-6 text-primary border-primary"
-            scroll
-          >
-            {t('button')}
-          </ButtonLink>
-
-          <div className="flex justify-center mt-10 animate-bounce">
+          <div className="flex justify-center mt-20 animate-bounce">
             <Link href="#about" scroll>
               <ChevronsDownIcon
                 size={32}
