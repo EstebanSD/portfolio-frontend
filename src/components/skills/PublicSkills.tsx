@@ -54,9 +54,9 @@ export async function PublicSkills({ lng }: { lng: string }) {
       <section id="skills" className="scroll-mt-24 min-h-screen py-20 bg-background">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-light text-foreground mb-4">
-            {t('page.title1')} <span className="text-accent">{t('page.title2')}</span>
+            {t('page.title1')} <span className="text-primary">{t('page.title2')}</span>
           </h2>
-          <div className="w-20 h-1 bg-accent mx-auto" />
+          <div className="w-20 h-1 bg-primary mx-auto" />
           <p className="mt-4 md:mt-6 text-gray-600 text-center">{t('page.subtitle')}</p>
         </div>
 
@@ -81,9 +81,9 @@ export async function PublicSkills({ lng }: { lng: string }) {
       >
         <div className="text-center mb-16">
           <h2 className="text-4xl font-light text-foreground mb-4">
-            {t('page.title1')} <span className="text-accent">{t('page.title2')}</span>
+            {t('page.title1')} <span className="text-primary">{t('page.title2')}</span>
           </h2>
-          <div className="w-20 h-1 bg-accent mx-auto" />
+          <div className="w-20 h-1 bg-primary mx-auto" />
           <p className="mt-4 md:mt-6 text-gray-600 text-center">{t('page.subtitle')}</p>
         </div>
 

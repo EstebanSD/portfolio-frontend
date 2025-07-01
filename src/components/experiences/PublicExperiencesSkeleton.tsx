@@ -6,16 +6,16 @@ export async function PublicExperiencesSkeleton({ lng }: { lng: string }) {
   return (
     <section
       id="experiences"
-      className="scroll-mt-24 min-h-screen py-20 px-8 rounded-sm bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-background"
+      className="scroll-mt-24 min-h-screen py-20 px-2 md:px-8 rounded-sm bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-background"
     >
       <div className="text-center mb-16">
         <h2 className="text-4xl font-light text-foreground mb-4">
-          {t('page.title1')} <span className="text-accent">{t('page.title2')}</span>
+          {t('page.title1')} <span className="text-primary">{t('page.title2')}</span>
         </h2>
-        <div className="w-20 h-1 bg-accent mx-auto" />
+        <div className="w-20 h-1 bg-primary mx-auto" />
       </div>
 
-      <div className="pb-4 px-2 flex flex-col items-center justify-center space-y-3">
+      <div className="pb-4 flex flex-col items-center justify-center space-y-3">
         {Array.from({ length: 3 }).map((_, i) => (
           <Card
             key={i}
