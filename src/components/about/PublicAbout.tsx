@@ -31,9 +31,9 @@ export async function PublicAbout({ lng }: { lng: string }) {
       <section id="about" className="scroll-mt-24 min-h-screen py-20 px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-light text-foreground mb-4">
-            {t('page.title1')} <span className="text-accent">{t('page.title2')}</span>
+            {t('page.title1')} <span className="text-primary">{t('page.title2')}</span>
           </h2>
-          <div className="w-20 h-1 bg-accent mx-auto" />
+          <div className="w-20 h-1 bg-primary mx-auto" />
         </div>
 
         <div className="max-w-4xl mx-auto text-justify text-muted-foreground leading-relaxed">
@@ -57,7 +57,7 @@ export async function PublicAbout({ lng }: { lng: string }) {
           )}
           <p className="text-base sm:text-lg whitespace-pre-line">{about.bio}</p>
           {about?.tagline && (
-            <p className="mt-6 text-lg italic text-accent leading-relaxed">
+            <p className="mt-6 text-lg italic text-primary leading-relaxed">
               &ldquo;{about.tagline}&rdquo;
             </p>
           )}
@@ -68,9 +68,7 @@ export async function PublicAbout({ lng }: { lng: string }) {
           <h3 className="text-xl font-semibold text-foreground mb-4">{t('page.principalStack')}</h3>
           <div className="flex flex-wrap gap-3">
             {about.general.positioningTags?.map((tag) => (
-              <Badge key={tag} variant={'accent'}>
-                {tag}
-              </Badge>
+              <Badge key={tag}>{tag}</Badge>
             ))}
           </div>
         </div>
@@ -83,9 +81,9 @@ export async function PublicAbout({ lng }: { lng: string }) {
       <section id="about" className="scroll-mt-24 min-h-48 py-20 px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-light text-foreground mb-4">
-            {t('page.title1')} <span className="text-accent">{t('page.title2')}</span>
+            {t('page.title1')} <span className="text-primary">{t('page.title2')}</span>
           </h2>
-          <div className="w-20 h-1 bg-accent mx-auto" />
+          <div className="w-20 h-1 bg-primary mx-auto" />
         </div>
 
         <div className="max-w-3xl mx-auto text-center text-muted-foreground">

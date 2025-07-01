@@ -10,9 +10,9 @@ export async function PublicExperiencesSkeleton({ lng }: { lng: string }) {
     >
       <div className="text-center mb-16">
         <h2 className="text-4xl font-light text-foreground mb-4">
-          {t('page.title1')} <span className="text-accent">{t('page.title2')}</span>
+          {t('page.title1')} <span className="text-primary">{t('page.title2')}</span>
         </h2>
-        <div className="w-20 h-1 bg-accent mx-auto" />
+        <div className="w-20 h-1 bg-primary mx-auto" />
       </div>
 
       <div className="pb-4 px-2 flex flex-col items-center justify-center space-y-3">

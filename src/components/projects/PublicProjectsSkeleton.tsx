@@ -18,9 +18,9 @@ export async function PublicProjectsSkeleton({ lng }: { lng: string }) {
     >
       <div className="text-center mb-16">
         <h2 className="text-4xl font-light text-foreground mb-4">
-          {t('page.title1')} <span className="text-accent">{t('page.title2')}</span>
+          {t('page.title1')} <span className="text-primary">{t('page.title2')}</span>
         </h2>
-        <div className="w-20 h-1 bg-accent mx-auto" />
+        <div className="w-20 h-1 bg-primary mx-auto" />
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {Array.from({ length: 3 }).map((_, i) => (

@@ -152,7 +152,7 @@ export function ProjectCard({ project }: ProductCardProps) {
       <CardFooter className="pt-0 flex justify-between items-center">
         <div className="flex gap-2">
           {general.links?.website && (
-            <Button variant="default" size="sm" asChild>
+            <Button variant="secondary" size="sm" asChild>
               <a
                 href={general.links.website}
                 target="_blank"
@@ -166,7 +166,7 @@ export function ProjectCard({ project }: ProductCardProps) {
           )}
 
           {general.links?.github && (
-            <Button variant="outline" size="sm" asChild>
+            <Button variant="secondary" size="sm" asChild>
               <a
                 href={general.links.github}
                 target="_blank"
