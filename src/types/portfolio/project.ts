@@ -30,3 +30,9 @@ export interface Project {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface ProductQueryFilters {
+  title?: string;
+  status?: ProjectStatus | 'all';
+  type?: ProjectType | 'all';
+}

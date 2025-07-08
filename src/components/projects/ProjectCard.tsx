@@ -60,7 +60,7 @@ export function ProjectCard({ project }: ProductCardProps) {
 
   return (
     // TODO onCLick
-    <Card className="h-full max-w-sm md:max-w-md lg:max-w-lg group pt-0 overflow-hidden border-0 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-background dark:bg-gray-900">
+    <Card className="h-full group pt-0 overflow-hidden border-0 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-background dark:bg-gray-900">
       <div className="relative h-48 overflow-hidden">
         {imageUrl ? (
           <Image

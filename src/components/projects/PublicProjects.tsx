@@ -1,7 +1,7 @@
 import { serverTranslation } from '@/lib/i18n';
 import { Project } from '@/types';
 import { ProjectCard } from './ProjectCard';
-import { CustomCarousel, EmptyCard } from '../common';
+import { ButtonLink, CustomCarousel, EmptyState } from '../common';
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL!;
 
@@ -33,17 +33,16 @@ export async function PublicProjects({ lng }: { lng: string }) {
       >
         <div className="text-center mb-16">
           <h2 className="text-4xl font-light text-foreground mb-4">
-            {t('page.title1')} <span className="text-primary">{t('page.title2')}</span>
+            {t('section.title1')} <span className="text-primary">{t('section.title2')}</span>
           </h2>
           <div className="w-20 h-1 bg-primary mx-auto" />
         </div>
 
-        {/* TODO */}
-        {/* <div className="flex items-center justify-end">
-          <ButtonLink href={'#'} variant={'outline'}>
-            {t('see-all')}
+        <div className="flex items-center justify-end">
+          <ButtonLink href={'projects'} variant={'outline'}>
+            {t('section.seeAll')}
           </ButtonLink>
-        </div> */}
+        </div>
 
         {projects.length > 0 ? (
           <CustomCarousel
@@ -57,7 +56,12 @@ export async function PublicProjects({ lng }: { lng: string }) {
             ))}
           />
         ) : (
-          <EmptyCard t={t} />
+          <EmptyState
+            asCard
+            title={t('empty.title')}
+            description={t('empty.description')}
+            iconName="ban"
+          />
         )}
       </section>
     );
@@ -71,7 +75,7 @@ export async function PublicProjects({ lng }: { lng: string }) {
       >
         <div className="text-center mb-16">
           <h2 className="text-4xl font-light text-foreground mb-4">
-            {t('page.title1')} <span className="text-primary">{t('page.title2')}</span>
+            {t('section.title1')} <span className="text-primary">{t('section.title2')}</span>
           </h2>
           <div className="w-20 h-1 bg-primary mx-auto" />
         </div>

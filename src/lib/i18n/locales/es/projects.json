@@ -1,7 +1,11 @@
 {
-  "page": {
+  "section": {
     "title1": "Mis",
-    "title2": "Proyectos"
+    "title2": "Proyectos",
+    "seeAll": "Ver Todos"
+  },
+  "page": {
+
   },
   "empty": {
     "title": "Sin Proyectos disponibles",

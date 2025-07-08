@@ -1,8 +1,10 @@
 {
-  "page": {
+  "section": {
     "title1": "My",
-    "title2": "Projects"
+    "title2": "Projects",
+    "seeAll": "See All"
   },
+  "page": {},
   "empty": {
     "title": "No Projects available",
     "description": "When they are added, they will appear in this section"
