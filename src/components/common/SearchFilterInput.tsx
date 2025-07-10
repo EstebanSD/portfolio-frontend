@@ -12,23 +12,21 @@ interface Props {
   label: string;
   placeholder: string;
   className?: string;
-  initialValue?: string;
   basePath: string;
 }
 
-export function SearchFilterInput({
-  paramKey,
-  label,
-  placeholder,
-  className,
-  initialValue = '',
-  basePath,
-}: Props) {
+export function SearchFilterInput({ paramKey, label, placeholder, className, basePath }: Props) {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const [value, setValue] = useState(initialValue);
-  const debouncedValue = useDebounce(value, 400);
+  const rawValue = searchParams.get(paramKey) ?? '';
+  const [value, setValue] = useState(rawValue);
+
+  useEffect(() => {
+    if (!rawValue) setValue(rawValue);
+  }, [rawValue]);
+
+  const debouncedValue = useDebounce(value, 600);
 
   useEffect(() => {
     const params = new URLSearchParams(searchParams.toString());
@@ -41,7 +39,8 @@ export function SearchFilterInput({
 
     const query = params.toString();
     router.replace(`${basePath}${query ? `?${query}` : ''}`);
-  }, [basePath, debouncedValue, paramKey, router, searchParams]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [debouncedValue]);
 
   return (
     <div className={cn('w-full', className)}>

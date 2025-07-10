@@ -1,12 +1,12 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui';
 import { cn } from '@/lib/shadcn/utils';
-import { AlertTriangleIcon, BanIcon, InboxIcon, SearchIcon } from 'lucide-react';
+import { AlertTriangleIcon, BanIcon, InboxIcon, SearchXIcon } from 'lucide-react';
 
 const getIcon = (key: string): React.ElementType => {
   const iconMap: Record<string, React.ElementType> = {
     ban: BanIcon,
     alert: AlertTriangleIcon,
-    search: SearchIcon,
+    search: SearchXIcon,
     inbox: InboxIcon,
   };
   return iconMap[key] || BanIcon;

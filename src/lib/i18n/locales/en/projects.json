@@ -4,7 +4,28 @@
     "title2": "Projects",
     "seeAll": "See All"
   },
-  "page": {},
+  "page": {
+    "filter": {
+      "type": "Type",
+      "typePlaceholder": "Select Type",
+      "status": "Status",
+      "statusPlaceholder": "Select Status",
+      "search": "Search",
+      "searchPlaceholder": "Search projects...",
+      "labelAll": "All",
+      "typeLabelPersonal": "Personal",
+      "typeLabelCompany": "Company",
+      "typeLabelFreelance": "Freelance",
+      "statusLabelCompleted": "Completed",
+      "statusLabelInProgress": "In Progress",
+      "statusLabePaused": "Paused",
+      "cleanFilters": "Clean filters"
+    },
+    "projects": {
+      "emptyTitle": "No projects found",
+      "emptyDescription": "Try adjusting the filters to find what you are looking for"
+    }
+  },
   "empty": {
     "title": "No Projects available",
     "description": "When they are added, they will appear in this section"

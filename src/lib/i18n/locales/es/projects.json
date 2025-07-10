@@ -5,7 +5,26 @@
     "seeAll": "Ver Todos"
   },
   "page": {
-
+    "filter": {
+      "type": "Tipo",
+      "typePlaceholder": "Seleccionar Tipo",
+      "status": "Estado",
+      "statusPlaceholder": "Seleccionar Estado",
+      "search": "Buscar",
+      "searchPlaceholder": "Buscar proyectos...",
+      "labelAll": "Todos",
+      "typeLabelPersonal": "Personal",
+      "typeLabelCompany": "Empresa",
+      "typeLabelFreelance": "Freelance",
+      "statusLabelCompleted": "Finalizado",
+      "statusLabelInProgress": "En Desarrollo",
+      "statusLabelPaused": "En Pausa",
+      "cleanFilters": "Limpiar filtros"
+    },
+    "projects": {
+      "emptyTitle": "No se encontraron proyectos",
+      "emptyDescription": "Intenta ajustar los filtros para encontrar lo que buscas"
+    }
   },
   "empty": {
     "title": "Sin Proyectos disponibles",
