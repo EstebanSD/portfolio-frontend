@@ -1,11 +1,9 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
 import { SearchIcon } from 'lucide-react';
 import { cn } from '@/lib/shadcn/utils';
-import { useDebounce } from '@/hooks/use-debounce';
 import { Input, Label } from '../ui';
+import { useUrlParams } from '@/hooks';
 
 interface Props {
   paramKey: string;
@@ -16,31 +14,10 @@ interface Props {
 }
 
 export function SearchFilterInput({ paramKey, label, placeholder, className, basePath }: Props) {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-
-  const rawValue = searchParams.get(paramKey) ?? '';
-  const [value, setValue] = useState(rawValue);
-
-  useEffect(() => {
-    if (!rawValue) setValue(rawValue);
-  }, [rawValue]);
-
-  const debouncedValue = useDebounce(value, 600);
-
-  useEffect(() => {
-    const params = new URLSearchParams(searchParams.toString());
-
-    if (!debouncedValue || debouncedValue === 'all') {
-      params.delete(paramKey);
-    } else {
-      params.set(paramKey, debouncedValue);
-    }
-
-    const query = params.toString();
-    router.replace(`${basePath}${query ? `?${query}` : ''}`);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [debouncedValue]);
+  const { value, setValue } = useUrlParams(paramKey, {
+    basePath,
+    debounceMs: 600,
+  });
 
   return (
     <div className={cn('w-full', className)}>

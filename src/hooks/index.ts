@@ -1,3 +1,3 @@
 export * from './use-login';
 export * from './use-scroll-to-top';
-export * from './use-debounce';
+export * from './use-url-params';

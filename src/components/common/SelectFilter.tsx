@@ -1,10 +1,9 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
 import { cn } from '@/lib/shadcn/utils';
 import { Option } from '@/types';
 import { Label, Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui';
+import { useUrlParams } from '@/hooks';
 
 interface Props {
   paramKey: string;
@@ -25,25 +24,10 @@ export function SelectFilter({
   basePath,
   className,
 }: Props) {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-
-  const currentValue = searchParams.get(paramKey) ?? initialValue;
-  const [value, setValue] = useState(currentValue);
-
-  useEffect(() => {
-    const params = new URLSearchParams(searchParams.toString());
-
-    if (value === 'all' || !value) {
-      params.delete(paramKey);
-    } else {
-      params.set(paramKey, value);
-    }
-
-    const query = params.toString();
-    router.replace(`${basePath}${query ? `?${query}` : ''}`);
-  }, [basePath, paramKey, router, searchParams, value]);
-
+  const { value, setValue } = useUrlParams(paramKey, {
+    basePath,
+    defaultValue: initialValue,
+  });
   return (
     <div className={cn('w-fit', className)}>
       <Label htmlFor={paramKey}>{label}</Label>
