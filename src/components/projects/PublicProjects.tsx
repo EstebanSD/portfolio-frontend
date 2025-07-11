@@ -58,8 +58,8 @@ export async function PublicProjects({ lng }: { lng: string }) {
         ) : (
           <EmptyState
             asCard
-            title={t('empty.title')}
-            description={t('empty.description')}
+            title={t('section.emptyTitle')}
+            description={t('section.emptyDescription')}
             iconName="ban"
           />
         )}

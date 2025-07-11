@@ -2,7 +2,9 @@
   "section": {
     "title1": "My",
     "title2": "Projects",
-    "seeAll": "See All"
+    "seeAll": "See All",
+    "emptyTitle": "No Projects available",
+    "emptyDescription": "When they are added, they will appear in this section"
   },
   "page": {
     "filter": {
@@ -26,9 +28,27 @@
       "emptyDescription": "Try adjusting the filters to find what you are looking for"
     }
   },
-  "empty": {
-    "title": "No Projects available",
-    "description": "When they are added, they will appear in this section"
+  "project": {
+    "images": "Project Images",
+    "description": "Description",
+    "technologies": "Technologies",
+    "links": {
+      "title": "Links",
+      "github": "View on GitHub",
+      "website": "Visit Web Site"
+    },
+    "info": {
+      "title": "Project Information",
+      "type": "Type",
+      "status": "Status",
+      "created": "Created",
+      "updated": "Updated"
+    },
+    "error": {
+      "title": "Error loading project",
+      "description": "There was an error loading the project. Please try again later."
+    },
+    "goBack": "Go Back"
   },
   "card": {
     "preview": "Project preview",

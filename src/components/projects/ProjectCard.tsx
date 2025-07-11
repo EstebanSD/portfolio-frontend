@@ -1,7 +1,7 @@
 'use client';
 
-import { format } from 'date-fns';
-import { Project, ProjectStatus, ProjectType } from '@/types';
+import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 import {
   Badge,
   Button,
@@ -12,55 +12,29 @@ import {
   CardHeader,
   CardTitle,
 } from '../ui';
-import Image from 'next/image';
 import { CalendarIcon, ClockIcon, ExternalLinkIcon, ImageIcon } from 'lucide-react';
 import { SiGithub } from 'react-icons/si';
+import { Project } from '@/types';
 import { useTranslation } from '@/lib/i18n/client';
-
-const getStatusColor = (status: ProjectStatus) => {
-  switch (status) {
-    case 'completed':
-      return 'bg-green-100 text-green-800';
-    case 'in_progress':
-      return 'bg-blue-100 text-blue-800';
-    case 'paused':
-      return 'bg-gray-100 text-gray-800';
-    default:
-      return 'bg-gray-100 text-gray-800';
-  }
-};
-
-const getTypeColor = (type: ProjectType) => {
-  switch (type) {
-    case 'company':
-      return 'bg-purple-100 text-purple-800';
-    case 'freelance':
-      return 'bg-cyan-100 text-cyan-800';
-    case 'personal':
-      return 'bg-orange-100 text-orange-800';
-    default:
-      return 'bg-gray-100 text-gray-800';
-  }
-};
-
-const formatDate = (date: Date | string | undefined) => {
-  if (!date) return '';
-  return format(new Date(date), 'MMM yyyy');
-};
+import { formatDate, getStatusColor, getTypeColor } from '@/utils';
 
 interface ProductCardProps {
   project: Project;
 }
 
 export function ProjectCard({ project }: ProductCardProps) {
+  const router = useRouter();
   const { general, summary } = project;
   const imageUrl = general.images && general.images.length ? general.images[0].url : null;
 
   const { t } = useTranslation(project.locale, 'projects');
 
+  const handleRouter = () => router.push(`/${project.locale}/projects/${general._id}`);
   return (
-    // TODO onCLick
-    <Card className="h-full group pt-0 overflow-hidden border-0 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-background dark:bg-gray-900">
+    <Card
+      className="h-full group pt-0 overflow-hidden border-0 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-background dark:bg-gray-900 cursor-pointer"
+      onClick={handleRouter}
+    >
       <div className="relative h-48 overflow-hidden">
         {imageUrl ? (
           <Image
