@@ -18,7 +18,7 @@ export async function PublicProjectsSkeleton({ lng }: { lng: string }) {
     >
       <div className="text-center mb-16">
         <h2 className="text-4xl font-light text-foreground mb-4">
-          {t('page.title1')} <span className="text-primary">{t('page.title2')}</span>
+          {t('section.title1')} <span className="text-primary">{t('section.title2')}</span>
         </h2>
         <div className="w-20 h-1 bg-primary mx-auto" />
       </div>
@@ -28,11 +28,11 @@ export async function PublicProjectsSkeleton({ lng }: { lng: string }) {
             key={i}
             className="max-w-sm md:max-w-md lg:max-w-lg pt-0 overflow-hidden border-0 shadow-md bg-background"
           >
-            {/* Imagen / Previsualización */}
+            {/* Image */}
             <div className="relative h-48">
               <Skeleton className="absolute inset-0 w-full h-full" />
 
-              {/* Badges superpuestos */}
+              {/* Badges */}
               <div className="absolute top-3 left-3">
                 <Skeleton className="w-16 h-6 rounded-md" />
               </div>
@@ -54,7 +54,7 @@ export async function PublicProjectsSkeleton({ lng }: { lng: string }) {
 
             {/* Content */}
             <CardContent className="space-y-4">
-              {/* Fechas */}
+              {/* Dates */}
               <div className="flex items-center gap-4">
                 <Skeleton className="h-4 w-24" />
                 <Skeleton className="h-4 w-24" />

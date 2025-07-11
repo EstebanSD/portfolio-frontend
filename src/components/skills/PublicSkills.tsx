@@ -1,7 +1,7 @@
 import { serverTranslation } from '@/lib/i18n';
 import { Skill, SkillCategory } from '@/types';
 import { SkillCard } from './SkillCard';
-import { EmptyCard } from '../common';
+import { EmptyState } from '../common';
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL!;
 
@@ -67,7 +67,12 @@ export async function PublicSkills({ lng }: { lng: string }) {
             })}
           </div>
         ) : (
-          <EmptyCard t={t} />
+          <EmptyState
+            asCard
+            title={t('empty.title')}
+            description={t('empty.description')}
+            iconName="ban"
+          />
         )}
       </section>
     );
