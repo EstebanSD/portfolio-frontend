@@ -1,0 +1,12 @@
+{
+  "title": "Acceso No Autorizado",
+  "subtitle": "No tienes permisos para acceder a esta página",
+  "description": "Tu sesión puede haber expirado o no tienes los permisos necesarios para ver este contenido.",
+  "additionalInfo": {
+    "title": "¿Qué puedes hacer?",
+    "item1": "Verifica que hayas iniciado sesión correctamente",
+    "item2": "Asegúrate de tener los permisos necesarios"
+  },
+  "buttonBack": "Volver Atrás",
+  "buttonHome": "Ir al Inicio"
+}

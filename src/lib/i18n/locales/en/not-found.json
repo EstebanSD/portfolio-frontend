@@ -1,0 +1,13 @@
+{
+  "title": "Page Not Found",
+  "subtitle": "Sorry, the page you are looking for does not exist",
+  "description": "The URL you entered does not correspond to any page on this site.",
+  "additionalInfo": {
+    "title": "Possible causes:",
+    "item1": "The URL was typed incorrectly",
+    "item2": "The page was moved or deleted",
+    "item3": "The link you followed is outdated."
+  },
+  "buttonBack": "Go Back",
+  "buttonHome": "Go to Home"
+}
