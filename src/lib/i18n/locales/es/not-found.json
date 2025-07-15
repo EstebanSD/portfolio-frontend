@@ -1,0 +1,13 @@
+{
+  "title": "Página No Encontrada",
+  "subtitle": "Lo sentimos, la página que buscas no existe",
+  "description": "La URL que ingresaste no corresponde a ninguna página en este sitio.",
+  "additionalInfo": {
+    "title": "Posibles causas:",
+    "item1": "La URL fue escrita incorrectamente",
+    "item2": "La página fue movida o eliminada",
+    "item3": "El enlace que seguiste está desactualizado"
+  },
+  "buttonBack": "Volver Atrás",
+  "buttonHome": "Ir al Inicio"
+}

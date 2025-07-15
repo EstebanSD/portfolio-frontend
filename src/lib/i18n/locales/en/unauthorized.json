@@ -1,0 +1,12 @@
+{
+  "title": "Unauthorized Access",
+  "subtitle": "You are not allowed to access this page",
+  "description": "Your session may have expired or you do not have the necessary permissions to view this content.",
+  "additionalInfo": {
+    "title": "What can you do?",
+    "item1": "Verify that you are logged in correctly",
+    "item2": "Make sure you have the necessary permits"
+  },
+  "buttonBack": "Go Back",
+  "buttonHome": "Go to Home"
+}

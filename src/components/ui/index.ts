@@ -11,3 +11,4 @@ export * from './separator';
 export * from './carousel';
 export * from './avatar';
 export * from './sheet';
+export * from './alert';
