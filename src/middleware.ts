@@ -64,7 +64,7 @@ export default middleware((req: NextRequest) => {
     }
 
     // Optional: Check admin role
-    if (req.auth.user?.role !== 'dmin') {
+    if (req.auth.user?.role !== 'Admin') {
       const unauthorizedUrl = new URL(`/${currentLocale}/unauthorized`, req.url);
       return NextResponse.redirect(unauthorizedUrl);
     }
