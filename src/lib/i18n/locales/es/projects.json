@@ -1,11 +1,54 @@
 {
-  "page": {
+  "section": {
     "title1": "Mis",
-    "title2": "Proyectos"
+    "title2": "Proyectos",
+    "seeAll": "Ver Todos",
+    "emptyTitle": "Sin Proyectos disponibles",
+    "emptyDescription": "Cuando se agreguen, aparecerán en esta sección"
   },
-  "empty": {
-    "title": "Sin Proyectos disponibles",
-    "description": "Cuando se agreguen, aparecerán en esta sección"
+  "page": {
+    "filter": {
+      "type": "Tipo",
+      "typePlaceholder": "Seleccionar Tipo",
+      "status": "Estado",
+      "statusPlaceholder": "Seleccionar Estado",
+      "search": "Buscar",
+      "searchPlaceholder": "Buscar proyectos...",
+      "labelAll": "Todos",
+      "typeLabelPersonal": "Personal",
+      "typeLabelCompany": "Empresa",
+      "typeLabelFreelance": "Freelance",
+      "statusLabelCompleted": "Finalizado",
+      "statusLabelInProgress": "En Desarrollo",
+      "statusLabelPaused": "En Pausa",
+      "cleanFilters": "Limpiar filtros"
+    },
+    "projects": {
+      "emptyTitle": "No se encontraron proyectos",
+      "emptyDescription": "Intenta ajustar los filtros para encontrar lo que buscas"
+    }
+  },
+  "project": {
+    "images": "Imágenes del Proyecto",
+    "description": "Descripción",
+    "technologies": "Tecnologías",
+    "links": {
+      "title": "Enlaces",
+      "github": "Ver en GitHub",
+      "website": "Visitar Sitio Web"
+    },
+    "info": {
+      "title": "Información del Proyecto",
+      "type": "Tipo",
+      "status": "Estado",
+      "created": "Creado",
+      "updated": "Actualizado"
+    },
+    "error": {
+      "title": "Error al cargar el proyecto",
+      "description": "Se ha producido un error al cargar el proyecto. Vuelva a intentarlo más tarde."
+    },
+    "goBack": "Volver"
   },
   "card": {
     "preview": "Vista previa del proyecto",
