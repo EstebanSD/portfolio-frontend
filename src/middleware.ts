@@ -48,17 +48,23 @@ export default middleware((req: NextRequest) => {
   const isProtectedRoute = protectedRoutes.some((route) => pathWithoutLocale.startsWith(route));
 
   if (isProtectedRoute) {
+    const currentLocale = pathname.split('/')[1];
+    // Check for token errors
+    if (req.auth?.error === 'RefreshAccessTokenError' || req.auth?.error === 'InvalidTokenError') {
+      const loginUrl = new URL(`/${currentLocale}/auth/login`, req.url);
+      // Optional: add query param to display session expired message
+      loginUrl.searchParams.set('error', 'SessionExpired');
+      return NextResponse.redirect(loginUrl);
+    }
     // Verify if the user is authenticated
     if (!req.auth) {
       // Extract current language from the URL for the redirect
-      const currentLocale = pathname.split('/')[1];
       const loginUrl = new URL(`/${currentLocale}/auth/login`, req.url);
       return NextResponse.redirect(loginUrl);
     }
 
     // Optional: Check admin role
-    if (req.auth.user?.role !== 'Admin') {
-      const currentLocale = pathname.split('/')[1];
+    if (req.auth.user?.role !== 'dmin') {
       const unauthorizedUrl = new URL(`/${currentLocale}/unauthorized`, req.url);
       return NextResponse.redirect(unauthorizedUrl);
     }
