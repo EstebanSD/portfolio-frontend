@@ -78,7 +78,7 @@ export const SkillCard = ({ category, skills }: SkillCardProps) => {
                   width={16}
                   height={16}
                   alt={skill.name}
-                  className="mr-1"
+                  className="mr-1 rounded-full"
                 />
               ) : null}
               {skill.name}

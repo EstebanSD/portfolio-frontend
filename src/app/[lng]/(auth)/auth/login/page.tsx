@@ -1,5 +1,5 @@
 import { serverTranslation } from '@/lib/i18n';
-import { LoginForm } from '@/components/auth/LoginForm';
+import { LoginForm } from '@/components/auth';
 
 type Props = {
   params: Promise<{ lng: string }>;

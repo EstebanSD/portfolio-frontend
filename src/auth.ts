@@ -56,6 +56,7 @@ export const config = {
         token.refreshToken = user.refreshToken;
         token.role = user.role;
         token.accessTokenExpires = Date.now() + 15 * MINUTE;
+        token.error = undefined;
         return token;
       }
 

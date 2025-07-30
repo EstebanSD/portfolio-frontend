@@ -12,3 +12,8 @@ export * from './carousel';
 export * from './avatar';
 export * from './sheet';
 export * from './alert';
+export * from './tooltip';
+export * from './sidebar';
+export * from './popover';
+export * from './switch';
+export * from './collapsible';
