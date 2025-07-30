@@ -209,27 +209,6 @@ export default async function page({ params }: Props) {
                     </label>
                     <p className="text-foreground">{t(`card.status.${general.status}`)}</p>
                   </div>
-
-                  <Separator />
-
-                  <div>
-                    <label className="text-sm font-medium text-gray-500">
-                      {t('project.info.created')}
-                    </label>
-                    <p className="text-foreground">{formatDate(general.createdAt)}</p>
-                  </div>
-
-                  {general.updatedAt !== general.createdAt && (
-                    <>
-                      <Separator />
-                      <div>
-                        <label className="text-sm font-medium text-gray-500">
-                          {t('project.info.updated')}
-                        </label>
-                        <p className="text-foreground">{formatDate(general.updatedAt)}</p>
-                      </div>
-                    </>
-                  )}
                 </CardContent>
               </Card>
             </div>
