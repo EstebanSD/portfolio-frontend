@@ -26,6 +26,7 @@ export async function PublicAbout({ lng }: { lng: string }) {
     }
 
     const about: About = await response.json();
+    const aboutGeneral = about.general;
 
     return (
       <section id="about" className="scroll-mt-24 min-h-screen py-20 px-2 md:px-8">
@@ -37,11 +38,11 @@ export async function PublicAbout({ lng }: { lng: string }) {
         </div>
 
         <div className="max-w-4xl mx-auto text-justify text-muted-foreground leading-relaxed">
-          {about.general.image && (
+          {aboutGeneral.image && (
             <div className="p-4 float-right md:ml-6 hidden md:flex flex-col items-center bg-gray-100 dark:bg-gray-900 rounded-2xl">
               <div className="relative w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 mb-4">
                 <Image
-                  src={about.general.image.url}
+                  src={aboutGeneral.image.url}
                   alt="profileImage"
                   fill
                   sizes="(max-width: 768px) 160px, 192px"
@@ -51,7 +52,7 @@ export async function PublicAbout({ lng }: { lng: string }) {
               </div>
               <div className="text-center">
                 <h3 className="text-lg font-semibold text-foreground mb-2">{about.title}</h3>
-                <p className="text-foreground">{about.general.location ?? 'Argentina 🇦🇷'}</p>
+                <p className="text-foreground">{aboutGeneral.location || 'Argentina 🇦🇷'}</p>
               </div>
             </div>
           )}
@@ -64,14 +65,18 @@ export async function PublicAbout({ lng }: { lng: string }) {
           <div className="clear-both" />
         </div>
 
-        <div className="mt-8 max-w-4xl mx-auto">
-          <h3 className="text-xl font-semibold text-foreground mb-4">{t('page.principalStack')}</h3>
-          <div className="flex flex-wrap gap-3">
-            {about.general.positioningTags?.map((tag) => (
-              <Badge key={tag}>{tag}</Badge>
-            ))}
+        {aboutGeneral.positioningTags && aboutGeneral.positioningTags?.length > 0 && (
+          <div className="mt-8 max-w-4xl mx-auto">
+            <h3 className="text-xl font-semibold text-foreground mb-4">
+              {t('page.principalStack')}
+            </h3>
+            <div className="flex flex-wrap gap-3">
+              {aboutGeneral.positioningTags.map((tag) => (
+                <Badge key={tag}>{tag}</Badge>
+              ))}
+            </div>
           </div>
-        </div>
+        )}
       </section>
     );
   } catch (error) {
