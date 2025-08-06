@@ -4,3 +4,4 @@ export * from './getTypeColor';
 export * from './getTypeIcon';
 export * from './formatDate';
 export * from './getInitials';
+export * from './getAvailableLocales';

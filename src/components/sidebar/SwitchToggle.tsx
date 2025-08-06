@@ -21,7 +21,7 @@ export function SwitchToggle() {
     return (
       <div className="flex items-center space-x-2 opacity-50">
         <SunIcon className="h-4 w-4" />
-        <Switch disabled />
+        <Switch disabled checked={false} />
         <MoonIcon className="h-4 w-4" />
       </div>
     );
