@@ -1,14 +1,22 @@
 {
-  "navigation": "Navigation",
+  "home": "Home",
+  "navigation": "Sections",
   "navDescription": "Select one to navigate.",
-  "downloadCv": "Resume",
+  "resume": {
+    "download": "Download Resume",
+    "loading": "Downloading",
+    "error": "Resume not available"
+  },
   "sections": {
     "about": "About",
     "projects": "Projects",
     "skills": "Skills",
     "experiences": "Experiences"
   },
+  "settings": "Settings",
+  "selectLanguage": "Select Language",
   "mode": {
+    "toggle": "Toggle between light and dark mode",
     "light": "Light",
     "dark": "Dark",
     "system": "System"    

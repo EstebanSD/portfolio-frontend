@@ -5,6 +5,7 @@ import { useTheme } from 'next-themes';
 import { usePathname } from 'next/navigation';
 import { useTranslation } from '@/lib/i18n/client';
 import { MoonIcon, SunIcon } from 'lucide-react';
+import { cn } from '@/lib/shadcn/utils';
 import { Switch } from '../ui';
 
 export function SwitchToggle() {
@@ -34,11 +35,12 @@ export function SwitchToggle() {
   };
 
   return (
-    <div className="flex items-center space-x-3 p-2 rounded-lg transition-colors hover:bg-accent/50">
+    <div className="flex items-center space-x-3 p-2 rounded-lg transition-colors hover:bg-accent">
       <SunIcon
-        className={`h-4 w-4 transition-all duration-300 ${
-          isDark ? 'text-muted-foreground scale-90' : 'text-yellow-500 scale-100'
-        }`}
+        className={cn(
+          'h-4 w-4 transition-all duration-300',
+          isDark ? 'text-muted-foreground scale-90' : 'text-yellow-500 scale-100',
+        )}
       />
       <Switch
         checked={isDark}
@@ -47,11 +49,12 @@ export function SwitchToggle() {
         className="cursor-pointer data-[state=checked]:bg-slate-800 data-[state=unchecked]:bg-yellow-100"
       />
       <MoonIcon
-        className={`h-4 w-4 transition-all duration-300 ${
-          isDark ? 'text-blue-400 scale-100' : 'text-muted-foreground scale-90'
-        }`}
+        className={cn(
+          'h-4 w-4 transition-all duration-300',
+          isDark ? 'text-blue-400 scale-100' : 'text-muted-foreground scale-90',
+        )}
       />
-      <span className="text-sm font-medium min-w-0">
+      <span className={cn('text-sm min-w-0 text-sidebar-foreground')}>
         {isDark ? t('mode.dark') : t('mode.light')}
       </span>
     </div>
