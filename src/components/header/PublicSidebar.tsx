@@ -21,8 +21,7 @@ import {
   SidebarMenuItem,
 } from '../ui';
 import { serverTranslation } from '@/lib/i18n';
-import { PublicCollapsibleSettings } from '../sidebar';
-import { DownloadCv } from './DownloadCv';
+import { PublicCollapsibleSettings, SidebarMenuItemDownloadCv } from '../sidebar';
 
 export async function PublicSidebar({ lng }: { lng: string }) {
   const { t } = await serverTranslation(lng, 'header');
@@ -88,9 +87,7 @@ export async function PublicSidebar({ lng }: { lng: string }) {
 
       <SidebarFooter className="mb-4">
         <SidebarMenu>
-          <SidebarMenuItem>
-            <DownloadCv lng={lng} className="w-full" />
-          </SidebarMenuItem>
+          <SidebarMenuItemDownloadCv lng={lng} />
         </SidebarMenu>
       </SidebarFooter>
     </Sidebar>

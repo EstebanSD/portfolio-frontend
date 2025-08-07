@@ -12,28 +12,55 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarMenuSub,
+  SidebarMenuSubItem,
   useSidebar,
 } from '../ui';
-import { SwitchToggle } from './SwitchToggle';
+import { useTranslation } from '@/lib/i18n/client';
+import { SubMenuButtonSwitchToggle } from './SubMenuButtonSwitchToggle';
+import { SidebarSwitchToggleIcon } from './SidebarSwitchToggleIcon';
 
 export function CollapsibleSettings() {
-  const { open } = useSidebar();
+  const { open, state } = useSidebar();
   const [localOpen, setLocalOpen] = useState<boolean>(false);
 
+  const { t } = useTranslation('en', 'header');
+
+  const isCollapsed = state === 'collapsed';
+
   useEffect(() => {
-    if (!open) setLocalOpen(false);
-  }, [open]);
+    if (!open || isCollapsed) {
+      setLocalOpen(false);
+    }
+  }, [open, isCollapsed]);
 
   const handleToggle = () => {
-    if (open) {
+    if (open && !isCollapsed) {
       setLocalOpen((prevOpen) => !prevOpen);
     }
   };
+
+  if (isCollapsed) {
+    return (
+      <SidebarGroup>
+        <SidebarGroupContent>
+          <SidebarMenu>
+            <SidebarMenuItem>
+              <SidebarMenuButton tooltip={t('selectMode')} className="justify-center">
+                <SidebarSwitchToggleIcon />
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          </SidebarMenu>
+        </SidebarGroupContent>
+      </SidebarGroup>
+    );
+  }
+
   return (
     <Collapsible open={localOpen && open} onOpenChange={handleToggle} className="group/collapsible">
       <SidebarGroup>
         <SidebarGroupLabel asChild>
-          <CollapsibleTrigger>
+          <CollapsibleTrigger className="group-data-[state=open]/collapsible:bg-sidebar-accent group-data-[state=open]/collapsible:text-sidebar-accent-foreground">
             Settings
             <ChevronDownIcon className="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-180" />
           </CollapsibleTrigger>
@@ -42,9 +69,11 @@ export function CollapsibleSettings() {
           <SidebarGroupContent>
             <SidebarMenu>
               <SidebarMenuItem>
-                <SidebarMenuButton asChild>
-                  <SwitchToggle />
-                </SidebarMenuButton>
+                <SidebarMenuSub>
+                  <SidebarMenuSubItem>
+                    <SubMenuButtonSwitchToggle />
+                  </SidebarMenuSubItem>
+                </SidebarMenuSub>
               </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>

@@ -4,8 +4,7 @@ import { useState, useEffect } from 'react';
 import { FileIcon, AlertCircleIcon } from 'lucide-react';
 import { cn } from '@/lib/shadcn/utils';
 import { MINUTE } from '@/lib/common';
-import { Button } from '../ui';
-import { Spinner } from '../common';
+import { SidebarMenuButton, SidebarMenuItem, useSidebar } from '../ui';
 import { useTranslation } from '@/lib/i18n/client';
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL!;
@@ -14,14 +13,15 @@ const apiUrl = process.env.NEXT_PUBLIC_API_URL!;
 const cvAvailabilityCache = new Map<string, { available: boolean; timestamp: number }>();
 const CACHE_DURATION = 5 * MINUTE;
 
-interface DownloadCvProps {
+interface SidebarMenuItemDownloadCv {
   lng: string;
   className?: string;
 }
 
-export function DownloadCv({ lng, className }: DownloadCvProps) {
+export function SidebarMenuItemDownloadCv({ lng, className }: SidebarMenuItemDownloadCv) {
   const [isAvailable, setIsAvailable] = useState<boolean | null>(null);
   const [isChecking, setIsChecking] = useState(false);
+  const { state } = useSidebar();
 
   const { t } = useTranslation(lng, 'header');
 
@@ -66,32 +66,32 @@ export function DownloadCv({ lng, className }: DownloadCvProps) {
     }
   };
 
-  if (isAvailable === false) {
-    return (
-      <Button
-        className={cn('cursor-pointer opacity-50', className)}
-        onClick={handleDownload}
-        variant="secondary"
-      >
-        <AlertCircleIcon />
-        {t('resume.error')}
-      </Button>
-    );
-  }
+  const getIcon = () => {
+    if (isChecking)
+      return (
+        <div className="animate-spin w-4 h-4 border-2 border-current border-t-transparent rounded-full" />
+      );
+    if (isAvailable === false) return <AlertCircleIcon className="w-4 h-4" />;
+    return <FileIcon className="w-4 h-4" />;
+  };
+
+  const getLabel = () => {
+    if (isChecking) return t('resume.loading');
+    if (isAvailable === false) return t('resume.error');
+    return t('resume.download');
+  };
 
   return (
-    <Button
-      className={cn('cursor-pointer', className)}
-      onClick={handleDownload}
-      variant="secondary"
-      disabled={isChecking}
-    >
-      <Spinner
-        loading={isChecking}
-        text={t('resume.download')}
-        loadingText={t('resume.loading')}
-        icon={<FileIcon />}
-      />
-    </Button>
+    <SidebarMenuItem>
+      <SidebarMenuButton
+        onClick={handleDownload}
+        disabled={isChecking}
+        className={cn('cursor-pointer', isAvailable === false && 'opacity-50', className)}
+        tooltip={state === 'collapsed' ? getLabel() : undefined}
+      >
+        {getIcon()}
+        <span>{getLabel()}</span>
+      </SidebarMenuButton>
+    </SidebarMenuItem>
   );
 }

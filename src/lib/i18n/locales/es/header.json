@@ -14,7 +14,8 @@
     "experiences": "Experiencias"
   },
   "settings": "Configuraciones",
-  "selectLanguage": "Seleccione el Idioma",
+  "selectLanguage": "Cambiar idioma",
+  "selectMode": "Cambiar tema",
   "mode": {
     "toggle": "Cambiar entre modo claro y oscuro",
     "light": "Claro",

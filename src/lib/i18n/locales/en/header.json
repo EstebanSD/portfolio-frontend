@@ -14,7 +14,8 @@
     "experiences": "Experiences"
   },
   "settings": "Settings",
-  "selectLanguage": "Select Language",
+  "selectLanguage": "Change language",
+  "selectMode": "Change mode",
   "mode": {
     "toggle": "Toggle between light and dark mode",
     "light": "Light",

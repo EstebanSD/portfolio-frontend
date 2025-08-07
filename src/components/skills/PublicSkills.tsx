@@ -51,7 +51,7 @@ export async function PublicSkills({ lng }: { lng: string }) {
     );
 
     return (
-      <section id="skills" className="scroll-mt-24 min-h-screen py-20 bg-background">
+      <section id="skills" className="scroll-mt-24 min-h-screen py-20 px-4 bg-background">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-light text-foreground mb-4">
             {t('page.title1')} <span className="text-primary">{t('page.title2')}</span>
@@ -80,10 +80,7 @@ export async function PublicSkills({ lng }: { lng: string }) {
     console.error('Error loading projects:', error);
 
     return (
-      <section
-        id="skills"
-        className="scroll-mt-24 min-h-48 py-20 px-8 rounded-sm bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-background"
-      >
+      <section id="skills" className="scroll-mt-24 min-h-48 py-20 px-4 bg-background">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-light text-foreground mb-4">
             {t('page.title1')} <span className="text-primary">{t('page.title2')}</span>

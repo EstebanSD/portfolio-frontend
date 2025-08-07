@@ -11,40 +11,68 @@ import {
   SidebarGroupContent,
   SidebarGroupLabel,
   SidebarMenu,
+  SidebarMenuButton,
   SidebarMenuItem,
   SidebarMenuSub,
-  SidebarMenuSubButton,
   SidebarMenuSubItem,
   useSidebar,
 } from '../ui';
-import { SwitchToggle } from './SwitchToggle';
 import { useTranslation } from '@/lib/i18n/client';
-import { SubLanguageSwitcher } from './SubLanguageSwitcher';
+import { SubMenuButtonSwitchToggle } from './SubMenuButtonSwitchToggle';
+import { SubMenuButtonLanguageSwitcher } from './SubMenuButtonLanguageSwitcher';
+import { SidebarSwitchToggleIcon } from './SidebarSwitchToggleIcon';
+import { SidebarLanguageSwitcherIcon } from './SidebarLanguageSwitcherIcon';
 
 export function PublicCollapsibleSettings() {
-  const { open } = useSidebar();
+  const { open, state } = useSidebar();
   const pathname = usePathname();
   const [localOpen, setLocalOpen] = useState<boolean>(false);
 
   const lng = pathname.split('/')[1] || 'en';
   const { t } = useTranslation(lng, 'header');
 
+  const isCollapsed = state === 'collapsed';
+
   useEffect(() => {
-    if (!open) setLocalOpen(false);
-  }, [open]);
+    if (!open || isCollapsed) {
+      setLocalOpen(false);
+    }
+  }, [open, isCollapsed]);
 
   const handleToggle = () => {
-    if (open) {
+    if (open && !isCollapsed) {
       setLocalOpen((prevOpen) => !prevOpen);
     }
   };
+
+  if (isCollapsed) {
+    return (
+      <SidebarGroup>
+        <SidebarGroupContent>
+          <SidebarMenu>
+            <SidebarMenuItem>
+              <SidebarMenuButton tooltip={t('selectMode')} className="justify-center">
+                <SidebarSwitchToggleIcon />
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+            <SidebarMenuItem>
+              <SidebarMenuButton tooltip={t('selectLanguage')} className="justify-center">
+                <SidebarLanguageSwitcherIcon />
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          </SidebarMenu>
+        </SidebarGroupContent>
+      </SidebarGroup>
+    );
+  }
+
   return (
     <Collapsible open={localOpen && open} onOpenChange={handleToggle} className="group/collapsible">
       <SidebarGroup>
         <SidebarGroupLabel asChild>
-          <CollapsibleTrigger>
+          <CollapsibleTrigger className="group-data-[state=open]/collapsible:bg-sidebar-accent group-data-[state=open]/collapsible:text-sidebar-accent-foreground">
             {t('settings')}
-            <ChevronDownIcon className="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-180" />
+            <ChevronDownIcon className="ml-auto h-4 w-4 transition-transform group-data-[state=open]/collapsible:rotate-180" />
           </CollapsibleTrigger>
         </SidebarGroupLabel>
         <CollapsibleContent>
@@ -53,12 +81,10 @@ export function PublicCollapsibleSettings() {
               <SidebarMenuItem>
                 <SidebarMenuSub>
                   <SidebarMenuSubItem>
-                    <SidebarMenuSubButton asChild>
-                      <SwitchToggle />
-                    </SidebarMenuSubButton>
+                    <SubMenuButtonSwitchToggle />
                   </SidebarMenuSubItem>
                   <SidebarMenuSubItem>
-                    <SubLanguageSwitcher />
+                    <SubMenuButtonLanguageSwitcher />
                   </SidebarMenuSubItem>
                 </SidebarMenuSub>
               </SidebarMenuItem>
