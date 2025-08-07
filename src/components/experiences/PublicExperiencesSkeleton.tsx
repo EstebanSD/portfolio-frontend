@@ -6,7 +6,7 @@ export async function PublicExperiencesSkeleton({ lng }: { lng: string }) {
   return (
     <section
       id="experiences"
-      className="scroll-mt-24 min-h-screen py-20 px-2 md:px-8 rounded-sm bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-background"
+      className="scroll-mt-24 min-h-screen py-20 px-2 md:px-8 bg-background dark:bg-gray-900"
     >
       <div className="text-center mb-16">
         <h2 className="text-4xl font-light text-foreground mb-4">

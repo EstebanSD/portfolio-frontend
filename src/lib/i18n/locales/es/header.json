@@ -1,14 +1,23 @@
 {
-  "navigation": "Navegación",
+  "home": "Inicio",
+  "navigation": "Secciones",
   "navDescription": "Seleccioná una para navegar.",
-  "downloadCv": "CV",
+  "resume": {
+    "download": "Descargar CV",
+    "loading": "Descargando",
+    "error": "CV no disponible"
+  },
   "sections": {
     "about": "Acerca",
     "projects": "Proyectos",
     "skills": "Habilidades",
     "experiences": "Experiencias"
   },
+  "settings": "Configuraciones",
+  "selectLanguage": "Cambiar idioma",
+  "selectMode": "Cambiar tema",
   "mode": {
+    "toggle": "Cambiar entre modo claro y oscuro",
     "light": "Claro",
     "dark": "Oscuro",
     "system": "Sistema"    

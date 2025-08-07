@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
 import { ChevronDownIcon } from 'lucide-react';
 import {
   Collapsible,
@@ -18,13 +19,17 @@ import {
 } from '../ui';
 import { useTranslation } from '@/lib/i18n/client';
 import { SubMenuButtonSwitchToggle } from './SubMenuButtonSwitchToggle';
+import { SubMenuButtonLanguageSwitcher } from './SubMenuButtonLanguageSwitcher';
 import { SidebarSwitchToggleIcon } from './SidebarSwitchToggleIcon';
+import { SidebarLanguageSwitcherIcon } from './SidebarLanguageSwitcherIcon';
 
-export function CollapsibleSettings() {
+export function PublicCollapsibleSettings() {
   const { open, state } = useSidebar();
+  const pathname = usePathname();
   const [localOpen, setLocalOpen] = useState<boolean>(false);
 
-  const { t } = useTranslation('en', 'header');
+  const lng = pathname.split('/')[1] || 'en';
+  const { t } = useTranslation(lng, 'header');
 
   const isCollapsed = state === 'collapsed';
 
@@ -50,6 +55,11 @@ export function CollapsibleSettings() {
                 <SidebarSwitchToggleIcon />
               </SidebarMenuButton>
             </SidebarMenuItem>
+            <SidebarMenuItem>
+              <SidebarMenuButton tooltip={t('selectLanguage')} className="justify-center">
+                <SidebarLanguageSwitcherIcon />
+              </SidebarMenuButton>
+            </SidebarMenuItem>
           </SidebarMenu>
         </SidebarGroupContent>
       </SidebarGroup>
@@ -61,8 +71,8 @@ export function CollapsibleSettings() {
       <SidebarGroup>
         <SidebarGroupLabel asChild>
           <CollapsibleTrigger className="group-data-[state=open]/collapsible:bg-sidebar-accent group-data-[state=open]/collapsible:text-sidebar-accent-foreground">
-            Settings
-            <ChevronDownIcon className="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-180" />
+            {t('settings')}
+            <ChevronDownIcon className="ml-auto h-4 w-4 transition-transform group-data-[state=open]/collapsible:rotate-180" />
           </CollapsibleTrigger>
         </SidebarGroupLabel>
         <CollapsibleContent>
@@ -72,6 +82,9 @@ export function CollapsibleSettings() {
                 <SidebarMenuSub>
                   <SidebarMenuSubItem>
                     <SubMenuButtonSwitchToggle />
+                  </SidebarMenuSubItem>
+                  <SidebarMenuSubItem>
+                    <SubMenuButtonLanguageSwitcher />
                   </SidebarMenuSubItem>
                 </SidebarMenuSub>
               </SidebarMenuItem>

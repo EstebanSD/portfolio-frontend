@@ -5,7 +5,7 @@ export async function PublicAboutSkeleton({ lng }: { lng: string }) {
   const { t } = await serverTranslation(lng, 'about');
 
   return (
-    <section id="about" className="scroll-mt-24 py-20 px-2 md:px-8">
+    <section id="about" className="scroll-mt-24 py-20 px-4 md:px-8">
       <div className="text-center mb-16">
         <h2 className="text-4xl font-light text-foreground mb-4">
           {t('page.title1')} <span className="text-primary">{t('page.title2')}</span>
