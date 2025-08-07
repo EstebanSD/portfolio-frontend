@@ -39,7 +39,7 @@ export function ExperienceCard({ experience, t }: ExperienceCardProps) {
     general;
 
   return (
-    <Card className="w-full max-w-4xl hover:shadow-lg transition-all duration-300 hover:scale-[1.02] border-border/50 bg-background dark:bg-gray-900">
+    <Card className="w-full max-w-4xl hover:shadow-lg transition-all duration-300 hover:scale-[1.02] border-border/50 bg-background dark:bg-gray-950">
       <CardHeader className="pb-4">
         <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
           {/* Company Info */}

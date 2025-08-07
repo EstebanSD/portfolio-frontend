@@ -39,7 +39,6 @@ export function useLogin(t: (key: string) => string) {
         setError(t('login.errors.invalidCredentials'));
       } else {
         router.push('/admin');
-        router.refresh();
       }
     } catch (error) {
       setError(t('login.errors.loginError'));

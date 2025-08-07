@@ -9,23 +9,47 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: 'bg-primary text-primary-foreground shadow-xs hover:bg-primary/90',
-        destructive:
-          'bg-destructive text-white shadow-xs hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60',
-        outline:
-          'border bg-background shadow-xs hover:bg-primary hover:text-primary-foreground dark:bg-input/30 dark:border-input dark:bg-background/60 dark:hover:bg-gray-900',
+        // Main button - most important action
+        default:
+          'bg-primary text-primary-foreground shadow-sm hover:bg-primary/90 focus-visible:ring-primary/20',
+
+        // Important secondary actions, but not primary ones
         secondary:
-          'bg-secondary text-secondary-foreground shadow-xs hover:bg-primary/20 dark:hover:bg-primary',
-        ghost: 'hover:bg-muted hover:text-foreground/90 dark:hover:bg-muted/30',
-        link: 'text-primary underline-offset-4 hover:underline',
-        subtle:
-          'bg-muted text-muted-foreground hover:bg-muted/80 dark:bg-muted/60 dark:text-foreground/90 dark:hover:bg-muted/80',
+          'bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80 focus-visible:ring-secondary/20',
+
+        // Button with border, less prominent than default
+        outline:
+          'border border-border bg-background text-foreground shadow-sm hover:bg-muted hover:text-foreground focus-visible:ring-muted/20',
+
+        // Subtle actions, integrated into the background
+        ghost: 'text-foreground hover:bg-muted hover:text-foreground focus-visible:ring-muted/20',
+
+        // Very subtle, for low-contrast actions
+        muted:
+          'bg-muted text-muted-foreground shadow-sm hover:bg-muted/80 hover:text-foreground focus-visible:ring-muted/20',
+
+        // For links or actions that appear to be links
+        link: 'text-primary underline-offset-4 hover:underline focus-visible:ring-primary/20',
+
+        // For positive actions (save, confirm)
+        success:
+          'bg-success text-primary-foreground shadow-sm hover:bg-success/90 focus-visible:ring-success/20',
+
+        // For warnings
+        warning:
+          'bg-warning text-foreground shadow-sm hover:bg-warning/90 focus-visible:ring-warning/20',
+
+        // For destructive actions (delete, cancel)
+        destructive:
+          'bg-destructive text-primary-foreground shadow-sm hover:bg-destructive/90 focus-visible:ring-destructive/20',
       },
       size: {
+        sm: 'h-8 px-3 text-xs',
         default: 'h-10 px-4 py-2',
-        sm: 'h-8 px-3 py-1.5',
-        lg: 'h-12 px-6 py-3',
+        lg: 'h-12 px-6 py-3 text-base',
         icon: 'size-9',
+        'icon-sm': 'size-7',
+        'icon-lg': 'size-11',
       },
     },
     defaultVariants: {

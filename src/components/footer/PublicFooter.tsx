@@ -42,22 +42,26 @@ export async function PublicFooter({ lng }: { lng: string }) {
     return (
       <>
         <footer className="bg-background dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 mt-20">
-          <div className="mx-auto px-4 sm:px-6 lg:px-8 py-12">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="space-y-4">
-                <h3 className="text-lg font-semibold text-foreground">{t('contact.title')}</h3>
-
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+            {/* Principal Grid - responsive */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+              {/* Contact Section */}
+              <div className="space-y-3 sm:space-y-4">
+                <h3 className="text-base sm:text-lg font-semibold text-foreground">
+                  {t('contact.title')}
+                </h3>
                 <div className="space-y-2">
                   <ButtonCopy toCopy={contact.email} iconName="mail" />
-
                   {contact.phone && <ButtonCopy toCopy={contact.phone} iconName="phone" />}
                 </div>
               </div>
 
-              <div className="space-y-4">
-                <h3 className="text-lg font-semibold text-foreground">{t('social.title')}</h3>
-
-                <div className="flex space-x-4">
+              {/* Social Section */}
+              <div className="space-y-3 sm:space-y-4">
+                <h3 className="text-base sm:text-lg font-semibold text-foreground">
+                  {t('social.title')}
+                </h3>
+                <div className="flex flex-wrap gap-3">
                   {contact.socialLinks &&
                     Object.entries(contact.socialLinks).map(([platform, url]) => {
                       if (!url) return null;
@@ -70,7 +74,7 @@ export async function PublicFooter({ lng }: { lng: string }) {
                           href={url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="p-2 rounded-full bg-muted hover:bg-muted/80 text-muted-foreground hover:text-primary transition-colors"
+                          className="inline-flex items-center justify-center p-2 rounded-full bg-muted hover:bg-muted/80 text-muted-foreground hover:text-primary transition-colors"
                           aria-label={`${platform} profile`}
                         >
                           <Icon className="h-5 w-5" />
@@ -80,19 +84,24 @@ export async function PublicFooter({ lng }: { lng: string }) {
                 </div>
               </div>
 
-              <div className="space-y-4">
-                <h3 className="text-lg font-semibold text-foreground">{t('more.title')}</h3>
-
-                <p className="text-sm text-muted-foreground leading-relaxed">
+              {/* More Section */}
+              <div className="space-y-3 sm:space-y-4 sm:col-span-2 lg:col-span-1">
+                <h3 className="text-base sm:text-lg font-semibold text-foreground">
+                  {t('more.title')}
+                </h3>
+                <p className="text-sm text-muted-foreground leading-relaxed max-w-md">
                   {t('more.description')}
                 </p>
               </div>
             </div>
 
-            <div className="mt-8 pt-8 border-t border-gray-200 dark:border-gray-700 text-center">
-              <p className="text-xs text-muted-foreground">
-                {t('builtWith')} Next.js & TypeScript • {createdYear}
-              </p>
+            {/* Footer bottom */}
+            <div className="mt-6 sm:mt-8 pt-6 sm:pt-8 border-t border-gray-200 dark:border-gray-700">
+              <div className="flex justify-center items-center">
+                <p className="text-xs text-muted-foreground">
+                  {t('builtWith')} Next.js & TypeScript • {createdYear}
+                </p>
+              </div>
             </div>
           </div>
         </footer>
@@ -105,16 +114,17 @@ export async function PublicFooter({ lng }: { lng: string }) {
     return (
       <>
         <footer className="bg-background dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 mt-20">
-          <div className="mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
             <div className="text-center space-y-4">
-              <h3 className="text-lg font-semibold text-foreground">{t('contact.title')}</h3>
-
+              <h3 className="text-base sm:text-lg font-semibold text-foreground">
+                {t('contact.title')}
+              </h3>
               <div className="space-y-2">
                 <p className="text-sm text-muted-foreground">{t('fallback')}</p>
               </div>
             </div>
 
-            <div className="mt-8 pt-8 border-t border-gray-200 dark:border-gray-700 text-center">
+            <div className="mt-6 sm:mt-8 pt-6 sm:pt-8 border-t border-gray-200 dark:border-gray-700 text-center">
               <p className="text-xs text-muted-foreground">
                 {t('builtWith')} Next.js & TypeScript • {new Date().getFullYear()}
               </p>

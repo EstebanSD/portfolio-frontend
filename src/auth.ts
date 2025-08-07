@@ -4,6 +4,9 @@ import Credentials from 'next-auth/providers/credentials';
 import { MINUTE } from './lib/common';
 import { JWT } from 'next-auth/jwt';
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000/api';
+const TOKEN_EXPIRES_IN = parseInt(process.env.TOKEN_EXPIRES_IN ?? '15', 10) * MINUTE;
+
 export const config = {
   providers: [
     Credentials({
@@ -17,7 +20,7 @@ export const config = {
         }
 
         try {
-          const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, {
+          const response = await fetch(`${API_URL}/auth/login`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -37,9 +40,10 @@ export const config = {
           return {
             id: data.user?.id || 'unknown',
             email: credentials.email as string,
+            name: data.user?.fullName,
+            role: data.user?.role || 'User',
             accessToken: data.access_token,
             refreshToken: data.refresh_token,
-            role: data.user?.role || 'User',
           };
         } catch (error) {
           console.error('Auth error:', error);
@@ -55,7 +59,8 @@ export const config = {
         token.accessToken = user.accessToken;
         token.refreshToken = user.refreshToken;
         token.role = user.role;
-        token.accessTokenExpires = Date.now() + 15 * MINUTE;
+        token.accessTokenExpires = Date.now() + TOKEN_EXPIRES_IN;
+        token.error = undefined;
         return token;
       }
 
@@ -96,7 +101,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth(config);
 
 async function refreshAccessToken(token: JWT): Promise<JWT> {
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/refresh`, {
+    const response = await fetch(`${API_URL}/auth/refresh`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ refresh_token: token.refreshToken }),
@@ -111,7 +116,7 @@ async function refreshAccessToken(token: JWT): Promise<JWT> {
       ...token,
       accessToken: refreshedTokens.access_token,
       refreshToken: refreshedTokens.refresh_token,
-      accessTokenExpires: Date.now() + 15 * MINUTE,
+      accessTokenExpires: Date.now() + TOKEN_EXPIRES_IN,
       error: undefined,
     };
   } catch (error) {

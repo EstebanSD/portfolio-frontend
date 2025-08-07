@@ -1,5 +1,7 @@
-import { PublicHeader } from '@/components/header';
+import { cookies } from 'next/headers';
+import { PublicSidebar } from '@/components/header';
 import { PublicFooter } from '@/components/footer';
+import { SidebarProvider, SidebarTrigger } from '@/components/ui';
 
 export default async function PublicLayout({
   children,
@@ -9,12 +11,20 @@ export default async function PublicLayout({
   params: Promise<{ lng: string }>;
 }) {
   const { lng } = await params;
+  const cookieStore = await cookies();
+  const defaultOpen = cookieStore.get('sidebar_state')?.value === 'true';
+
   return (
-    <>
-      <PublicHeader lng={lng} />
+    <SidebarProvider defaultOpen={defaultOpen}>
+      <PublicSidebar lng={lng} />
       {/* Adjusted padding to account for fixed header */}
-      <main className="pt-16">{children}</main>
-      <PublicFooter lng={lng} />
-    </>
+      <main className="w-full pt-16">
+        <nav className="py-4 pl-4 w-full border-b fixed top-0 z-50 bg-background">
+          <SidebarTrigger />
+        </nav>
+        {children}
+        <PublicFooter lng={lng} />
+      </main>
+    </SidebarProvider>
   );
 }
