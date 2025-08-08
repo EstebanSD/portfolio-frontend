@@ -24,7 +24,7 @@ import { SidebarSwitchToggleIcon } from './SidebarSwitchToggleIcon';
 import { SidebarLanguageSwitcherIcon } from './SidebarLanguageSwitcherIcon';
 
 export function PublicCollapsibleSettings() {
-  const { open, state } = useSidebar();
+  const { open, state, isMobile } = useSidebar();
   const pathname = usePathname();
   const [localOpen, setLocalOpen] = useState<boolean>(false);
 
@@ -45,7 +45,7 @@ export function PublicCollapsibleSettings() {
     }
   };
 
-  if (isCollapsed) {
+  if (isCollapsed && !isMobile) {
     return (
       <SidebarGroup>
         <SidebarGroupContent>

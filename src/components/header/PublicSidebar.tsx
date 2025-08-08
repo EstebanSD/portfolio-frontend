@@ -1,5 +1,8 @@
+'use client';
+
 import Link from 'next/link';
 import { ForwardRefExoticComponent, RefAttributes } from 'react';
+import { usePathname } from 'next/navigation';
 import {
   BrainCircuitIcon,
   BriefcaseIcon,
@@ -20,11 +23,13 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from '../ui';
-import { serverTranslation } from '@/lib/i18n';
 import { PublicCollapsibleSettings, SidebarMenuItemDownloadCv } from '../sidebar';
+import { useTranslation } from '@/lib/i18n/client';
 
-export async function PublicSidebar({ lng }: { lng: string }) {
-  const { t } = await serverTranslation(lng, 'header');
+export function PublicSidebar() {
+  const pathname = usePathname();
+  const lng = pathname.split('/')[1] || 'en';
+  const { t } = useTranslation(lng, 'header');
   const sections: {
     key: string;
     label: string;
