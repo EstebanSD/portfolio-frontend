@@ -32,7 +32,7 @@ export function ProjectCard({ project }: ProductCardProps) {
   const handleRouter = () => router.push(`/${project.locale}/projects/${general._id}`);
   return (
     <Card
-      className="h-full group pt-0 overflow-hidden border-0 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-background dark:bg-gray-900 cursor-pointer"
+      className="h-full group pt-0 overflow-hidden border-0 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-background dark:bg-gray-950 cursor-pointer"
       onClick={handleRouter}
     >
       <div className="relative h-48 overflow-hidden">
