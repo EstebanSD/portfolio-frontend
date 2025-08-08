@@ -21,7 +21,7 @@ import { SubMenuButtonSwitchToggle } from './SubMenuButtonSwitchToggle';
 import { SidebarSwitchToggleIcon } from './SidebarSwitchToggleIcon';
 
 export function CollapsibleSettings() {
-  const { open, state } = useSidebar();
+  const { open, state, isMobile } = useSidebar();
   const [localOpen, setLocalOpen] = useState<boolean>(false);
 
   const { t } = useTranslation('en', 'header');
@@ -40,7 +40,7 @@ export function CollapsibleSettings() {
     }
   };
 
-  if (isCollapsed) {
+  if (isCollapsed && !isMobile) {
     return (
       <SidebarGroup>
         <SidebarGroupContent>

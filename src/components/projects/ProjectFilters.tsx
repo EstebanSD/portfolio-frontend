@@ -41,7 +41,7 @@ export function ProjectFilters({ lng, currentFilters }: ProjectFiltersProps) {
   ];
 
   return (
-    <div className="mt-2 mb-8 mx-2">
+    <div className="mt-2 mb-8">
       <Card>
         <CardContent className="p-6">
           <div className="flex flex-wrap gap-4 items-end">
