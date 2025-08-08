@@ -19,8 +19,9 @@ export default async function PublicLayout({
       <PublicSidebar lng={lng} />
       {/* Adjusted padding to account for fixed header */}
       <main className="w-full pt-16">
-        <nav className="py-4 pl-4 w-full border-b fixed top-0 z-50 bg-background">
+        <nav className="py-4 pl-4 w-full border-b fixed top-0 z-50 bg-background space-x-4 flex items-center">
           <SidebarTrigger />
+          <span>Esteban Salvay Dilena</span>
         </nav>
         {children}
         <PublicFooter lng={lng} />
