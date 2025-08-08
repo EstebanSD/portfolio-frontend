@@ -49,7 +49,7 @@ export function ProjectList({ lng, filters }: Props) {
     );
   }
   return (
-    <div className="grid gap-4 md:gap-6 mb-8 grid-cols-[repeat(auto-fill,minmax(280px,1fr))]">
+    <div className="grid gap-4 md:gap-6 mb-8 grid-cols-[repeat(auto-fill,minmax(280px,1fr))] dark:px-4 dark:py-6 dark:rounded-md dark:bg-gray-900">
       {projects.map((project) => (
         <ProjectCard key={project._id} project={project} />
       ))}
