@@ -1,5 +1,6 @@
 'use client';
 
+import { useTransition } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { CheckIcon, GlobeIcon } from 'lucide-react';
 import { cn } from '@/lib/shadcn/utils';
@@ -13,6 +14,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
   SidebarMenuSubButton,
+  useSidebar,
 } from '../ui';
 
 export function SubMenuButtonLanguageSwitcher() {
@@ -20,13 +22,29 @@ export function SubMenuButtonLanguageSwitcher() {
   const pathname = usePathname();
   const lng = pathname.split('/')[1] || 'en';
   const { t } = useTranslation(lng, 'header');
+  const { setOpenMobile, isMobile } = useSidebar();
+  const [isPending, startTransition] = useTransition();
 
   const handleLanguageChange = (newLng: string) => {
-    const segments = pathname.split('/');
-    segments[1] = newLng;
-    const newPath = segments.join('/');
-    const hash = typeof window !== 'undefined' ? window.location.hash : '';
-    router.push(newPath + hash);
+    if (newLng === lng) return;
+
+    startTransition(() => {
+      const segments = pathname.split('/');
+      segments[1] = newLng;
+      const newPath = segments.join('/');
+      const hash = typeof window !== 'undefined' ? window.location.hash : '';
+
+      // On mobile, close sidebar before browsing
+      if (isMobile) {
+        setOpenMobile(false);
+        // Short delay for the animation to complete
+        setTimeout(() => {
+          router.push(newPath + hash);
+        }, 200);
+      } else {
+        router.push(newPath + hash);
+      }
+    });
   };
 
   return (
@@ -34,12 +52,10 @@ export function SubMenuButtonLanguageSwitcher() {
       <DropdownMenuTrigger asChild>
         <SidebarMenuSubButton>
           <GlobeIcon
-            className="h-4 w-4 mr-2 text-gray-500"
-            style={{
-              color: '#bcbcbc',
-            }}
+            className={cn('h-4 w-4 mr-2 text-gray-500', isPending && 'animate-spin')}
+            style={{ color: '#bcbcbc' }}
           />
-          <span>{t('selectLanguage')}</span>
+          <span>{isPending ? '...' : t('selectLanguage')}</span>
           <span className="ml-auto text-xs text-muted-foreground uppercase">{lng}</span>
         </SidebarMenuSubButton>
       </DropdownMenuTrigger>
@@ -51,6 +67,7 @@ export function SubMenuButtonLanguageSwitcher() {
             key={language}
             onClick={() => handleLanguageChange(language)}
             className={cn(lng === language && 'bg-accent/50', 'cursor-pointer mt-0.5')}
+            disabled={isPending}
           >
             <span className="uppercase font-medium">{language}</span>
             {lng === language && <CheckIcon className="ml-auto h-4 w-4" />}
