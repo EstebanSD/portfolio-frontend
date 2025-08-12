@@ -11,7 +11,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from '../ui';
-import { LogoutButton } from '../auth';
+import { LogoutButtonServer } from '../auth';
 import { auth } from '@/auth';
 import { getInitials } from '@/utils';
 
@@ -40,8 +40,8 @@ export async function UserAvatar() {
             </SidebarMenuButton>
           </DropdownMenuTrigger>
           <DropdownMenuContent side="right" className="w-[--radix-popper-anchor-width]">
-            <DropdownMenuItem asChild>
-              <LogoutButton />
+            <DropdownMenuItem className="group">
+              <LogoutButtonServer />
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
