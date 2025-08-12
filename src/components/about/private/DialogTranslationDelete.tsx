@@ -12,7 +12,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '../ui';
+} from '@/components/ui';
 
 interface Props {
   name: string | undefined;

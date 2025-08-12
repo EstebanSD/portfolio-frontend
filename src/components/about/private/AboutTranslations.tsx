@@ -3,11 +3,11 @@
 import { useEffect, useState } from 'react';
 import { FolderXIcon, PlusIcon } from 'lucide-react';
 import { useSession } from 'next-auth/react';
-import { Button, Card, CardContent } from '../ui';
-import { AddTranslationForm } from './AddTranslationForm';
 import { AboutTranslation } from '@/types';
-import { TranslationCard } from './TranslationCard';
 import { getAvailableLocales } from '@/utils';
+import { Button, Card, CardContent } from '@/components/ui';
+import { AddTranslationForm } from './AddTranslationForm';
+import { TranslationCard } from './TranslationCard';
 
 interface Props {
   initialData?: AboutTranslation[];

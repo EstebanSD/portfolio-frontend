@@ -10,7 +10,7 @@ export async function loginAction(data: LoginFormValues) {
     await signIn('credentials', {
       email: data.email,
       password: data.password,
-      redirectTo: '/en/admin',
+      redirect: false,
     });
   } catch (error) {
     if (error instanceof ZodError) {

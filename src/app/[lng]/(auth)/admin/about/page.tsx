@@ -1,6 +1,6 @@
 import { GlobeIcon, UserIcon } from 'lucide-react';
 import { fetchDataAction } from '@/actions/about';
-import { AboutGeneralForm, AboutTranslations } from '@/components/about';
+import { AboutGeneralForm, AboutTranslations } from '@/components/about/private';
 import {
   Card,
   CardDescription,
@@ -17,7 +17,7 @@ export default async function page() {
   const tCount = initialData.translations.length;
 
   return (
-    <div className="min-h-screen p-6">
+    <div className="min-h-screen">
       <div className="max-w-6xl mx-auto space-y-6">
         <Card>
           <CardHeader>

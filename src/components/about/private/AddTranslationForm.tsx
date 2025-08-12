@@ -4,7 +4,6 @@ import { useTransition } from 'react';
 import { Session } from 'next-auth';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, Card, CardContent, CardHeader, CardTitle, Form } from '../ui';
 import {
   BriefcaseIcon,
   FileIcon,
@@ -14,7 +13,8 @@ import {
   SaveIcon,
   XIcon,
 } from 'lucide-react';
-import { FormFileUpload, FormInput, FormSelect, FormTextArea, Spinner } from '../common';
+import { Button, Card, CardContent, CardHeader, CardTitle, Form } from '@/components/ui';
+import { FormFileUpload, FormInput, FormSelect, FormTextArea, Spinner } from '@/components/common';
 import { addNewTranslationAction } from '@/actions/about';
 import { aboutTranslationFormSchema, type AboutTranslationFormValues } from '@/lib/validations';
 

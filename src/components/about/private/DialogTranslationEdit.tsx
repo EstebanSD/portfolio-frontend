@@ -32,10 +32,10 @@ import {
   DrawerTrigger,
   Form,
   SheetClose,
-} from '../ui';
+} from '@/components/ui';
 import { useIsMobile } from '@/hooks';
 import { AboutTranslation } from '@/types';
-import { FormFileUpload, FormInput, FormTextArea } from '../common';
+import { FormFileUpload, FormInput, FormTextArea } from '@/components/common';
 
 const translationFormSchema = z.object({
   locale: z.string().nonempty('This field is required.'),
@@ -89,7 +89,7 @@ export function DialogTranslationEdit({ translation, localeInfo, handleEdit, isL
 
   const FormContent = () => (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onEdit)} className="space-y-4">
+      <form onSubmit={form.handleSubmit(onEdit)} className="space-y-4 p-2">
         <FormInput
           disabled
           required
@@ -205,7 +205,7 @@ export function DialogTranslationEdit({ translation, localeInfo, handleEdit, isL
           <EditIcon className="w-4 h-4" />
         </button>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className="sm:max-w-md lg:max-w-lg max-h-[80vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>{TITLE}</DialogTitle>
           <DialogDescription>{DESC}</DialogDescription>

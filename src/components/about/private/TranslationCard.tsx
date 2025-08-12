@@ -5,7 +5,7 @@ import { Session } from 'next-auth';
 import { DownloadIcon } from 'lucide-react';
 import { deleteTranslationAction, editTranslationAction } from '@/actions/about';
 import { AboutTranslation, AVAILABLE_LOCALES } from '@/types';
-import { Card, CardContent, CardHeader, CardTitle } from '../ui';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui';
 import { DialogTranslationDelete } from './DialogTranslationDelete';
 import { DialogTranslationEdit } from './DialogTranslationEdit';
 import { type AboutTranslationFormValues } from '@/lib/validations';

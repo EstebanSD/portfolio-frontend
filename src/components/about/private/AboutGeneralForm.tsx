@@ -14,8 +14,8 @@ import {
   CardHeader,
   CardTitle,
   Form,
-} from '../ui';
-import { FormImageUpload, FormInput, FormTagsInput, Spinner } from '../common';
+} from '@/components/ui';
+import { FormImageUpload, FormInput, FormTagsInput, Spinner } from '@/components/common';
 import { aboutGeneralFormSchema, type AboutGeneralFormValues } from '@/lib/validations';
 import { updateGeneralInfoAction } from '@/actions/about';
 
