@@ -1,24 +1,22 @@
-import { serverTranslation } from '@/lib/i18n';
 import { LoginForm } from '@/components/auth';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui';
 
-type Props = {
-  params: Promise<{ lng: string }>;
-};
-
-export default async function LoginPage({ params }: Props) {
-  const { lng } = await params;
-  const { t } = await serverTranslation(lng, 'auth');
-
+export default async function page() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
       <div className="max-w-md w-full space-y-8">
-        <div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            {t('login.page.title')}
-          </h2>
-        </div>
+        <Card className="w-full max-w-md">
+          <CardHeader className="space-y-1">
+            <CardTitle className="text-2xl text-center">Login</CardTitle>
+            <CardDescription className="text-center">
+              Enter your credentials to access to the administration panel
+            </CardDescription>
+          </CardHeader>
 
-        <LoginForm lng={lng} />
+          <CardContent>
+            <LoginForm />
+          </CardContent>
+        </Card>
       </div>
     </div>
   );
