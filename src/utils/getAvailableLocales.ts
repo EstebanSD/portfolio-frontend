@@ -1,4 +1,5 @@
-import { AboutTranslation, AVAILABLE_LOCALES } from '@/types';
+import { AboutTranslation } from '@/types';
+import { AVAILABLE_LOCALES } from '@/lib/common';
 
 export const getAvailableLocales = (translations: AboutTranslation[]) => {
   const usedLocales = translations?.map((t) => t.locale) || [];

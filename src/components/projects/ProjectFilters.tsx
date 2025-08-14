@@ -5,10 +5,10 @@ import { useRouter } from 'next/navigation';
 import { XIcon } from 'lucide-react';
 import { Button, Card, CardContent } from '../ui';
 import { SearchFilterInput, SelectFilter } from '../common';
-import { ProductQueryFilters, ProjectStatus, ProjectType } from '@/types';
+import { ProjectQueryFilters, ProjectStatus, ProjectType } from '@/types';
 import { useTranslation } from '@/lib/i18n/client';
 
-type Filters = Required<ProductQueryFilters>;
+type Filters = Required<ProjectQueryFilters>;
 
 interface ProjectFiltersProps {
   lng: string;
@@ -50,7 +50,6 @@ export function ProjectFilters({ lng, currentFilters }: ProjectFiltersProps) {
               label={t('page.filter.type')}
               placeholder={t('page.filter.typePlaceholder')}
               basePath={`/${lng}/projects`}
-              initialValue="all"
               className="min-w-[150px]"
               options={TYPE_OPTIONS}
             />
@@ -60,7 +59,6 @@ export function ProjectFilters({ lng, currentFilters }: ProjectFiltersProps) {
               label={t('page.filter.status')}
               placeholder={t('page.filter.statusPlaceholder')}
               basePath={`/${lng}/projects`}
-              initialValue="all"
               className="min-w-[150px]"
               options={STATUS_OPTIONS}
             />

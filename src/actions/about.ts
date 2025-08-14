@@ -1,13 +1,13 @@
 'use server';
 
-import { z } from 'zod';
+import { ZodError } from 'zod';
 import { auth } from '@/auth';
 import { revalidateTag } from 'next/cache';
 import { AboutAll } from '@/types';
 import { aboutGeneralFormServerSchema, aboutTranslationFormServerSchema } from '@/lib/validations';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL!;
-export async function fetchDataAction() {
+export async function fetchAboutAction() {
   const session = await auth();
   try {
     const res = await fetch(`${API_URL}/portfolio/about`, {
@@ -105,7 +105,7 @@ export async function updateGeneralInfoAction(formData: FormData, accessToken: s
       data: result,
     };
   } catch (error) {
-    if (error instanceof z.ZodError) {
+    if (error instanceof ZodError) {
       const errorMessages = error.errors.map((e) => `${e.path.join('.')}: ${e.message}`);
       throw new Error(`Validation errors: ${errorMessages.join(', ')}`);
     }
@@ -170,7 +170,7 @@ export async function addNewTranslationAction(formData: FormData, accessToken: s
 
     return { success: true, message: 'Translation added successfully', data: result };
   } catch (error) {
-    if (error instanceof z.ZodError) {
+    if (error instanceof ZodError) {
       const errorMessages = error.errors.map((e) => `${e.path.join('.')}: ${e.message}`);
       throw new Error(`Validation errors: ${errorMessages.join(', ')}`);
     }
@@ -235,7 +235,7 @@ export async function editTranslationAction(formData: FormData, accessToken: str
 
     return { success: true, message: 'Translation edited successfully', data: result };
   } catch (error) {
-    if (error instanceof z.ZodError) {
+    if (error instanceof ZodError) {
       const errorMessages = error.errors.map((e) => `${e.path.join('.')}: ${e.message}`);
       throw new Error(`Validation errors: ${errorMessages.join(', ')}`);
     }

@@ -6,33 +6,49 @@ export type ProjectStatus = (typeof PROJECT_STATUSES)[number];
 export const PROJECT_TYPES = ['personal', 'company', 'freelance'] as const;
 export type ProjectType = (typeof PROJECT_TYPES)[number];
 
+export interface ProjectGeneral {
+  _id: string;
+  title: string;
+  type: ProjectType;
+  startDate?: Date;
+  endDate?: Date;
+  status: ProjectStatus;
+  technologies?: string[];
+  links?: {
+    github?: string;
+    website?: string;
+  };
+  images?: FileMetadata[];
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface ProjectTranslation {
+  _id: string;
+  locale: string;
+  summary: string;
+  description: string;
+  createdAt: string;
+  updatedAt: string;
+}
 export interface Project {
   _id: string;
   locale: string;
   summary: string;
   description: string;
-  general: {
-    _id: string;
-    title: string;
-    type: ProjectType;
-    startDate?: Date;
-    endDate?: Date;
-    status: ProjectStatus;
-    technologies?: string[];
-    links?: {
-      github?: string;
-      website?: string;
-    };
-    images?: FileMetadata[];
-    createdAt: string;
-    updatedAt: string;
-  };
+  general: ProjectGeneral;
   createdAt: string;
   updatedAt: string;
 }
 
-export interface ProductQueryFilters {
+export interface ProjectQueryFilters {
   title?: string;
   status?: ProjectStatus | 'all';
   type?: ProjectType | 'all';
 }
+
+export interface PrivateProjectQueryFilters extends ProjectQueryFilters {
+  locale?: string;
+}
+
+export type ProjectsMap = Record<string, Project[]>;

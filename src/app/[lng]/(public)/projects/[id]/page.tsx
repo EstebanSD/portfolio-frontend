@@ -52,7 +52,7 @@ export default async function page({ params }: Props) {
           <div className="py-6 md:px-2 lg:px-4">
             <ButtonLink
               variant={'ghost'}
-              className="group hover:bg-accent/80 transition-colors"
+              className="group hover:bg-accent/80 hover:text-white transition-colors"
               href={`/${lng}/projects`}
             >
               <ArrowLeftIcon className="w-4 h-4 mr-3 transition-transform duration-200 group-hover:-translate-x-1" />

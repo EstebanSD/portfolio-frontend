@@ -1,10 +1,10 @@
 import { Suspense } from 'react';
 import { ProjectFilters, ProjectList, ProjectsSkeleton } from '@/components/projects';
-import { ProductQueryFilters } from '@/types';
+import { ProjectQueryFilters } from '@/types';
 
 interface Props {
   params: Promise<{ lng: string }>;
-  searchParams: Promise<ProductQueryFilters>;
+  searchParams: Promise<ProjectQueryFilters>;
 }
 
 export default async function page({ params, searchParams }: Props) {
