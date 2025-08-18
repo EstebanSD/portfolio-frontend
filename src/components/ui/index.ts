@@ -21,3 +21,4 @@ export * from './tabs';
 export * from './dialog';
 export * from './textarea';
 export * from './drawer';
+export * from './table';

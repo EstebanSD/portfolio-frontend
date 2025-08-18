@@ -1,3 +1,4 @@
+import { Language } from '../common';
 import { FileMetadata } from './image';
 
 export const PROJECT_STATUSES = ['in_progress', 'completed', 'paused'] as const;
@@ -47,8 +48,29 @@ export interface ProjectQueryFilters {
   type?: ProjectType | 'all';
 }
 
-export interface PrivateProjectQueryFilters extends ProjectQueryFilters {
-  locale?: string;
-}
+export type RequiredProjectFilters = Required<ProjectQueryFilters>;
 
-export type ProjectsMap = Record<string, Project[]>;
+export interface PrivateProjectQueryFilters extends ProjectQueryFilters {
+  locale?: Language | 'all';
+}
+export type RequiredPrivateProjectFilters = Required<PrivateProjectQueryFilters>;
+
+export interface ProjectWithTranslations {
+  _id: string;
+  title: string;
+  type: ProjectType;
+  status: ProjectStatus;
+  startDate: string | null;
+  endDate: string | null;
+  technologies: string[];
+  links: {
+    github?: string;
+    website?: string;
+  };
+  images?: FileMetadata[];
+  translations: {
+    locale: string;
+    summary: string;
+    description: string;
+  }[];
+}

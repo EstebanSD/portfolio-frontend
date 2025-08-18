@@ -4,7 +4,7 @@ import { useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { XIcon } from 'lucide-react';
 import { Button, Card, CardContent } from '../ui';
-import { SearchFilterInput, SelectFilter } from '../common';
+import { SearchFilterInputUrl, SelectFilterUrl } from '../common';
 import { ProjectQueryFilters, ProjectStatus, ProjectType } from '@/types';
 import { useTranslation } from '@/lib/i18n/client';
 
@@ -45,7 +45,7 @@ export function ProjectFilters({ lng, currentFilters }: ProjectFiltersProps) {
       <Card>
         <CardContent className="p-6">
           <div className="flex flex-wrap gap-4 items-end">
-            <SelectFilter
+            <SelectFilterUrl
               paramKey="type"
               label={t('page.filter.type')}
               placeholder={t('page.filter.typePlaceholder')}
@@ -53,8 +53,7 @@ export function ProjectFilters({ lng, currentFilters }: ProjectFiltersProps) {
               className="min-w-[150px]"
               options={TYPE_OPTIONS}
             />
-
-            <SelectFilter
+            <SelectFilterUrl
               paramKey="status"
               label={t('page.filter.status')}
               placeholder={t('page.filter.statusPlaceholder')}
@@ -63,7 +62,7 @@ export function ProjectFilters({ lng, currentFilters }: ProjectFiltersProps) {
               options={STATUS_OPTIONS}
             />
 
-            <SearchFilterInput
+            <SearchFilterInputUrl
               paramKey="title"
               label={t('page.filter.search')}
               placeholder={t('page.filter.searchPlaceholder')}
