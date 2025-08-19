@@ -1,7 +1,7 @@
 'use client';
 
 import { HTMLInputAutoCompleteAttribute, useState } from 'react';
-import { EyeIcon, EyeOffIcon } from 'lucide-react';
+import { AsteriskIcon, EyeIcon, EyeOffIcon } from 'lucide-react';
 import { Control, ControllerRenderProps, FieldValues, Path } from 'react-hook-form';
 import { FormControl, FormField, FormItem, FormLabel, FormMessage, Input } from '../ui';
 
@@ -45,9 +45,9 @@ export function FormInput<T extends FieldValues, K extends Path<T>>({
               className="data-[error=true]:text-foreground"
             >
               {labelIcon && <span>{labelIcon}</span>}
-              <p className="m-0 text-sm font-medium">
+              <p className="m-0 text-sm font-medium flex items-center gap-1">
                 {label}
-                {required && <span> *</span>}
+                {required && <AsteriskIcon className="text-destructive w-3 h-3 mb-1" />}
               </p>
             </FormLabel>
           )}

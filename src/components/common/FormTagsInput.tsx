@@ -2,7 +2,7 @@
 
 import { useState, useRef, KeyboardEvent } from 'react';
 import { Control, ControllerRenderProps, FieldValues, Path } from 'react-hook-form';
-import { XIcon } from 'lucide-react';
+import { AsteriskIcon, XIcon } from 'lucide-react';
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '../ui';
 import { cn } from '@/lib/shadcn/utils';
 
@@ -81,9 +81,9 @@ export function FormTagsInput<T extends FieldValues, K extends Path<T>>({
                 className="data-[error=true]:text-foreground"
               >
                 {labelIcon && <span>{labelIcon}</span>}
-                <p className="m-0 text-sm font-medium">
+                <p className="m-0 text-sm font-medium flex items-center gap-1">
                   {label}
-                  {required && <span> *</span>}
+                  {required && <AsteriskIcon className="text-destructive w-3 h-3 mb-1" />}
                 </p>
               </FormLabel>
             )}

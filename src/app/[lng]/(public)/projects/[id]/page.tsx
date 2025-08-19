@@ -1,3 +1,4 @@
+import { Metadata } from 'next';
 import Image from 'next/image';
 import {
   ArrowLeftIcon,
@@ -20,6 +21,11 @@ import { Project } from '@/types';
 import { formatDate, getStatusColor, getTypeIcon } from '@/utils';
 import { serverTranslation } from '@/lib/i18n';
 import { ButtonLink, CustomCarousel, EmptyState } from '@/components/common';
+
+export const metadata: Metadata = {
+  title: 'Project Details',
+  description: 'Detailed view of a specific project in the portfolio',
+};
 
 interface Props {
   params: Promise<{ lng: string; id: string }>;
