@@ -20,3 +20,4 @@ export * from './SelectFilterControlled';
 export * from './FormRadioGroup';
 export * from './DatePicker';
 export * from './FormDatePicker';
+export * from './DialogDelete';

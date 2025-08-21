@@ -10,7 +10,6 @@ import {
   FileIcon,
   FileTextIcon,
   GlobeIcon,
-  Loader2Icon,
   MessageSquareDashedIcon,
 } from 'lucide-react';
 import {
@@ -35,7 +34,7 @@ import {
 } from '@/components/ui';
 import { useIsMobile } from '@/hooks';
 import { AboutTranslation } from '@/types';
-import { FormFileUpload, FormInput, FormTextArea } from '@/components/common';
+import { FormFileUpload, FormInput, FormTextArea, Spinner } from '@/components/common';
 
 const translationFormSchema = z.object({
   locale: z.string().nonempty('This field is required.'),
@@ -60,7 +59,7 @@ interface Props {
         flag: string;
       }
     | undefined;
-  isLoading?: boolean;
+  isLoading: boolean;
 }
 export function DialogTranslationEdit({ translation, localeInfo, handleEdit, isLoading }: Props) {
   const [open, setOpen] = useState(false);
@@ -162,14 +161,7 @@ export function DialogTranslationEdit({ translation, localeInfo, handleEdit, isL
         disabled={isLoading}
         className="flex-1 md:flex-initial"
       >
-        {isLoading ? (
-          <>
-            <Loader2Icon className="w-4 h-4 mr-2 animate-spin" />
-            Updating...
-          </>
-        ) : (
-          'Update Translation'
-        )}
+        <Spinner loading={isLoading} text={'Update Translation'} loadingText={'Updating...'} />
       </Button>
     </>
   );

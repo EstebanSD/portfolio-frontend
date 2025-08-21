@@ -123,6 +123,7 @@ export function ProjectForm() {
               />
 
               <FormDatePicker
+                required={watchedStatus === 'completed'}
                 control={form.control}
                 name="startDate"
                 label="Start Date"

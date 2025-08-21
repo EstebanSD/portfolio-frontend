@@ -96,3 +96,33 @@ export async function addNewProjectAction(
     throw error;
   }
 }
+
+export async function deleteProjectAction(id: string, accessToken: string | undefined) {
+  if (!accessToken) {
+    throw new Error('No access token provided');
+  }
+
+  try {
+    const res = await fetch(`${API_URL}/portfolio/projects/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+
+    if (!res.ok) {
+      const errorData = await res.json().catch(() => null);
+      console.error('Error deleting project:', errorData);
+      throw new Error(`Error HTTP: ${res.status}`);
+    }
+
+    revalidateTag('projects');
+    revalidateTag('projects-all');
+
+    return { success: true, message: 'Project deleted successfully', data: null };
+  } catch (error) {
+    console.error('Error trying to delete the Project', error);
+    throw error;
+  }
+}

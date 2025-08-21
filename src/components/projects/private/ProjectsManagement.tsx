@@ -1,6 +1,7 @@
 'use client';
 
 import { useMemo, useState } from 'react';
+import { useSession } from 'next-auth/react';
 import { CalendarIcon, CheckCircleIcon, ClockIcon, FolderOpenIcon } from 'lucide-react';
 import { ProjectsToolbar } from './ProjectsToolbar';
 import { StatsCard } from './StatsCard';
@@ -18,6 +19,7 @@ interface Props {
   projects: ProjectWithTranslations[];
 }
 export function ProjectsManagement({ projectsCounts, projects }: Props) {
+  const { data: session } = useSession();
   const [filters, setFilters] = useState<RequiredProjectFilters>({
     title: '',
     status: 'all',
@@ -75,13 +77,13 @@ export function ProjectsManagement({ projectsCounts, projects }: Props) {
         <div className="p-6">
           <h2 className="text-xl font-semibold mb-4">Projects</h2>
 
-          <ProjectsTable projects={filteredProjects} />
+          <ProjectsTable projects={filteredProjects} session={session} />
         </div>
       </div>
 
       <div className="grid grid-cols-1 md:hidden gap-4">
         {filteredProjects.map((project) => (
-          <PrivProjectCard key={project._id} project={project} />
+          <PrivProjectCard key={project._id} project={project} session={session} />
         ))}
       </div>
     </div>

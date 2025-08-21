@@ -1,17 +1,15 @@
 'use client';
 
+import { useTransition } from 'react';
+import { toast } from 'sonner';
+import { Session } from 'next-auth';
 import { useRouter } from 'next/navigation';
-import {
-  CalendarIcon,
-  EditIcon,
-  ExternalLinkIcon,
-  EyeIcon,
-  ImageIcon,
-  Trash2Icon,
-} from 'lucide-react';
+import { CalendarIcon, EditIcon, ExternalLinkIcon, EyeIcon, ImageIcon } from 'lucide-react';
 import { SiGithub } from 'react-icons/si';
 import { getStatusColor, getTypeColor } from '@/utils';
 import { ProjectWithTranslations } from '@/types';
+import { DialogDelete } from '@/components/common';
+import { deleteProjectAction } from '@/actions/projects';
 
 const PROJECT_TYPES = {
   personal: 'Personal',
@@ -26,22 +24,37 @@ const PROJECT_STATUSES = {
 };
 
 interface Props {
+  session: Session | null;
   project: ProjectWithTranslations;
 }
 
-export function PrivProjectCard({ project }: Props) {
+export function PrivProjectCard({ session, project }: Props) {
   const router = useRouter();
-  const onEdit = (project: ProjectWithTranslations) => {
+  const [isPending, startTransition] = useTransition();
+
+  const handleDelete = async () => {
+    if (!session?.accessToken) {
+      toast.error('Authentication required');
+      return;
+    }
+
+    startTransition(async () => {
+      try {
+        await deleteProjectAction(project._id, session.accessToken);
+        toast.success(`Project ${project.title} deleted successfully`);
+      } catch (error) {
+        toast.error(`Failed to delete project ${project.title}`);
+        console.error('Delete error:', error);
+      }
+    });
+  };
+
+  const handleEdit = (project: ProjectWithTranslations) => {
     console.log('Edit project:', project);
     router.push(`/en/admin/projects/${project._id}/edit`); // or the same page like view
   };
 
-  const onDelete = (project: ProjectWithTranslations) => {
-    console.log('Delete project:', project);
-    // Modal
-  };
-
-  const onView = (project: ProjectWithTranslations) => {
+  const handleView = (project: ProjectWithTranslations) => {
     console.log('Project:', project);
     router.push(`/en/admin/projects/${project._id}`);
   };
@@ -70,26 +83,29 @@ export function PrivProjectCard({ project }: Props) {
 
           <div className="flex gap-1">
             <button
-              onClick={() => onView(project)}
+              onClick={() => handleView(project)}
               className="p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
               disabled={true} // TODO: Implement view functionality
             >
               <EyeIcon className="w-4 h-4" />
             </button>
             <button
-              onClick={() => onEdit(project)}
+              onClick={() => handleEdit(project)}
               className="p-2 text-gray-400 hover:text-yellow-600 hover:bg-yellow-50 rounded-lg transition-colors"
               disabled={true} // TODO: Implement edit functionality
             >
               <EditIcon className="w-4 h-4" />
             </button>
-            <button
-              onClick={() => onDelete(project)}
-              className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
-              disabled={true} // TODO: Implement delete functionality
-            >
-              <Trash2Icon className="w-4 h-4" />
-            </button>
+
+            <DialogDelete title="Delete Project" handleDelete={handleDelete} isLoading={isPending}>
+              <>
+                Are you sure you want to delete <strong>{project.title}</strong>?
+                <br />
+                If the project has translations, they will also be deleted.
+                <br />
+                <span className="text-destructive">This action cannot be undone.</span>
+              </>
+            </DialogDelete>
           </div>
         </div>
 

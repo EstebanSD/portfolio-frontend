@@ -1,8 +1,11 @@
 'use client';
 
+import { useTransition } from 'react';
+import { toast } from 'sonner';
+import { Session } from 'next-auth';
 import { useRouter } from 'next/navigation';
 import { format } from 'date-fns';
-import { EditIcon, ExternalLinkIcon, EyeIcon, MoreHorizontalIcon, Trash2Icon } from 'lucide-react';
+import { EditIcon, ExternalLinkIcon, EyeIcon, MoreHorizontalIcon } from 'lucide-react';
 import { SiGithub } from 'react-icons/si';
 import {
   Badge,
@@ -20,23 +23,40 @@ import {
 } from '@/components/ui';
 import { ProjectWithTranslations } from '@/types';
 import { getStatusColor, getTypeColor } from '@/utils';
+import { deleteProjectAction } from '@/actions/projects';
+import { DialogDelete } from '@/components/common';
 
 interface Props {
+  session: Session | null;
   projects: ProjectWithTranslations[];
 }
-export function ProjectsTable({ projects }: Props) {
+export function ProjectsTable({ session, projects }: Props) {
   const router = useRouter();
-  const onEdit = (project: ProjectWithTranslations) => {
+  const [isPending, startTransition] = useTransition();
+
+  const handleDelete = async (project: ProjectWithTranslations) => {
+    if (!session?.accessToken) {
+      toast.error('Authentication required');
+      return;
+    }
+
+    startTransition(async () => {
+      try {
+        await deleteProjectAction(project._id, session.accessToken);
+        toast.success(`Project ${project.title} deleted successfully`);
+      } catch (error) {
+        toast.error(`Failed to delete project ${project.title}`);
+        console.error('Delete error:', error);
+      }
+    });
+  };
+
+  const handleEdit = (project: ProjectWithTranslations) => {
     console.log('Edit project:', project);
     router.push(`/en/admin/projects/${project._id}/edit`); // or the same page like view
   };
 
-  const onDelete = (project: ProjectWithTranslations) => {
-    console.log('Delete project:', project);
-    // Modal
-  };
-
-  const onView = (project: ProjectWithTranslations) => {
+  const handleView = (project: ProjectWithTranslations) => {
     console.log('Project:', project);
     router.push(`/en/admin/projects/${project._id}`);
   };
@@ -162,7 +182,7 @@ export function ProjectsTable({ projects }: Props) {
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end">
                     <DropdownMenuItem
-                      onClick={() => onView(project)}
+                      onClick={() => handleView(project)}
                       className="cursor-pointer"
                       disabled={true} // TODO: Implement view functionality
                     >
@@ -170,20 +190,28 @@ export function ProjectsTable({ projects }: Props) {
                       Details
                     </DropdownMenuItem>
                     <DropdownMenuItem
-                      onClick={() => onEdit(project)}
+                      onClick={() => handleEdit(project)}
                       className="cursor-pointer"
                       disabled={true} // TODO: Implement edit functionality
                     >
                       <EditIcon className="mr-2 h-4 w-4" />
                       Edit
                     </DropdownMenuItem>
-                    <DropdownMenuItem
-                      onClick={() => onDelete(project)}
-                      className="cursor-pointer text-red-600 focus:text-red-600"
-                      disabled={true} // TODO: Implement delete functionality
-                    >
-                      <Trash2Icon className="mr-2 h-4 w-4" />
-                      Delete
+                    <DropdownMenuItem className="cursor-pointer" asChild>
+                      <DialogDelete
+                        label={'Delete'}
+                        title="Delete Project"
+                        handleDelete={() => handleDelete(project)}
+                        isLoading={isPending}
+                      >
+                        <>
+                          Are you sure you want to delete <strong>{project.title}</strong>?
+                          <br />
+                          If the project has translations, they will also be deleted.
+                          <br />
+                          <span className="text-destructive">This action cannot be undone.</span>
+                        </>
+                      </DialogDelete>
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>

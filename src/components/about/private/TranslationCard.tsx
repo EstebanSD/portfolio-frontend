@@ -8,9 +8,9 @@ import { deleteTranslationAction, editTranslationAction } from '@/actions/about'
 import { AboutTranslation } from '@/types';
 import { AVAILABLE_LOCALES } from '@/lib/common';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui';
-import { DialogTranslationDelete } from './DialogTranslationDelete';
 import { DialogTranslationEdit } from './DialogTranslationEdit';
 import { type AboutTranslationFormValues } from '@/lib/validations';
+import { DialogDelete } from '@/components/common';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL!;
 const getLocaleInfo = (code: string) => AVAILABLE_LOCALES.find((l) => l.code === code);
@@ -95,11 +95,18 @@ export function TranslationCard({ session, translation }: Props) {
             isLoading={isPending}
           />
 
-          <DialogTranslationDelete
-            name={localeInfo?.name}
+          <DialogDelete
+            title="Delete Translation"
             handleDelete={handleDelete}
             isLoading={isPending}
-          />
+          >
+            <>
+              Are you sure you want to delete the{' '}
+              {localeInfo?.name && <strong>{localeInfo.name} </strong>}translation?
+              <br />
+              <span className="text-destructive">This action cannot be undone.</span>
+            </>
+          </DialogDelete>
         </div>
       </CardHeader>
       <CardContent className="space-y-4">
