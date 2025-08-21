@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
+import { Toaster } from 'sonner';
 import { languages } from '@/lib/i18n/settings';
 import './globals.css';
 import { ThemeProvider } from '@/components/providers';
@@ -95,6 +96,16 @@ export default async function RootLayout({
           disableTransitionOnChange
         >
           {children}
+          <Toaster
+            // position="bottom-center"
+            richColors
+            // closeButton
+            // toastOptions={{
+            //   style: {
+            //     fontFamily: 'var(--font-geist-sans)',
+            //   },
+            // }}
+          />
         </ThemeProvider>
       </body>
     </html>

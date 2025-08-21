@@ -1,6 +1,7 @@
 'use client';
 
 import { useRef, useTransition } from 'react';
+import { toast } from 'sonner';
 import { useSession } from 'next-auth/react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -42,7 +43,7 @@ export function ProjectForm() {
 
   async function onSubmit(values: ProjectFormValues) {
     if (!session?.accessToken) {
-      // TODO toast.error('Authentication required');
+      toast.error('Authentication required');
       return;
     }
 
@@ -68,20 +69,17 @@ export function ProjectForm() {
 
         await addNewProjectAction(cleanData, session.accessToken);
 
-        // TODO toast.success('say something');
-        // TODO or redirect to project/[id]
+        toast.success('Project added successfully');
         form.reset();
       } catch (error) {
         const errorMessage =
           error instanceof Error ? error.message : 'An unexpected error occurred';
-        // if (errorMessage.includes('409')) {
-        //   // TODO toast.error('Project with this title already exists');
-        // } else if (errorMessage.includes('Validation errors')) {
-        //   // TODO toast.error('Please check the form for errors');
-        // } else {
-        //   // TODO toast.error(errorMessage);
-        // }
-        console.error('Submit error:', errorMessage);
+        if (errorMessage.includes('409')) {
+          toast.error('Project with this title already exists');
+        } else {
+          toast.error(errorMessage);
+        }
+        console.error('Submit error:', error);
       }
     });
   }
@@ -123,24 +121,24 @@ export function ProjectForm() {
                   { label: 'Paused', value: 'paused' },
                 ]}
               />
+
+              <FormDatePicker
+                control={form.control}
+                name="startDate"
+                label="Start Date"
+                placeholder="Select a Start Date"
+                startMonth={2000}
+              />
+
+              <FormDatePicker
+                required={watchedStatus === 'completed'}
+                control={form.control}
+                name="endDate"
+                label="End Date"
+                placeholder="Select a End Date"
+                startMonth={2000}
+              />
             </div>
-
-            <FormDatePicker
-              control={form.control}
-              name="startDate"
-              label="Start Date"
-              placeholder="Select a Start Date"
-              startMonth={2000}
-            />
-
-            <FormDatePicker
-              required={watchedStatus === 'completed'}
-              control={form.control}
-              name="endDate"
-              label="End Date"
-              placeholder="Select a End Date"
-              startMonth={2000}
-            />
 
             <FormTagsInput
               control={form.control}

@@ -72,18 +72,21 @@ export function PrivProjectCard({ project }: Props) {
             <button
               onClick={() => onView(project)}
               className="p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+              disabled={true} // TODO: Implement view functionality
             >
               <EyeIcon className="w-4 h-4" />
             </button>
             <button
               onClick={() => onEdit(project)}
               className="p-2 text-gray-400 hover:text-yellow-600 hover:bg-yellow-50 rounded-lg transition-colors"
+              disabled={true} // TODO: Implement edit functionality
             >
               <EditIcon className="w-4 h-4" />
             </button>
             <button
               onClick={() => onDelete(project)}
               className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+              disabled={true} // TODO: Implement delete functionality
             >
               <Trash2Icon className="w-4 h-4" />
             </button>

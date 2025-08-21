@@ -1,6 +1,7 @@
 'use client';
 
 import { useTransition } from 'react';
+import { toast } from 'sonner';
 import { Session } from 'next-auth';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -38,7 +39,7 @@ export function AddTranslationForm({ cancelNew, locales, session }: Props) {
 
   async function onSubmit(values: AboutTranslationFormValues) {
     if (!session?.accessToken) {
-      // TODO toast.error('Authentication required');
+      toast.error('Authentication required');
       return;
     }
 
@@ -57,14 +58,11 @@ export function AddTranslationForm({ cancelNew, locales, session }: Props) {
 
         await addNewTranslationAction(formData, session.accessToken);
 
-        // TODO toast.success(`${localeInfo?.name} translation added successfully`);
+        toast.success(`${values.locale.toUpperCase()} translation added successfully`);
         form.reset();
         cancelNew();
       } catch (error) {
-        // const errorMessage =
-        //   error instanceof Error ? error.message : 'An unexpected error occurred';
-        // TODO toast.error(errorMessage);
-        // TODO toast.error(`Failed to add ${localeInfo?.name} translation`);
+        toast.error(`Failed to add ${values.locale.toUpperCase()} translation`);
         console.error('Submit error:', error);
       }
     });

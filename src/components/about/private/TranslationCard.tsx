@@ -1,6 +1,7 @@
 'use client';
 
 import { useTransition } from 'react';
+import { toast } from 'sonner';
 import { Session } from 'next-auth';
 import { DownloadIcon } from 'lucide-react';
 import { deleteTranslationAction, editTranslationAction } from '@/actions/about';
@@ -31,16 +32,16 @@ export function TranslationCard({ session, translation }: Props) {
 
   const handleDelete = async () => {
     if (!session?.accessToken) {
-      // TODO toast.error('Authentication required');
+      toast.error('Authentication required');
       return;
     }
 
     startTransition(async () => {
       try {
         await deleteTranslationAction(translation.locale, session.accessToken);
-        // TODO toast.success(`${localeInfo?.name} translation deleted successfully`);
+        toast.success(`${localeInfo?.name} translation deleted successfully`);
       } catch (error) {
-        // TODO toast.error(`Failed to delete ${localeInfo?.name} translation`);
+        toast.error(`Failed to delete ${localeInfo?.name} translation`);
         console.error('Delete error:', error);
       }
     });
@@ -48,7 +49,7 @@ export function TranslationCard({ session, translation }: Props) {
 
   const handleEdit = async (values: AboutTranslationFormValues) => {
     if (!session?.accessToken) {
-      // TODO toast.error('Authentication required');
+      toast.error('Authentication required');
       return;
     }
 
@@ -65,11 +66,9 @@ export function TranslationCard({ session, translation }: Props) {
           }
         }
         await editTranslationAction(formData, session.accessToken);
-        // TODO toast.success(`${localeInfo?.name} translation edited successfully`);
+        toast.success(`${localeInfo?.name} translation edited successfully`);
       } catch (error) {
-        // const errorMessage =
-        //   error instanceof Error ? error.message : 'An unexpected error occurred';
-        // TODO toast.error(`Failed to edit ${localeInfo?.name} translation`);
+        toast.error(`Failed to edit ${localeInfo?.name} translation`);
         console.error('Edit error:', error);
       }
     });
