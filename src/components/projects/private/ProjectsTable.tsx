@@ -57,7 +57,7 @@ export function ProjectsTable({ projects }: Props) {
             <TableHead className="w-[200px]">Title</TableHead>
             <TableHead>Type</TableHead>
             <TableHead>Status</TableHead>
-            <TableHead>Language</TableHead>
+            <TableHead>Languages</TableHead>
             <TableHead className="hidden lg:table-cell">Technologies</TableHead>
             <TableHead className="hidden md:table-cell">Dates</TableHead>
             <TableHead>Links</TableHead>
@@ -161,17 +161,26 @@ export function ProjectsTable({ projects }: Props) {
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end">
-                    <DropdownMenuItem onClick={() => onView(project)} className="cursor-pointer">
+                    <DropdownMenuItem
+                      onClick={() => onView(project)}
+                      className="cursor-pointer"
+                      disabled={true} // TODO: Implement view functionality
+                    >
                       <EyeIcon className="mr-2 h-4 w-4" />
                       Details
                     </DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => onEdit(project)} className="cursor-pointer">
+                    <DropdownMenuItem
+                      onClick={() => onEdit(project)}
+                      className="cursor-pointer"
+                      disabled={true} // TODO: Implement edit functionality
+                    >
                       <EditIcon className="mr-2 h-4 w-4" />
                       Edit
                     </DropdownMenuItem>
                     <DropdownMenuItem
                       onClick={() => onDelete(project)}
                       className="cursor-pointer text-red-600 focus:text-red-600"
+                      disabled={true} // TODO: Implement delete functionality
                     >
                       <Trash2Icon className="mr-2 h-4 w-4" />
                       Delete

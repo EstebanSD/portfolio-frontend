@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { CalendarIcon, CheckCircleIcon, ClockIcon, FolderOpenIcon } from 'lucide-react';
 import { ProjectsToolbar } from './ProjectsToolbar';
 import { StatsCard } from './StatsCard';
@@ -24,13 +24,25 @@ export function ProjectsManagement({ projectsCounts, projects }: Props) {
     type: 'all',
   });
 
-  const filteredProjects = projects.filter((project) => {
-    return (
-      project.title.toLowerCase().includes(filters.title.toLowerCase()) &&
-      (filters.type === 'all' || project.type === filters.type) &&
-      (filters.status === 'all' || project.status === filters.status)
-    );
-  });
+  const titleFilter = filters.title.toLowerCase();
+  const filteredProjects = useMemo(() => {
+    if (!filters.title && filters.type === 'all' && filters.status === 'all') {
+      return projects;
+    }
+
+    return projects.filter((project) => {
+      if (titleFilter && !project.title.toLowerCase().includes(titleFilter)) {
+        return false;
+      }
+      if (filters.type !== 'all' && project.type !== filters.type) {
+        return false;
+      }
+      if (filters.status !== 'all' && project.status !== filters.status) {
+        return false;
+      }
+      return true;
+    });
+  }, [projects, filters, titleFilter]);
 
   return (
     <div className="space-y-6">
@@ -53,7 +65,7 @@ export function ProjectsManagement({ projectsCounts, projects }: Props) {
           icon={<ClockIcon className="h-4 w-4 text-blue-600" />}
         />
         <StatsCard
-          title="Planned"
+          title="Paused"
           value={projectsCounts.paused}
           icon={<CalendarIcon className="h-4 w-4 text-yellow-600" />}
         />
