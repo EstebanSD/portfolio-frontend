@@ -84,6 +84,9 @@
   --chart-4: oklch(0.627 0.265 303.9);
   --chart-5: oklch(0.645 0.246 16.439);
 
+  --card: var(--background);
+  --card-foreground: var(--foreground);
+
   --popover: var(--background);
   --popover-foreground: var(--foreground);
 

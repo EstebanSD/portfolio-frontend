@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Loader2Icon, Trash2Icon } from 'lucide-react';
+import { Trash2Icon } from 'lucide-react';
 import {
   Button,
   Dialog,
@@ -12,14 +12,18 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '../ui';
+} from '@/components/ui';
+import { Spinner } from '@/components/common';
 
 interface Props {
-  name: string | undefined;
+  title: string;
+  name?: string;
+  label?: string;
   handleDelete: () => Promise<void>;
-  isLoading?: boolean;
+  isLoading: boolean;
+  children?: React.ReactNode;
 }
-export function DialogTranslationDelete({ name, handleDelete, isLoading }: Props) {
+export function DialogDelete({ title, name, label, handleDelete, isLoading, children }: Props) {
   const [open, setOpen] = useState(false);
 
   const onDelete = async () => {
@@ -29,23 +33,23 @@ export function DialogTranslationDelete({ name, handleDelete, isLoading }: Props
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <button className="p-2 text-gray-500 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors">
-          <Trash2Icon className="w-4 h-4" />
+        <button
+          className={
+            'w-full flex items-center p-2 text-foreground hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors cursor-pointer'
+          }
+          aria-label={label ?? 'Delete'}
+        >
+          <Trash2Icon className={`h-4 w-4 ${label ? 'mr-2' : ''}`} />
+          {label}
         </button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Delete Translation</DialogTitle>
+          <DialogTitle>{title}</DialogTitle>
           <DialogDescription>
-            {name ? (
+            {children ?? (
               <>
-                Are you sure you want to delete the <strong>{name}</strong> translation?
-                <br />
-                <span className="text-destructive">This action cannot be undone.</span>
-              </>
-            ) : (
-              <>
-                Are you sure you want to delete the translation?
+                Are you sure you want to delete {name ? <strong>{name}</strong> : 'this item'}?
                 <br />
                 <span className="text-destructive">This action cannot be undone.</span>
               </>
@@ -58,14 +62,7 @@ export function DialogTranslationDelete({ name, handleDelete, isLoading }: Props
             <Button variant="outline">Cancel</Button>
           </DialogClose>
           <Button variant="destructive" onClick={onDelete} disabled={isLoading}>
-            {isLoading ? (
-              <>
-                <Loader2Icon className="w-4 h-4 mr-2 animate-spin" />
-                Deleting...
-              </>
-            ) : (
-              'Delete'
-            )}
+            <Spinner loading={isLoading} text={'Delete'} loadingText={'Deleting...'} />
           </Button>
         </DialogFooter>
       </DialogContent>

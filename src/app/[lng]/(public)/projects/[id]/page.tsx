@@ -1,3 +1,4 @@
+import { Metadata } from 'next';
 import Image from 'next/image';
 import {
   ArrowLeftIcon,
@@ -20,6 +21,11 @@ import { Project } from '@/types';
 import { formatDate, getStatusColor, getTypeIcon } from '@/utils';
 import { serverTranslation } from '@/lib/i18n';
 import { ButtonLink, CustomCarousel, EmptyState } from '@/components/common';
+
+export const metadata: Metadata = {
+  title: 'Project Details',
+  description: 'Detailed view of a specific project in the portfolio',
+};
 
 interface Props {
   params: Promise<{ lng: string; id: string }>;
@@ -52,7 +58,7 @@ export default async function page({ params }: Props) {
           <div className="py-6 md:px-2 lg:px-4">
             <ButtonLink
               variant={'ghost'}
-              className="group hover:bg-accent/80 transition-colors"
+              className="group hover:bg-accent/80 hover:text-white transition-colors"
               href={`/${lng}/projects`}
             >
               <ArrowLeftIcon className="w-4 h-4 mr-3 transition-transform duration-200 group-hover:-translate-x-1" />

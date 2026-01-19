@@ -2,6 +2,7 @@ import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 import { auth as middleware } from './auth';
 import { languages, fallbackLng, i18CookieName } from './lib/i18n/settings';
+import { Language } from './types';
 
 export default middleware((req: NextRequest) => {
   const pathname = req.nextUrl.pathname;
@@ -15,7 +16,7 @@ export default middleware((req: NextRequest) => {
     let locale = fallbackLng;
 
     // Check language cookie
-    const cookieLocale = req.cookies.get(i18CookieName)?.value;
+    const cookieLocale = req.cookies.get(i18CookieName)?.value as Language | undefined;
     if (cookieLocale && languages.includes(cookieLocale)) {
       locale = cookieLocale;
     } else {
@@ -25,10 +26,10 @@ export default middleware((req: NextRequest) => {
         const preferredLocale = acceptLanguage
           .split(',')
           .map((lang) => lang.split(';')[0].trim())
-          .find((lang) => languages.includes(lang));
+          .find((lang) => languages.includes(lang as Language));
 
         if (preferredLocale) {
-          locale = preferredLocale;
+          locale = preferredLocale as Language;
         }
       }
     }

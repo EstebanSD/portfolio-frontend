@@ -21,3 +21,6 @@ export * from './tabs';
 export * from './dialog';
 export * from './textarea';
 export * from './drawer';
+export * from './table';
+export * from './radio-group';
+export * from './calendar';

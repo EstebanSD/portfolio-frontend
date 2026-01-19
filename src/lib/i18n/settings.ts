@@ -1,5 +1,8 @@
-export const fallbackLng = 'en';
-export const languages = [fallbackLng, 'es'];
+import { Language } from '@/types';
+import { AVAILABLE_LANGUAGES } from '../common';
+
+export const fallbackLng: Language = AVAILABLE_LANGUAGES[0];
+export const languages: readonly Language[] = AVAILABLE_LANGUAGES;
 export const defaultNS = 'common';
 export const i18CookieName = 'i18next';
 
