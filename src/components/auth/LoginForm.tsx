@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useTransition } from 'react';
+import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Form, Button } from '../ui';
@@ -9,6 +10,7 @@ import { loginFormSchema, LoginFormValues } from '@/lib/validations';
 import { loginAction } from '@/actions/auth';
 
 export function LoginForm() {
+  const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
 
@@ -25,6 +27,8 @@ export function LoginForm() {
     startTransition(async () => {
       try {
         await loginAction(values);
+
+        router.replace('/en/admin');
       } catch (error) {
         const errorMessage =
           error instanceof Error ? error.message : 'An unexpected error occurred';

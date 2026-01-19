@@ -1,14 +1,14 @@
 import { use } from 'react';
-import { ProductQueryFilters, Project } from '@/types';
+import { ProjectQueryFilters, Project } from '@/types';
 import { ProjectCard } from './ProjectCard';
 import { EmptyState } from '../common';
 import { serverTranslation } from '@/lib/i18n';
 
-type Filters = Required<ProductQueryFilters>;
+type Filters = Required<ProjectQueryFilters>;
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL!;
 
-async function getProjects(lng: string, filters: ProductQueryFilters) {
+async function getProjects(lng: string, filters: ProjectQueryFilters) {
   const params = new URLSearchParams();
   params.append('locale', lng);
 

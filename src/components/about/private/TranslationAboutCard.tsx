@@ -1,14 +1,16 @@
 'use client';
 
 import { useTransition } from 'react';
+import { toast } from 'sonner';
 import { Session } from 'next-auth';
 import { DownloadIcon } from 'lucide-react';
 import { deleteTranslationAction, editTranslationAction } from '@/actions/about';
-import { AboutTranslation, AVAILABLE_LOCALES } from '@/types';
-import { Card, CardContent, CardHeader, CardTitle } from '../ui';
-import { DialogTranslationDelete } from './DialogTranslationDelete';
-import { DialogTranslationEdit } from './DialogTranslationEdit';
+import { AboutTranslation } from '@/types';
+import { AVAILABLE_LOCALES } from '@/lib/common';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui';
+import { DialogAboutTranslationEdit } from './DialogAboutTranslationEdit';
 import { type AboutTranslationFormValues } from '@/lib/validations';
+import { DialogDelete } from '@/components/common';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL!;
 const getLocaleInfo = (code: string) => AVAILABLE_LOCALES.find((l) => l.code === code);
@@ -24,22 +26,22 @@ interface Props {
   session: Session | null;
   translation: AboutTranslation;
 }
-export function TranslationCard({ session, translation }: Props) {
+export function TranslationAboutCard({ session, translation }: Props) {
   const [isPending, startTransition] = useTransition();
   const localeInfo = getLocaleInfo(translation.locale);
 
   const handleDelete = async () => {
     if (!session?.accessToken) {
-      // TODO toast.error('Authentication required');
+      toast.error('Authentication required');
       return;
     }
 
     startTransition(async () => {
       try {
         await deleteTranslationAction(translation.locale, session.accessToken);
-        // TODO toast.success(`${localeInfo?.name} translation deleted successfully`);
+        toast.success(`${localeInfo?.name} translation deleted successfully`);
       } catch (error) {
-        // TODO toast.error(`Failed to delete ${localeInfo?.name} translation`);
+        toast.error(`Failed to delete ${localeInfo?.name} translation`);
         console.error('Delete error:', error);
       }
     });
@@ -47,7 +49,7 @@ export function TranslationCard({ session, translation }: Props) {
 
   const handleEdit = async (values: AboutTranslationFormValues) => {
     if (!session?.accessToken) {
-      // TODO toast.error('Authentication required');
+      toast.error('Authentication required');
       return;
     }
 
@@ -64,11 +66,9 @@ export function TranslationCard({ session, translation }: Props) {
           }
         }
         await editTranslationAction(formData, session.accessToken);
-        // TODO toast.success(`${localeInfo?.name} translation edited successfully`);
+        toast.success(`${localeInfo?.name} translation edited successfully`);
       } catch (error) {
-        // const errorMessage =
-        //   error instanceof Error ? error.message : 'An unexpected error occurred';
-        // TODO toast.error(`Failed to edit ${localeInfo?.name} translation`);
+        toast.error(`Failed to edit ${localeInfo?.name} translation`);
         console.error('Edit error:', error);
       }
     });
@@ -88,18 +88,25 @@ export function TranslationCard({ session, translation }: Props) {
         </div>
 
         <div className="flex gap-2">
-          <DialogTranslationEdit
+          <DialogAboutTranslationEdit
             translation={translation}
             localeInfo={localeInfo}
             handleEdit={handleEdit}
             isLoading={isPending}
           />
 
-          <DialogTranslationDelete
-            name={localeInfo?.name}
+          <DialogDelete
+            title="Delete Translation"
             handleDelete={handleDelete}
             isLoading={isPending}
-          />
+          >
+            <>
+              Are you sure you want to delete the{' '}
+              {localeInfo?.name && <strong>{localeInfo.name} </strong>}translation?
+              <br />
+              <span className="text-destructive">This action cannot be undone.</span>
+            </>
+          </DialogDelete>
         </div>
       </CardHeader>
       <CardContent className="space-y-4">

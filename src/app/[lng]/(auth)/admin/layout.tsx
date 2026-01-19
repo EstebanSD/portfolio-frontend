@@ -11,11 +11,15 @@ export default async function PrivateLayout({ children }: { children: React.Reac
     <AuthSessionProvider>
       <SidebarProvider defaultOpen={defaultOpen}>
         <PrivateSidebar />
-        <main className="w-full pt-16">
-          <nav className="py-4 pl-4 w-full border-b fixed top-0 z-50 bg-background">
+        <main className="pt-20 flex-1 flex flex-col min-h-screen overflow-hidden">
+          <nav className="h-16 p-4 w-full border-b fixed top-0 z-50 bg-background">
             <SidebarTrigger />
           </nav>
-          {children}
+
+          {/* Content */}
+          <div className="p-4 min-h-full max-w-full overflow-x-hidden">
+            <div className="w-full max-w-7xl mx-auto">{children}</div>
+          </div>
         </main>
       </SidebarProvider>
     </AuthSessionProvider>

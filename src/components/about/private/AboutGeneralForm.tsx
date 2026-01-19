@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useTransition } from 'react';
+import { toast } from 'sonner';
 import { useSession } from 'next-auth/react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -14,8 +15,8 @@ import {
   CardHeader,
   CardTitle,
   Form,
-} from '../ui';
-import { FormImageUpload, FormInput, FormTagsInput, Spinner } from '../common';
+} from '@/components/ui';
+import { FormImageUpload, FormInput, FormTagsInput, Spinner } from '@/components/common';
 import { aboutGeneralFormSchema, type AboutGeneralFormValues } from '@/lib/validations';
 import { updateGeneralInfoAction } from '@/actions/about';
 
@@ -43,7 +44,7 @@ export function AboutGeneralForm({ initialData = {} }: Props) {
 
   async function onSubmit(values: AboutGeneralFormValues) {
     if (!session?.accessToken) {
-      // TODO toast.error('Authentication required');
+      toast.error('Authentication required');
       return;
     }
 
@@ -65,12 +66,10 @@ export function AboutGeneralForm({ initialData = {} }: Props) {
 
         await updateGeneralInfoAction(formData, session.accessToken);
 
-        // TODO toast.success('say something');
+        toast.success('General Information updated successfully');
         form.reset(values);
       } catch (error) {
-        // const errorMessage =
-        //   error instanceof Error ? error.message : 'An unexpected error occurred';
-        // TODO toast.error(errorMessage);
+        toast.error('Failed to update General Information');
         console.error('Submit error:', error);
       }
     });

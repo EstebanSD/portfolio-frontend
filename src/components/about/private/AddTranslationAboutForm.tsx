@@ -1,10 +1,10 @@
 'use client';
 
 import { useTransition } from 'react';
+import { toast } from 'sonner';
 import { Session } from 'next-auth';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, Card, CardContent, CardHeader, CardTitle, Form } from '../ui';
 import {
   BriefcaseIcon,
   FileIcon,
@@ -14,7 +14,8 @@ import {
   SaveIcon,
   XIcon,
 } from 'lucide-react';
-import { FormFileUpload, FormInput, FormSelect, FormTextArea, Spinner } from '../common';
+import { Button, Card, CardContent, CardHeader, CardTitle, Form } from '@/components/ui';
+import { FormFileUpload, FormInput, FormSelect, FormTextArea, Spinner } from '@/components/common';
 import { addNewTranslationAction } from '@/actions/about';
 import { aboutTranslationFormSchema, type AboutTranslationFormValues } from '@/lib/validations';
 
@@ -23,7 +24,7 @@ interface Props {
   cancelNew: () => void;
   locales: Array<{ code: string; name: string; flag: string }>;
 }
-export function AddTranslationForm({ cancelNew, locales, session }: Props) {
+export function AddTranslationAboutForm({ cancelNew, locales, session }: Props) {
   const [isPending, startTransition] = useTransition();
   const form = useForm<AboutTranslationFormValues>({
     resolver: zodResolver(aboutTranslationFormSchema),
@@ -38,7 +39,7 @@ export function AddTranslationForm({ cancelNew, locales, session }: Props) {
 
   async function onSubmit(values: AboutTranslationFormValues) {
     if (!session?.accessToken) {
-      // TODO toast.error('Authentication required');
+      toast.error('Authentication required');
       return;
     }
 
@@ -57,14 +58,11 @@ export function AddTranslationForm({ cancelNew, locales, session }: Props) {
 
         await addNewTranslationAction(formData, session.accessToken);
 
-        // TODO toast.success(`${localeInfo?.name} translation added successfully`);
+        toast.success(`${values.locale.toUpperCase()} translation added successfully`);
         form.reset();
         cancelNew();
       } catch (error) {
-        // const errorMessage =
-        //   error instanceof Error ? error.message : 'An unexpected error occurred';
-        // TODO toast.error(errorMessage);
-        // TODO toast.error(`Failed to add ${localeInfo?.name} translation`);
+        toast.error(`Failed to add ${values.locale.toUpperCase()} translation`);
         console.error('Submit error:', error);
       }
     });
@@ -73,7 +71,7 @@ export function AddTranslationForm({ cancelNew, locales, session }: Props) {
   const localesOptions = locales.map((loc) => ({ value: loc.code, label: loc.name }));
 
   return (
-    <Card className="border-blue-200 bg-blue-50">
+    <Card className="border-blue-200 bg-blue-50 dark:border-gray-50 dark:bg-gray-900">
       <CardHeader>
         <CardTitle>Add New Translation</CardTitle>
       </CardHeader>

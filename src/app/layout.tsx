@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
+import { Toaster } from 'sonner';
 import { languages } from '@/lib/i18n/settings';
 import './globals.css';
 import { ThemeProvider } from '@/components/providers';
@@ -77,16 +78,13 @@ export async function generateStaticParams() {
   return languages.map((lng) => ({ lng }));
 }
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
-  params,
 }: Readonly<{
   children: React.ReactNode;
-  params: Promise<{ lng: string }>;
 }>) {
-  const { lng } = await params;
   return (
-    <html lang={lng} suppressHydrationWarning className="scroll-smooth">
+    <html suppressHydrationWarning className="scroll-smooth">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <ThemeProvider
           attribute="class"
@@ -95,6 +93,7 @@ export default async function RootLayout({
           disableTransitionOnChange
         >
           {children}
+          <Toaster richColors />
         </ThemeProvider>
       </body>
     </html>

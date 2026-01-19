@@ -4,15 +4,7 @@ import { useState } from 'react';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import {
-  BriefcaseIcon,
-  EditIcon,
-  FileIcon,
-  FileTextIcon,
-  GlobeIcon,
-  Loader2Icon,
-  MessageSquareDashedIcon,
-} from 'lucide-react';
+import { BriefcaseIcon, EditIcon, FileTextIcon, GlobeIcon } from 'lucide-react';
 import {
   Button,
   Dialog,
@@ -32,26 +24,20 @@ import {
   DrawerTrigger,
   Form,
   SheetClose,
-} from '../ui';
+} from '@/components/ui';
 import { useIsMobile } from '@/hooks';
-import { AboutTranslation } from '@/types';
-import { FormFileUpload, FormInput, FormTextArea } from '../common';
+import { ProjectTranslation } from '@/types';
+import { FormInput, FormTextArea, Spinner } from '@/components/common';
 
 const translationFormSchema = z.object({
   locale: z.string().nonempty('This field is required.'),
-  title: z.string().nonempty('This field is required.'),
-  bio: z.string().nonempty('This field is required.'),
-  tagline: z.string().optional(),
-  cv: z
-    .custom<File>((val) => val instanceof File || val === undefined, {
-      message: 'Invalid file',
-    })
-    .optional(),
+  summary: z.string().nonempty('This field is required.'),
+  description: z.string().nonempty('This field is required.'),
 });
 type FormValues = z.infer<typeof translationFormSchema>;
 
 interface Props {
-  translation: AboutTranslation;
+  translation: ProjectTranslation;
   handleEdit: (values: FormValues) => Promise<void>;
   localeInfo:
     | {
@@ -60,9 +46,14 @@ interface Props {
         flag: string;
       }
     | undefined;
-  isLoading?: boolean;
+  isLoading: boolean;
 }
-export function DialogTranslationEdit({ translation, localeInfo, handleEdit, isLoading }: Props) {
+export function DialogProjectTranslationEdit({
+  translation,
+  localeInfo,
+  handleEdit,
+  isLoading,
+}: Props) {
   const [open, setOpen] = useState(false);
   const isMobile = useIsMobile();
 
@@ -70,10 +61,8 @@ export function DialogTranslationEdit({ translation, localeInfo, handleEdit, isL
     resolver: zodResolver(translationFormSchema),
     defaultValues: {
       locale: translation.locale,
-      title: translation.title,
-      bio: translation.bio,
-      tagline: translation?.tagline || '',
-      cv: undefined,
+      summary: translation.summary,
+      description: translation.description,
     },
   });
 
@@ -89,7 +78,7 @@ export function DialogTranslationEdit({ translation, localeInfo, handleEdit, isL
 
   const FormContent = () => (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onEdit)} className="space-y-4">
+      <form onSubmit={form.handleSubmit(onEdit)} className="space-y-4 p-2">
         <FormInput
           disabled
           required
@@ -102,40 +91,21 @@ export function DialogTranslationEdit({ translation, localeInfo, handleEdit, isL
         <FormInput
           required
           control={form.control}
-          name="title"
-          label={'Title'}
+          name="summary"
+          label={'Summary'}
           labelIcon={<BriefcaseIcon className="w-4 h-4" />}
-          placeholder="Full Stack"
-        />
-
-        <FormInput
-          control={form.control}
-          name="tagline"
-          label={'Tagline (Optional)'}
-          labelIcon={<MessageSquareDashedIcon className="w-4 h-4" />}
-          placeholder="A catchy tagline"
+          placeholder="Write a short description"
         />
 
         <FormTextArea
           required
           control={form.control}
-          name={'bio'}
-          label={'Biography'}
+          name="description"
+          label={'Description'}
           labelIcon={<FileTextIcon className="w-4 h-4" />}
-          placeholder="Write your biography"
+          placeholder="Write a full description"
           rows={4}
           maxLength={500}
-        />
-
-        <FormFileUpload
-          control={form.control}
-          name="cv"
-          label={'Curriculum Vitae'}
-          labelIcon={<FileIcon className="h-4 w-4" />}
-          accept=".pdf,.doc,.docx"
-          maxSize={5}
-          showPreview={true}
-          allowDownload={true}
         />
       </form>
     </Form>
@@ -162,14 +132,7 @@ export function DialogTranslationEdit({ translation, localeInfo, handleEdit, isL
         disabled={isLoading}
         className="flex-1 md:flex-initial"
       >
-        {isLoading ? (
-          <>
-            <Loader2Icon className="w-4 h-4 mr-2 animate-spin" />
-            Updating...
-          </>
-        ) : (
-          'Update Translation'
-        )}
+        <Spinner loading={isLoading} text={'Update Translation'} loadingText={'Updating...'} />
       </Button>
     </>
   );
@@ -177,7 +140,7 @@ export function DialogTranslationEdit({ translation, localeInfo, handleEdit, isL
     return (
       <Drawer open={open} onOpenChange={setOpen}>
         <DrawerTrigger asChild>
-          <button className="p-2 text-gray-500 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
+          <button className="p-2 text-foreground hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
             <EditIcon className="w-4 h-4" />
           </button>
         </DrawerTrigger>
@@ -201,11 +164,11 @@ export function DialogTranslationEdit({ translation, localeInfo, handleEdit, isL
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <button className="p-2 text-gray-500 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
+        <button className="p-2 text-foreground hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
           <EditIcon className="w-4 h-4" />
         </button>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className="sm:max-w-md lg:max-w-lg max-h-[80vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>{TITLE}</DialogTitle>
           <DialogDescription>{DESC}</DialogDescription>

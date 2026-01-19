@@ -35,7 +35,7 @@ export function SelectFilter({
         <SelectTrigger
           id={paramKey}
           name={paramKey}
-          className="mt-1 bg-background dark:hover:bg-gray-800"
+          className="w-full mt-1 bg-background dark:hover:bg-gray-800"
         >
           <SelectValue placeholder={placeholder} />
         </SelectTrigger>

@@ -1,24 +1,24 @@
 'use client';
 
-import { SearchIcon } from 'lucide-react';
 import { cn } from '@/lib/shadcn/utils';
 import { Input, Label } from '../ui';
-import { useUrlParams } from '@/hooks';
+import { SearchIcon } from 'lucide-react';
 
-interface Props {
+export interface SearchInputBaseProps {
   paramKey: string;
   label: string;
   placeholder: string;
   className?: string;
-  basePath: string;
 }
 
-export function SearchFilterInput({ paramKey, label, placeholder, className, basePath }: Props) {
-  const { value, setValue } = useUrlParams(paramKey, {
-    basePath,
-    debounceMs: 600,
-  });
-
+export function SearchInputBase({
+  paramKey,
+  label,
+  placeholder,
+  className,
+  value,
+  onChange,
+}: SearchInputBaseProps & { value: string; onChange: (value: string) => void }) {
   return (
     <div className={cn('w-full', className)}>
       <Label htmlFor={paramKey}>{label}</Label>
@@ -32,7 +32,7 @@ export function SearchFilterInput({ paramKey, label, placeholder, className, bas
           type="search"
           name={paramKey}
           value={value}
-          onChange={(e) => setValue(e.target.value)}
+          onChange={(e) => onChange(e.target.value)}
           placeholder={placeholder}
           className="pl-10"
         />

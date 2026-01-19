@@ -1,6 +1,7 @@
 'use client';
 
 import { Control, ControllerRenderProps, FieldValues, Path } from 'react-hook-form';
+import { AsteriskIcon } from 'lucide-react';
 import { Option } from '@/types';
 import {
   FormControl,
@@ -51,9 +52,9 @@ export function FormSelect<T extends FieldValues, K extends Path<T>>({
           {label && (
             <FormLabel aria-required={required} className="data-[error=true]:text-foreground">
               {labelIcon && <span>{labelIcon}</span>}
-              <p className="m-0 text-sm font-medium">
+              <p className="m-0 text-sm font-medium flex items-center gap-1">
                 {label}
-                {required && <span> *</span>}
+                {required && <AsteriskIcon className="text-destructive w-3 h-3 mb-1" />}
               </p>
             </FormLabel>
           )}

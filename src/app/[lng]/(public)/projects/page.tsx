@@ -1,10 +1,16 @@
 import { Suspense } from 'react';
+import { Metadata } from 'next';
 import { ProjectFilters, ProjectList, ProjectsSkeleton } from '@/components/projects';
-import { ProductQueryFilters } from '@/types';
+import { ProjectQueryFilters } from '@/types';
+
+export const metadata: Metadata = {
+  title: 'List of Projects',
+  description: 'Explore all projects in the portfolio',
+};
 
 interface Props {
   params: Promise<{ lng: string }>;
-  searchParams: Promise<ProductQueryFilters>;
+  searchParams: Promise<ProjectQueryFilters>;
 }
 
 export default async function page({ params, searchParams }: Props) {

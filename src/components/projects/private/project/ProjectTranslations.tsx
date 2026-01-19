@@ -1,20 +1,21 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { FolderXIcon, PlusIcon } from 'lucide-react';
 import { useSession } from 'next-auth/react';
-import { Button, Card, CardContent } from '../ui';
-import { AddTranslationForm } from './AddTranslationForm';
-import { AboutTranslation } from '@/types';
-import { TranslationCard } from './TranslationCard';
+import { Button, Card, CardContent } from '@/components/ui';
+import { ProjectTranslation } from '@/types';
+import { FolderXIcon, PlusIcon } from 'lucide-react';
 import { getAvailableLocales } from '@/utils';
+import { AddTranslationProjectForm } from './AddTranslationProjectForm';
+import { TranslationProjectCard } from './TranslationProjectCard';
 
 interface Props {
-  initialData?: AboutTranslation[];
+  projectId: string;
+  initialData?: ProjectTranslation[];
 }
-export function AboutTranslations({ initialData }: Props) {
+export function ProjectTranslations({ projectId, initialData }: Props) {
   const { data: session } = useSession();
-  const [translations, setTranslations] = useState<AboutTranslation[]>([]);
+  const [translations, setTranslations] = useState<ProjectTranslation[]>([]);
   const [isAddNew, setIsAddNew] = useState<boolean>(false);
 
   const locales = getAvailableLocales(translations);
@@ -40,7 +41,8 @@ export function AboutTranslations({ initialData }: Props) {
 
       {/* Add New Translation */}
       {isAddNew && (
-        <AddTranslationForm
+        <AddTranslationProjectForm
+          projectId={projectId}
           cancelNew={() => setIsAddNew(false)}
           locales={locales}
           session={session}
@@ -58,7 +60,12 @@ export function AboutTranslations({ initialData }: Props) {
           </Card>
         ) : (
           translations.map((translation) => (
-            <TranslationCard key={translation._id} translation={translation} session={session} />
+            <TranslationProjectCard
+              projectId={projectId}
+              key={translation._id}
+              translation={translation}
+              session={session}
+            />
           ))
         )}
       </div>
