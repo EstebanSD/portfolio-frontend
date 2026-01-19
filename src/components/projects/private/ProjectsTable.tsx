@@ -5,7 +5,7 @@ import { toast } from 'sonner';
 import { Session } from 'next-auth';
 import { useRouter } from 'next/navigation';
 import { format } from 'date-fns';
-import { EditIcon, ExternalLinkIcon, EyeIcon, MoreHorizontalIcon } from 'lucide-react';
+import { ExternalLinkIcon, EyeIcon, MoreHorizontalIcon } from 'lucide-react';
 import { SiGithub } from 'react-icons/si';
 import {
   Badge,
@@ -51,13 +51,7 @@ export function ProjectsTable({ session, projects }: Props) {
     });
   };
 
-  const handleEdit = (project: ProjectWithTranslations) => {
-    console.log('Edit project:', project);
-    router.push(`/en/admin/projects/${project._id}/edit`); // or the same page like view
-  };
-
   const handleView = (project: ProjectWithTranslations) => {
-    console.log('Project:', project);
     router.push(`/en/admin/projects/${project._id}`);
   };
 
@@ -88,7 +82,11 @@ export function ProjectsTable({ session, projects }: Props) {
           {projects.map((project) => (
             <TableRow key={project._id} className="hover:bg-muted/50">
               <TableCell className="font-medium">
-                <div className="font-semibold truncate max-w-[180px]" title={project.title}>
+                <div
+                  className="font-semibold truncate max-w-[180px] w-fit cursor-pointer hover:underline"
+                  title={project.title}
+                  onClick={() => handleView(project)}
+                >
                   {project.title}
                 </div>
               </TableCell>
@@ -184,19 +182,11 @@ export function ProjectsTable({ session, projects }: Props) {
                     <DropdownMenuItem
                       onClick={() => handleView(project)}
                       className="cursor-pointer"
-                      disabled={true} // TODO: Implement view functionality
                     >
-                      <EyeIcon className="mr-2 h-4 w-4" />
+                      <EyeIcon className="mr-2 h-4 w-4 text-black dark:text-white" />
                       Details
                     </DropdownMenuItem>
-                    <DropdownMenuItem
-                      onClick={() => handleEdit(project)}
-                      className="cursor-pointer"
-                      disabled={true} // TODO: Implement edit functionality
-                    >
-                      <EditIcon className="mr-2 h-4 w-4" />
-                      Edit
-                    </DropdownMenuItem>
+
                     <DropdownMenuItem className="cursor-pointer" asChild>
                       <DialogDelete
                         label={'Delete'}

@@ -35,7 +35,7 @@ export function DialogDelete({ title, name, label, handleDelete, isLoading, chil
       <DialogTrigger asChild>
         <button
           className={
-            'w-full flex items-center p-2 text-gray-500 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors cursor-pointer'
+            'w-full flex items-center p-2 text-foreground hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors cursor-pointer'
           }
           aria-label={label ?? 'Delete'}
         >

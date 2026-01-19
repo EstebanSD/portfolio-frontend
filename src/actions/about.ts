@@ -96,7 +96,6 @@ export async function updateGeneralInfoAction(formData: FormData, accessToken: s
 
     const result = await res.json();
 
-    revalidateTag('about');
     revalidateTag('about-all');
 
     return {
@@ -165,7 +164,6 @@ export async function addNewTranslationAction(formData: FormData, accessToken: s
 
     const result = await res.json();
 
-    revalidateTag('about');
     revalidateTag('about-all');
 
     return { success: true, message: 'Translation added successfully', data: result };
@@ -230,7 +228,6 @@ export async function editTranslationAction(formData: FormData, accessToken: str
 
     const result = await res.json();
 
-    revalidateTag('about');
     revalidateTag('about-all');
 
     return { success: true, message: 'Translation edited successfully', data: result };
@@ -265,7 +262,6 @@ export async function deleteTranslationAction(locale: string, accessToken: strin
       throw new Error(`Error HTTP: ${res.status}`);
     }
 
-    revalidateTag('about');
     revalidateTag('about-all');
 
     return { success: true, message: 'Translation deleted successfully', data: null };

@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { PROJECT_STATUSES, PROJECT_TYPES, ProjectStatus, ProjectType } from '@/types';
 
+//// GENERAL
 const isValidDate = (dateString: string): boolean => {
   if (!dateString) return false;
   const date = new Date(dateString);
@@ -113,17 +114,6 @@ export const projectFormSchema = projectFormBaseSchema.superRefine((data, ctx) =
       });
     }
   }
-
-  if (data.status === 'in_progress' && data.endDate) {
-    const today = new Date().toISOString().split('T')[0];
-    if (!isAfter(data.endDate, today)) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
-        path: ['endDate'],
-        message: 'End date cannot be in the past for active projects',
-      });
-    }
-  }
 });
 
 export type ProjectFormValues = {
@@ -139,3 +129,12 @@ export type ProjectFormValues = {
     website?: string;
   };
 };
+
+//// TRANSLATION
+export const projectTranslationFormSchema = z.object({
+  locale: z.string().nonempty('This field is required.'),
+  summary: z.string().nonempty('This field is required.'),
+  description: z.string().nonempty('This field is required.'),
+});
+
+export type ProjectTranslationFormValues = z.infer<typeof projectTranslationFormSchema>;

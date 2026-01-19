@@ -2,6 +2,7 @@ import { createInstance } from 'i18next';
 import resourcesToBackend from 'i18next-resources-to-backend';
 import { initReactI18next } from 'react-i18next/initReactI18next';
 import { getOptions } from './settings';
+import { Language } from '@/types';
 
 const initI18next = async (lng: string, ns: string) => {
   const i18nInstance = createInstance();
@@ -12,7 +13,7 @@ const initI18next = async (lng: string, ns: string) => {
         (language: string, namespace: string) => import(`./locales/${language}/${namespace}.json`),
       ),
     )
-    .init(getOptions(lng, ns));
+    .init(getOptions(lng as Language, ns));
   return i18nInstance;
 };
 

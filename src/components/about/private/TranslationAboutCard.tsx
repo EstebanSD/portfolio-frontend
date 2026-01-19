@@ -8,7 +8,7 @@ import { deleteTranslationAction, editTranslationAction } from '@/actions/about'
 import { AboutTranslation } from '@/types';
 import { AVAILABLE_LOCALES } from '@/lib/common';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui';
-import { DialogTranslationEdit } from './DialogTranslationEdit';
+import { DialogAboutTranslationEdit } from './DialogAboutTranslationEdit';
 import { type AboutTranslationFormValues } from '@/lib/validations';
 import { DialogDelete } from '@/components/common';
 
@@ -26,7 +26,7 @@ interface Props {
   session: Session | null;
   translation: AboutTranslation;
 }
-export function TranslationCard({ session, translation }: Props) {
+export function TranslationAboutCard({ session, translation }: Props) {
   const [isPending, startTransition] = useTransition();
   const localeInfo = getLocaleInfo(translation.locale);
 
@@ -88,7 +88,7 @@ export function TranslationCard({ session, translation }: Props) {
         </div>
 
         <div className="flex gap-2">
-          <DialogTranslationEdit
+          <DialogAboutTranslationEdit
             translation={translation}
             localeInfo={localeInfo}
             handleEdit={handleEdit}

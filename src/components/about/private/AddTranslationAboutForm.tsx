@@ -24,7 +24,7 @@ interface Props {
   cancelNew: () => void;
   locales: Array<{ code: string; name: string; flag: string }>;
 }
-export function AddTranslationForm({ cancelNew, locales, session }: Props) {
+export function AddTranslationAboutForm({ cancelNew, locales, session }: Props) {
   const [isPending, startTransition] = useTransition();
   const form = useForm<AboutTranslationFormValues>({
     resolver: zodResolver(aboutTranslationFormSchema),
@@ -71,7 +71,7 @@ export function AddTranslationForm({ cancelNew, locales, session }: Props) {
   const localesOptions = locales.map((loc) => ({ value: loc.code, label: loc.name }));
 
   return (
-    <Card className="border-blue-200 bg-blue-50">
+    <Card className="border-blue-200 bg-blue-50 dark:border-gray-50 dark:bg-gray-900">
       <CardHeader>
         <CardTitle>Add New Translation</CardTitle>
       </CardHeader>

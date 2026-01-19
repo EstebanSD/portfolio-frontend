@@ -74,3 +74,20 @@ export interface ProjectWithTranslations {
     description: string;
   }[];
 }
+export interface ProjectIdWithTranslations {
+  general: {
+    _id: string;
+    title: string;
+    type: ProjectType;
+    status: ProjectStatus;
+    startDate?: string;
+    endDate?: string;
+    technologies: string[];
+    links: {
+      github?: string;
+      website?: string;
+    };
+    images?: FileMetadata[];
+  };
+  translations: ProjectTranslation[];
+}

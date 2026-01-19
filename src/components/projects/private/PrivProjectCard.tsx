@@ -4,7 +4,7 @@ import { useTransition } from 'react';
 import { toast } from 'sonner';
 import { Session } from 'next-auth';
 import { useRouter } from 'next/navigation';
-import { CalendarIcon, EditIcon, ExternalLinkIcon, EyeIcon, ImageIcon } from 'lucide-react';
+import { CalendarIcon, EditIcon, ExternalLinkIcon, ImageIcon } from 'lucide-react';
 import { SiGithub } from 'react-icons/si';
 import { getStatusColor, getTypeColor } from '@/utils';
 import { ProjectWithTranslations } from '@/types';
@@ -50,14 +50,9 @@ export function PrivProjectCard({ session, project }: Props) {
   };
 
   const handleEdit = (project: ProjectWithTranslations) => {
-    console.log('Edit project:', project);
-    router.push(`/en/admin/projects/${project._id}/edit`); // or the same page like view
-  };
-
-  const handleView = (project: ProjectWithTranslations) => {
-    console.log('Project:', project);
     router.push(`/en/admin/projects/${project._id}`);
   };
+
   return (
     <div className="bg-background dark:bg-gray-900 rounded-lg shadow-sm border hover:shadow-md transition-shadow">
       {/* Project Header */}
@@ -83,18 +78,10 @@ export function PrivProjectCard({ session, project }: Props) {
 
           <div className="flex gap-1">
             <button
-              onClick={() => handleView(project)}
-              className="p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
-              disabled={true} // TODO: Implement view functionality
-            >
-              <EyeIcon className="w-4 h-4" />
-            </button>
-            <button
               onClick={() => handleEdit(project)}
-              className="p-2 text-gray-400 hover:text-yellow-600 hover:bg-yellow-50 rounded-lg transition-colors"
-              disabled={true} // TODO: Implement edit functionality
+              className="p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
             >
-              <EditIcon className="w-4 h-4" />
+              <EditIcon className="w-4 h-4 text-black dark:text-white" />
             </button>
 
             <DialogDelete title="Delete Project" handleDelete={handleDelete} isLoading={isPending}>
