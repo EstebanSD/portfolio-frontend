@@ -78,16 +78,13 @@ export async function generateStaticParams() {
   return languages.map((lng) => ({ lng }));
 }
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
-  params,
 }: Readonly<{
   children: React.ReactNode;
-  params: Promise<{ lng: string }>;
 }>) {
-  const { lng } = await params;
   return (
-    <html lang={lng} suppressHydrationWarning className="scroll-smooth">
+    <html suppressHydrationWarning className="scroll-smooth">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <ThemeProvider
           attribute="class"
@@ -96,16 +93,7 @@ export default async function RootLayout({
           disableTransitionOnChange
         >
           {children}
-          <Toaster
-            // position="bottom-center"
-            richColors
-            // closeButton
-            // toastOptions={{
-            //   style: {
-            //     fontFamily: 'var(--font-geist-sans)',
-            //   },
-            // }}
-          />
+          <Toaster richColors />
         </ThemeProvider>
       </body>
     </html>

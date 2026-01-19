@@ -114,7 +114,7 @@ export async function addNewProjectAction(
 
     const result = await res.json();
 
-    revalidateTag('projects-all');
+    revalidateTag('projects-all', 'max');
 
     return { success: true, message: 'Translation added successfully', data: result };
   } catch (error) {
@@ -176,7 +176,7 @@ export async function updateGeneralInfoAction(
 
     const result = await res.json();
 
-    revalidateTag('projects-all');
+    revalidateTag('projects-all', 'max');
 
     return { success: true, message: 'General info updated successfully', data: result };
   } catch (error) {
@@ -212,7 +212,7 @@ export async function addNewTranslationAction(
 
     const result = await res.json();
 
-    revalidateTag('projects-all');
+    revalidateTag('projects-all', 'max');
 
     return { success: true, message: 'Translation added successfully', data: result };
   } catch (error) {
@@ -254,7 +254,7 @@ export async function editTranslationAction(
 
     const result = await res.json();
 
-    revalidateTag('projects-all');
+    revalidateTag('projects-all', 'max');
 
     return { success: true, message: 'Translation edited successfully', data: result };
   } catch (error) {
@@ -288,7 +288,7 @@ export async function deleteProjectAction(id: string, accessToken: string | unde
       throw new Error(`Error HTTP: ${res.status}`);
     }
 
-    revalidateTag('projects-all');
+    revalidateTag('projects-all', 'max');
 
     return { success: true, message: 'Project deleted successfully', data: null };
   } catch (error) {
@@ -321,7 +321,7 @@ export async function deleteTranslationAction(
       throw new Error(`Error HTTP: ${res.status}`);
     }
 
-    revalidateTag('about-all');
+    revalidateTag('about-all', 'max');
 
     return { success: true, message: 'Translation deleted successfully', data: null };
   } catch (error) {
