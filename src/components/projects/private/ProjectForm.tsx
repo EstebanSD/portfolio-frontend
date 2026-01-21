@@ -89,13 +89,7 @@ export function ProjectForm() {
       <CardContent>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="grid grid-cols-1 gap-4 lg:gap-6">
-            <FormInput
-              required
-              control={form.control}
-              name={'title'}
-              label={'Title'}
-              placeholder={'Project Title'}
-            />
+            <FormInput required name={'title'} label={'Title'} placeholder={'Project Title'} />
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
               <FormRadioGroup
@@ -149,14 +143,12 @@ export function ProjectForm() {
             />
 
             <FormInput
-              control={form.control}
               name={'links.github'}
               label={'GitHub'}
               placeholder="https://github.com/user/repo"
             />
 
             <FormInput
-              control={form.control}
               name={'links.website'}
               label={'Web Site'}
               placeholder="https://myproject.com"

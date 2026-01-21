@@ -82,7 +82,6 @@ export function DialogProjectTranslationEdit({
         <FormInput
           disabled
           required
-          control={form.control}
           name="locale"
           label={'Language'}
           labelIcon={<GlobeIcon className="w-4 h-4" />}
@@ -90,7 +89,6 @@ export function DialogProjectTranslationEdit({
 
         <FormInput
           required
-          control={form.control}
           name="summary"
           label={'Summary'}
           labelIcon={<BriefcaseIcon className="w-4 h-4" />}

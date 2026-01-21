@@ -123,13 +123,7 @@ export function ProjectGeneral({ projectId, initialData = {} }: Props) {
             onSubmit={form.handleSubmit(onSubmit)}
             className="grid grid-cols-1 lg:grid-cols-2 gap-6"
           >
-            <FormInput
-              required
-              control={form.control}
-              name="title"
-              label={'Title'}
-              placeholder="Project Title"
-            />
+            <FormInput required name="title" label={'Title'} placeholder="Project Title" />
 
             <div className="grid grid-cols-2 gap-6">
               <FormRadioGroup
@@ -183,14 +177,12 @@ export function ProjectGeneral({ projectId, initialData = {} }: Props) {
             />
 
             <FormInput
-              control={form.control}
               name={'links.github'}
               label={'GitHub'}
               placeholder="https://github.com/user/repo"
             />
 
             <FormInput
-              control={form.control}
               name={'links.website'}
               label={'Web Site'}
               placeholder="https://myproject.com"

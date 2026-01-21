@@ -1,0 +1,1 @@
+export { FormInputLabel } from './FormInputLabel';

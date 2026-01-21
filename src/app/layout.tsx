@@ -84,7 +84,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html suppressHydrationWarning className="scroll-smooth">
+    <html suppressHydrationWarning data-scroll-behavior="smooth">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <ThemeProvider
           attribute="class"

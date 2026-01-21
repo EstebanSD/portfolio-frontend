@@ -69,7 +69,6 @@ export function AddTranslationProjectForm({ projectId, cancelNew, locales, sessi
 
             <FormInput
               required
-              control={form.control}
               name="summary"
               label={'Summary'}
               labelIcon={<BriefcaseIcon className="w-4 h-4" />}

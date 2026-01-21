@@ -1,4 +1,5 @@
 export * from './FormInput';
+export * from './FormInputLabel';
 export * from './ButtonLink';
 export * from './CustomCarousel';
 export * from './EmptyState';

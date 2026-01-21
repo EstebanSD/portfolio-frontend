@@ -89,7 +89,6 @@ export function AddTranslationAboutForm({ cancelNew, locales, session }: Props) 
 
             <FormInput
               required
-              control={form.control}
               name="title"
               label={'Title'}
               labelIcon={<BriefcaseIcon className="w-4 h-4" />}
@@ -97,7 +96,6 @@ export function AddTranslationAboutForm({ cancelNew, locales, session }: Props) 
             />
 
             <FormInput
-              control={form.control}
               name="tagline"
               label={'Tagline (Optional)'}
               labelIcon={<MessageSquareDashedIcon className="w-4 h-4" />}
