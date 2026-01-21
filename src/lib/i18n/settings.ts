@@ -1,5 +1,5 @@
+import { AVAILABLE_LANGUAGES } from '@/constants';
 import { Language } from '@/types';
-import { AVAILABLE_LANGUAGES } from '../common';
 
 export const fallbackLng: Language = AVAILABLE_LANGUAGES[0];
 export const languages: readonly Language[] = AVAILABLE_LANGUAGES;

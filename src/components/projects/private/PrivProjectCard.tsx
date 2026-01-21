@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation';
 import { CalendarIcon, EditIcon, ExternalLinkIcon, ImageIcon } from 'lucide-react';
 import { SiGithub } from 'react-icons/si';
 import { getStatusColor, getTypeColor } from '@/utils';
-import { ProjectWithTranslations } from '@/types';
+import { ProjectWithTranslations } from '@/types-portfolio/project';
 import { DialogDelete } from '@/components/common';
 import { deleteProjectAction } from '@/actions/projects';
 

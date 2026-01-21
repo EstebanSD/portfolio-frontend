@@ -1,6 +1,6 @@
 'use client';
 
-import { useUrlParams } from '@/hooks';
+import { useUrlParams } from '@/hooks/use-url-params';
 import { SearchInputBase, SearchInputBaseProps } from './SearchInputBase';
 
 interface UrlModeProps extends SearchInputBaseProps {

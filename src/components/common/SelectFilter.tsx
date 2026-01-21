@@ -3,7 +3,7 @@
 import { cn } from '@/lib/shadcn/utils';
 import { Option } from '@/types';
 import { Label, Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui';
-import { useUrlParams } from '@/hooks';
+import { useUrlParams } from '@/hooks/use-url-params';
 
 interface Props {
   paramKey: string;

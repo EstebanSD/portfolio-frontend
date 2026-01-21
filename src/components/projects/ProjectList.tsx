@@ -1,5 +1,5 @@
 import { use } from 'react';
-import { ProjectQueryFilters, Project } from '@/types';
+import { ProjectQueryFilters, Project } from '@/types-portfolio/project';
 import { ProjectCard } from './ProjectCard';
 import { EmptyState } from '../common';
 import { serverTranslation } from '@/lib/i18n';

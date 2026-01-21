@@ -1,5 +1,5 @@
 import { serverTranslation } from '@/lib/i18n';
-import { Project } from '@/types';
+import { Project } from '@/types-portfolio/project';
 import { ProjectCard } from './ProjectCard';
 import { ButtonLink, CustomCarousel, EmptyState } from '../common';
 

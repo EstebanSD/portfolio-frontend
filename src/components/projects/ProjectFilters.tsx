@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { XIcon } from 'lucide-react';
 import { Button, Card, CardContent } from '../ui';
 import { SearchFilterInputUrl, SelectFilterUrl } from '../common';
-import { ProjectQueryFilters, ProjectStatus, ProjectType } from '@/types';
+import { ProjectQueryFilters, ProjectStatus, ProjectType } from '@/types-portfolio/project';
 import { useTranslation } from '@/lib/i18n/client';
 
 type Filters = Required<ProjectQueryFilters>;

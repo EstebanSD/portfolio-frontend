@@ -17,7 +17,7 @@ import {
   CardTitle,
   Separator,
 } from '@/components/ui';
-import { Project } from '@/types';
+import { Project } from '@/types-portfolio/project';
 import { formatDate, getStatusColor, getTypeIcon } from '@/utils';
 import { serverTranslation } from '@/lib/i18n';
 import { ButtonLink, CustomCarousel, EmptyState } from '@/components/common';

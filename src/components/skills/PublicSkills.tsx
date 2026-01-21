@@ -1,5 +1,5 @@
 import { serverTranslation } from '@/lib/i18n';
-import { Skill, SkillCategory } from '@/types';
+import { Skill, SkillCategory } from '@/types-portfolio/skill';
 import { SkillCard } from './SkillCard';
 import { EmptyState } from '../common';
 

@@ -1,10 +1,12 @@
 'use client';
 
-import { useUrlParams } from '@/hooks';
+import { useUrlParams } from '@/hooks/use-url-params';
 import { SelectFilterBase, SelectFilterBaseProps } from './SelectFilterBase';
 
-interface SelectFilterUrlProps<T extends string>
-  extends Omit<SelectFilterBaseProps<T>, 'value' | 'onValueChange'> {
+interface SelectFilterUrlProps<T extends string> extends Omit<
+  SelectFilterBaseProps<T>,
+  'value' | 'onValueChange'
+> {
   basePath: string;
   initialValue?: T;
   debounceMs?: number;

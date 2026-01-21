@@ -25,8 +25,8 @@ import {
   Form,
   SheetClose,
 } from '@/components/ui';
-import { useIsMobile } from '@/hooks';
-import { ProjectTranslation } from '@/types';
+import { useIsMobile } from '@/hooks/use-mobile';
+import { ProjectTranslation } from '@/types-portfolio/project';
 import { FormInput, FormTextArea, Spinner } from '@/components/common';
 
 const translationFormSchema = z.object({

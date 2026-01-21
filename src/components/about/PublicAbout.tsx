@@ -1,7 +1,7 @@
 import Image from 'next/image';
 
 import { serverTranslation } from '@/lib/i18n';
-import { About } from '@/types';
+import { About } from '@/types-portfolio/about';
 import { Badge } from '../ui';
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL!;

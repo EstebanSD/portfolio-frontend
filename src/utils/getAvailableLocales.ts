@@ -1,4 +1,4 @@
-import { AVAILABLE_LOCALES } from '@/lib/common';
+import { AVAILABLE_LOCALES } from '@/constants';
 
 export const getAvailableLocales = <T extends { locale: string }>(translations: T[]) => {
   const usedLocales = translations?.map((t) => t.locale) || [];

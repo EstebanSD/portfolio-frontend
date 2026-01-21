@@ -4,7 +4,7 @@ import { useCallback } from 'react';
 import { XIcon } from 'lucide-react';
 import { Button } from '@/components/ui';
 import { SearchFilterInputControlled, SelectFilterControlled } from '@/components/common';
-import { ProjectStatus, ProjectType, RequiredProjectFilters } from '@/types';
+import { ProjectStatus, ProjectType, RequiredProjectFilters } from '@/types-portfolio/project';
 
 const TYPE_OPTIONS: { label: string; value: ProjectType | 'all' }[] = [
   { label: 'All', value: 'all' },

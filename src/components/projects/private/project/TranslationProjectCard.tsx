@@ -3,8 +3,8 @@
 import { useTransition } from 'react';
 import { toast } from 'sonner';
 import { Session } from 'next-auth';
-import { ProjectTranslation } from '@/types';
-import { AVAILABLE_LOCALES } from '@/lib/common';
+import { ProjectTranslation } from '@/types-portfolio/project';
+import { AVAILABLE_LOCALES } from '@/constants';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui';
 import { type ProjectTranslationFormValues } from '@/lib/validations';
 import { DialogDelete } from '@/components/common';

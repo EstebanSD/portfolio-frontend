@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { Button, Card, CardContent } from '@/components/ui';
-import { ProjectTranslation } from '@/types';
+import { ProjectTranslation } from '@/types-portfolio/project';
 import { FolderXIcon, PlusIcon } from 'lucide-react';
 import { getAvailableLocales } from '@/utils';
 import { AddTranslationProjectForm } from './AddTranslationProjectForm';

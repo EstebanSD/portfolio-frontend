@@ -1,4 +1,4 @@
-import { AVAILABLE_LANGUAGES } from '@/lib/common';
+import { AVAILABLE_LANGUAGES } from '@/constants';
 
 export interface Option {
   value: string;

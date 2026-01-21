@@ -11,7 +11,7 @@ import {
   UsersIcon,
   WrenchIcon,
 } from 'lucide-react';
-import { Skill, SkillCategory } from '@/types';
+import { Skill, SkillCategory } from '@/types-portfolio/skill';
 import { Badge, Card, CardContent, CardHeader, CardTitle } from '../ui';
 
 const getCategoryIcon = (categoryKey: string): React.ElementType => {

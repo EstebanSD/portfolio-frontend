@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { GlobeIcon, LinkedinIcon } from 'lucide-react';
 import { SiGithub, SiX, SiInstagram } from 'react-icons/si';
-import { Contact, SocialPlatformType } from '@/types';
+import { Contact, SocialPlatformType } from '@/types-portfolio/contact';
 import { serverTranslation } from '@/lib/i18n';
 import { ButtonCopy } from '../common';
 import { ButtonScrollToTop } from './ButtonScrollToTop';

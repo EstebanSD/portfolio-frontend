@@ -21,7 +21,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui';
-import { ProjectWithTranslations } from '@/types';
+import { ProjectWithTranslations } from '@/types-portfolio/project';
 import { getStatusColor, getTypeColor } from '@/utils';
 import { deleteProjectAction } from '@/actions/projects';
 import { DialogDelete } from '@/components/common';

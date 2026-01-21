@@ -1,5 +1,10 @@
 import { z } from 'zod';
-import { PROJECT_STATUSES, PROJECT_TYPES, ProjectStatus, ProjectType } from '@/types';
+import {
+  PROJECT_STATUSES,
+  PROJECT_TYPES,
+  ProjectStatus,
+  ProjectType,
+} from '@/types-portfolio/project';
 
 //// GENERAL
 const isValidDate = (dateString: string): boolean => {
