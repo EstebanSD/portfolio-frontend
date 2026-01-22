@@ -1,7 +1,8 @@
 import { PlusIcon } from 'lucide-react';
 import { ProjectsManagement } from '@/components/projects/private';
 import { fetchProjectsAction } from '@/actions/projects';
-import { ButtonLink } from '@/components/common';
+import { Button } from '@/components/ui';
+import Link from 'next/link';
 
 export default async function page() {
   const projects = await fetchProjectsAction();
@@ -35,10 +36,12 @@ export default async function page() {
           </p>
         </div>
 
-        <ButtonLink href={'/en/admin/projects/new'}>
-          <PlusIcon className="mr-2 h-4 w-4" />
-          Add Project
-        </ButtonLink>
+        <Button asChild>
+          <Link href={'/en/admin/projects/new'}>
+            <PlusIcon className="mr-2 h-4 w-4" />
+            Add Project
+          </Link>
+        </Button>
       </div>
 
       <ProjectsManagement projectsCounts={projectsCounts} projects={projects} />

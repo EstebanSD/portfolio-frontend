@@ -23,25 +23,14 @@
       }
     ],
     "paths": {
-      // "@/*": [
-      //   "./src/*"
-      // ],
-      // "@/about": ["./src/components/about/index.tsx"],
-      // "@/about-public/*": ["./src/components/about/public/*"],
-      // "@/about-admin/*": ["./src/components/about/private/*"],
-
-      // "@/auth": ["./src/components/auth/index.ts"],
-      // "@/auth/*": ["./src/components/auth/*"],
       "@/actions/*":["./src/actions/*"],
       "@/components/*":["./src/components/*"],
       "@/constants":["./src/constants/index.ts"],
       "@/hooks/*":["./src/hooks/*"],
       "@/lib/*":["./src/lib/*"],
-
-
-
       "@/types":["./src/types/index.ts"],
       "@/types-portfolio/*":["./src/types/portfolio/*"],
+      "@/styles/*":["./src/styles/*"],
       "@/test/*":["./src/test/*"],
       "@/utils":["./src/utils/index.ts"],
       "@/auth":["./src/auth.ts"]
