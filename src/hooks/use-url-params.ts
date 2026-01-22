@@ -12,18 +12,21 @@ export function useUrlParams(paramKey: string, options: UseUrlParamsOptions) {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  // Get current URL value
   const urlValue = searchParams.get(paramKey) ?? defaultValue;
   const [localValue, setLocalValue] = useState(urlValue);
 
-  // Synchronize local status when URL changes externally
+  // Sync local state ONLY if external change
   useEffect(() => {
-    setLocalValue(urlValue);
-  }, [urlValue]);
+    if (urlValue !== localValue) {
+      setLocalValue(urlValue);
+    }
+  }, [urlValue, localValue]);
 
-  // URL update function
   const updateUrl = useCallback(
     (value: string) => {
+      // avoid redundant navigation
+      if (value === urlValue) return;
+
       const params = new URLSearchParams(searchParams.toString());
 
       if (!value || value === 'all' || value === defaultValue) {
@@ -33,28 +36,25 @@ export function useUrlParams(paramKey: string, options: UseUrlParamsOptions) {
       }
 
       const query = params.toString();
-      router.replace(`${basePath}${query ? `?${query}` : ''}`);
+      const nextUrl = `${basePath}${query ? `?${query}` : ''}`;
+
+      router.replace(nextUrl);
     },
-    [basePath, paramKey, router, searchParams, defaultValue],
+    [basePath, paramKey, router, searchParams, defaultValue, urlValue],
   );
 
-  // Handle debounce if necessary
   useEffect(() => {
     if (debounceMs > 0) {
-      const timeoutId = setTimeout(() => {
-        updateUrl(localValue);
-      }, debounceMs);
-
-      return () => clearTimeout(timeoutId);
-    } else {
-      updateUrl(localValue);
+      const id = setTimeout(() => updateUrl(localValue), debounceMs);
+      return () => clearTimeout(id);
     }
+
+    updateUrl(localValue);
   }, [localValue, updateUrl, debounceMs]);
 
   return {
     value: localValue,
     setValue: setLocalValue,
     urlValue,
-    updateUrl,
   };
 }
