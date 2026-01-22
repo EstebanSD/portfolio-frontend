@@ -1,16 +1,16 @@
 'use client';
 
-import { useState } from 'react';
-import { Button } from '../ui';
 import { CheckIcon, CopyIcon, MailIcon, PhoneIcon, LinkedinIcon, GlobeIcon } from 'lucide-react';
 import { SiGithub, SiX, SiInstagram } from 'react-icons/si';
 import { cn } from '@/lib/shadcn/utils';
+import { useCopyToClipboard } from './useCopyToClipboard';
+import { Button } from '@/components/ui';
 
 const ICON_MAP = {
   mail: MailIcon,
   phone: PhoneIcon,
   github: SiGithub,
-  linkedin: LinkedinIcon, // TODO update icon
+  linkedin: LinkedinIcon,
   twitter: SiX,
   instagram: SiInstagram,
   website: GlobeIcon,
@@ -23,26 +23,34 @@ interface ButtonCopyProps {
   iconName: IconName;
   displayText?: string;
   className?: string;
+  onCopySuccess?: (text: string) => void;
+  onCopyError?: (error: Error) => void;
 }
 
-export function ButtonCopy({ toCopy, iconName, displayText, className }: ButtonCopyProps) {
-  const [copied, setCopied] = useState(false);
-  const Icon = ICON_MAP[iconName];
-  const copyToClipboard = async () => {
-    try {
-      await navigator.clipboard.writeText(toCopy);
-      setCopied(true);
+export function ButtonCopy({
+  toCopy,
+  iconName,
+  displayText,
+  className,
+  onCopySuccess,
+  onCopyError,
+}: ButtonCopyProps) {
+  const { isCopied, copy } = useCopyToClipboard({
+    resetInterval: 2000,
+    onSuccess: onCopySuccess,
+    onError: onCopyError,
+  });
 
-      setTimeout(() => setCopied(false), 2000);
-    } catch (err) {
-      console.error('Error copying:', err);
-    }
+  const Icon = ICON_MAP[iconName];
+
+  const handleClick = () => {
+    copy(toCopy);
   };
 
   return (
     <Button
       variant="ghost"
-      onClick={copyToClipboard}
+      onClick={handleClick}
       className={cn(
         'flex items-center space-x-2 transition-colors h-auto p-0 group cursor-pointer',
         className,
@@ -53,10 +61,10 @@ export function ButtonCopy({ toCopy, iconName, displayText, className }: ButtonC
       <span className="text-muted-foreground group-hover:text-accent transition-colors">
         {displayText || toCopy}
       </span>
-      {copied ? (
-        <CheckIcon className="h-3 w-3 text-green-500" />
+      {isCopied ? (
+        <CheckIcon className="h-3 w-3 text-green-500" aria-label="Copied" />
       ) : (
-        <CopyIcon className="h-3 w-3 opacity-50" />
+        <CopyIcon className="h-3 w-3 opacity-50" aria-label="Copy to clipboard" />
       )}
     </Button>
   );

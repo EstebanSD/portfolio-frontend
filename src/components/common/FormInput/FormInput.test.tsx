@@ -1,39 +1,16 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { describe, test, expect } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { FormProvider, useForm } from 'react-hook-form';
+import { renderWithForm } from '@/test/utils/renderWithForm';
 import { FormInput } from './FormInput';
 
-function renderWithForm(ui: React.ReactElement, { defaultValues }: { defaultValues?: any } = {}) {
-  function Wrapper() {
-    const methods = useForm({ defaultValues });
-
-    return (
-      <FormProvider {...methods}>
-        <form>{ui}</form>
-      </FormProvider>
-    );
-  }
-
-  return render(<Wrapper />);
-}
-
-describe('FormInput - Integration Tests', () => {
+describe('FormInput (react-hook-form integration)', () => {
   describe('initial state', () => {
     test('should render basic text input', () => {
       renderWithForm(<FormInput name="username" label="Username" placeholder="Enter Username" />);
 
       expect(screen.getByLabelText(/username/i)).toBeInTheDocument();
       expect(screen.getByPlaceholderText(/enter username/i)).toBeInTheDocument();
-    });
-
-    test('should display an asterisk when required is true', () => {
-      const { container } = renderWithForm(<FormInput name="email" label="Email" required />);
-
-      const icon = container.querySelector('.lucide-asterisk');
-      expect(icon).toBeInTheDocument();
-      expect(icon).toHaveClass('text-destructive');
     });
 
     test('password input should render with type="password"', () => {

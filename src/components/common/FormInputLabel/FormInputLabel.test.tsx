@@ -1,19 +1,9 @@
 import { describe, expect, test } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import { useForm, FormProvider } from 'react-hook-form';
+import { renderWithForm } from '@/test/utils/renderWithForm';
 import { FormInputLabel } from './FormInputLabel';
 
-function FormWrapper({ children }: { children: React.ReactNode }) {
-  const form = useForm();
-
-  return <FormProvider {...form}>{children}</FormProvider>;
-}
-
-function renderWithForm(ui: React.ReactElement) {
-  return render(ui, { wrapper: FormWrapper });
-}
-
-describe('FormInputLabel', () => {
+describe('FormInputLabel (react-hook-form integration)', () => {
   test('should not render anything when label is not provided', () => {
     const { container } = render(<FormInputLabel htmlFor="email" />);
 
@@ -23,11 +13,10 @@ describe('FormInputLabel', () => {
   test('should render the label text when label is provided', () => {
     renderWithForm(<FormInputLabel htmlFor="email" label="Email address" />);
 
-    const labelText = screen.getByText('Email address');
-    expect(labelText).toBeInTheDocument();
+    expect(screen.getByText('Email address')).toBeInTheDocument();
   });
 
-  test('should associate the label with the input via htmlFor', () => {
+  test('should pass htmlFor to FormLabel', () => {
     renderWithForm(<FormInputLabel htmlFor="email" label="Email" />);
 
     const labelText = screen.getByText('Email');
@@ -37,7 +26,7 @@ describe('FormInputLabel', () => {
     expect(labelElement).toHaveAttribute('for', 'email');
   });
 
-  test('should render required indicator when inputRequired is true', () => {
+  test('should set aria-required when inputRequired is true', () => {
     renderWithForm(<FormInputLabel htmlFor="password" label="Password" inputRequired />);
 
     const labelText = screen.getByText('Password');
@@ -47,7 +36,7 @@ describe('FormInputLabel', () => {
     expect(labelElement).toHaveAttribute('aria-required', 'true');
   });
 
-  test('should render label icon when labelIcon is provided', () => {
+  test('should render label icon when provided', () => {
     renderWithForm(
       <FormInputLabel
         htmlFor="username"
@@ -56,7 +45,16 @@ describe('FormInputLabel', () => {
       />,
     );
 
-    const icon = screen.getByTestId('label-icon');
+    expect(screen.getByTestId('label-icon')).toBeInTheDocument();
+  });
+
+  test('should display an asterisk icon when inputRequired is true', () => {
+    const { container } = renderWithForm(
+      <FormInputLabel htmlFor="password" label="Password" inputRequired />,
+    );
+
+    const icon = container.querySelector('.lucide-asterisk');
     expect(icon).toBeInTheDocument();
+    expect(icon).toHaveClass('text-destructive');
   });
 });

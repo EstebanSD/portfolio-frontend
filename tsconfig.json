@@ -42,6 +42,7 @@
 
       "@/types":["./src/types/index.ts"],
       "@/types-portfolio/*":["./src/types/portfolio/*"],
+      "@/test/*":["./src/test/*"],
       "@/utils":["./src/utils/index.ts"],
       "@/auth":["./src/auth.ts"]
     },
