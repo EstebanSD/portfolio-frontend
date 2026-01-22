@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 import { renderWithForm } from '@/test/utils/renderWithForm';
 import { FormInput } from './FormInput';
 
-describe('FormInput (react-hook-form integration)', () => {
+describe('<FormInput /> (react-hook-form integration)', () => {
   describe('initial state', () => {
     test('should render basic text input', () => {
       renderWithForm(<FormInput name="username" label="Username" placeholder="Enter Username" />);

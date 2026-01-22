@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 import { renderWithForm } from '@/test/utils/renderWithForm';
 import { FormInputLabel } from './FormInputLabel';
 
-describe('FormInputLabel (react-hook-form integration)', () => {
+describe('<FormInputLabel /> (react-hook-form integration)', () => {
   test('should not render anything when label is not provided', () => {
     const { container } = render(<FormInputLabel htmlFor="email" />);
 

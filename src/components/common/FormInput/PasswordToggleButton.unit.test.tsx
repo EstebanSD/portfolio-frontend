@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { PasswordToggleButton } from './PasswordToggleButton';
 
-describe('PasswordToggleButton (unit)', () => {
+describe('<PasswordToggleButton /> (unit)', () => {
   test.each([
     [false, /show password/i],
     [true, /hide password/i],

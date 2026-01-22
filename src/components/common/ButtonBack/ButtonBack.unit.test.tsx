@@ -21,7 +21,7 @@ function setHistoryLength(value: number) {
   });
 }
 
-describe('ButtonBack', () => {
+describe('<ButtonBack /> (unit)', () => {
   beforeEach(() => {
     vi.clearAllMocks();
   });

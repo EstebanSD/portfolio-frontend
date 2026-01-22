@@ -23,7 +23,7 @@ function mockHookReturn(overrides?: Partial<ReturnType<typeof useCopyToClipboard
   });
 }
 
-describe('ButtonCopy (unit)', () => {
+describe('<ButtonCopy /> (unit)', () => {
   beforeEach(() => {
     mockCopy = vi.fn().mockResolvedValue(undefined);
     vi.clearAllMocks();
