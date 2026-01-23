@@ -25,7 +25,7 @@
     "paths": {
       "@/actions/*":["./src/actions/*"],
       "@/components/*":["./src/components/*"],
-      "@/constants":["./src/constants/index.ts"],
+      "@/constants/*":["./src/constants/*"],
       "@/hooks/*":["./src/hooks/*"],
       "@/lib/*":["./src/lib/*"],
       "@/types":["./src/types/index.ts"],

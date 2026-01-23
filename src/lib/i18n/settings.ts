@@ -1,4 +1,4 @@
-import { AVAILABLE_LANGUAGES } from '@/constants';
+import { AVAILABLE_LANGUAGES } from '@/constants/locales';
 import { Language } from '@/types';
 
 export const fallbackLng: Language = AVAILABLE_LANGUAGES[0];

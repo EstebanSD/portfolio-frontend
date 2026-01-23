@@ -1,6 +1,6 @@
 import { serverTranslation } from '@/lib/i18n';
 import { Experience } from '@/types-portfolio/experience';
-import { EmptyState } from '../common';
+import { EmptyStateCard } from '../common';
 import { ExperienceCard } from './ExperienceCard';
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL!;
@@ -45,8 +45,7 @@ export async function PublicExperiences({ lng }: { lng: string }) {
             ))}
           </div>
         ) : (
-          <EmptyState
-            asCard
+          <EmptyStateCard
             title={t('empty.title')}
             description={t('empty.description')}
             iconName="ban"

@@ -2,10 +2,10 @@ export * from './ButtonBack';
 export * from './ButtonCopy';
 export * from './ConfirmDialog';
 export * from './CustomCarousel';
+export * from './EmptyState';
 export * from './FormInput';
 export * from './FormInputLabel';
 
-export * from './EmptyState';
 export * from './SelectFilter';
 export * from './FormFileUpload';
 export * from './FormImageUpload';

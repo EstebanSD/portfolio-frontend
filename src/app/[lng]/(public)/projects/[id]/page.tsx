@@ -21,7 +21,7 @@ import {
 import { Project } from '@/types-portfolio/project';
 import { formatDate, getStatusColor, getTypeIcon } from '@/utils';
 import { serverTranslation } from '@/lib/i18n';
-import { CustomCarousel, EmptyState } from '@/components/common';
+import { CustomCarousel, EmptyStateCard } from '@/components/common';
 
 export const metadata: Metadata = {
   title: 'Project Details',
@@ -254,8 +254,7 @@ export default async function page({ params }: Props) {
     return (
       <div className="min-h-screen pt-8">
         <div className="max-w-2xl mx-auto px-4 text-center">
-          <EmptyState
-            asCard
+          <EmptyStateCard
             title={t('project.error.title')}
             description={t('project.error.description')}
             iconName="ban"

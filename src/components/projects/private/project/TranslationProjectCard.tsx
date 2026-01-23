@@ -4,7 +4,7 @@ import { useTransition } from 'react';
 import { toast } from 'sonner';
 import { Session } from 'next-auth';
 import { ProjectTranslation } from '@/types-portfolio/project';
-import { AVAILABLE_LOCALES } from '@/constants';
+import { AVAILABLE_LOCALES } from '@/constants/locales';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui';
 import { type ProjectTranslationFormValues } from '@/lib/validations';
 import { ConfirmDialog } from '@/components/common';

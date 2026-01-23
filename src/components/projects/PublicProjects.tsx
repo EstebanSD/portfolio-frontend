@@ -1,7 +1,7 @@
 import { serverTranslation } from '@/lib/i18n';
 import { Project } from '@/types-portfolio/project';
 import { ProjectCard } from './ProjectCard';
-import { CustomCarousel, EmptyState } from '../common';
+import { CustomCarousel, EmptyStateCard } from '../common';
 import { Button } from '../ui';
 import Link from 'next/link';
 
@@ -58,8 +58,7 @@ export async function PublicProjects({ lng }: { lng: string }) {
             ))}
           />
         ) : (
-          <EmptyState
-            asCard
+          <EmptyStateCard
             title={t('section.emptyTitle')}
             description={t('section.emptyDescription')}
             iconName="ban"
