@@ -1,8 +1,10 @@
+export * from './ButtonBack';
+export * from './ButtonCopy';
+export * from './ConfirmDialog';
+export * from './CustomCarousel';
 export * from './FormInput';
 export * from './FormInputLabel';
-export * from './ButtonCopy';
-export * from './ButtonBack';
-export * from './CustomCarousel';
+
 export * from './EmptyState';
 export * from './SelectFilter';
 export * from './FormFileUpload';
@@ -18,6 +20,4 @@ export * from './SelectFilterBase';
 export * from './SelectFilterUrl';
 export * from './SelectFilterControlled';
 export * from './FormRadioGroup';
-export * from './DatePicker';
 export * from './FormDatePicker';
-export * from './DialogDelete';

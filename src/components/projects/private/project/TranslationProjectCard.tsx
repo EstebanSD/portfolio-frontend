@@ -7,9 +7,10 @@ import { ProjectTranslation } from '@/types-portfolio/project';
 import { AVAILABLE_LOCALES } from '@/constants';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui';
 import { type ProjectTranslationFormValues } from '@/lib/validations';
-import { DialogDelete } from '@/components/common';
+import { ConfirmDialog } from '@/components/common';
 import { deleteTranslationAction, editTranslationAction } from '@/actions/projects';
 import { DialogProjectTranslationEdit } from './DialogProjectTranslationEdit';
+import { Trash2Icon } from 'lucide-react';
 
 const getLocaleInfo = (code: string) => AVAILABLE_LOCALES.find((l) => l.code === code);
 
@@ -28,15 +29,13 @@ export function TranslationProjectCard({ projectId, session, translation }: Prop
       return;
     }
 
-    startTransition(async () => {
-      try {
-        await deleteTranslationAction(projectId, translation.locale, session.accessToken);
-        toast.success(`${localeInfo?.name} translation deleted successfully`);
-      } catch (error) {
-        toast.error(`Failed to delete ${localeInfo?.name} translation`);
-        console.error('Delete error:', error);
-      }
-    });
+    try {
+      await deleteTranslationAction(projectId, translation.locale, session.accessToken);
+      toast.success(`${localeInfo?.name} translation deleted successfully`);
+    } catch (error) {
+      toast.error(`Failed to delete ${localeInfo?.name} translation`);
+      throw error;
+    }
   };
 
   const handleEdit = async (values: ProjectTranslationFormValues) => {
@@ -77,18 +76,29 @@ export function TranslationProjectCard({ projectId, session, translation }: Prop
             isLoading={isPending}
           />
 
-          <DialogDelete
+          <ConfirmDialog
             title="Delete Translation"
-            handleDelete={handleDelete}
-            isLoading={isPending}
-          >
-            <>
-              Are you sure you want to delete the{' '}
-              {localeInfo?.name && <strong>{localeInfo.name} </strong>}translation?
-              <br />
-              <span className="text-destructive">This action cannot be undone.</span>
-            </>
-          </DialogDelete>
+            confirmLabel="Delete"
+            loading={isPending}
+            onConfirm={() =>
+              startTransition(async () => {
+                await handleDelete();
+              })
+            }
+            trigger={
+              <button className="p-2 hover:text-red-600">
+                <Trash2Icon className="w-4 h-4" />
+              </button>
+            }
+            description={
+              <>
+                Are you sure you want to delete the{' '}
+                {localeInfo?.name && <strong>{localeInfo.name} </strong>}translation?
+                <br />
+                <span className="text-destructive">This action cannot be undone.</span>
+              </>
+            }
+          />
         </div>
       </CardHeader>
       <CardContent className="space-y-4">

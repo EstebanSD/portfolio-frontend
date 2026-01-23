@@ -3,14 +3,14 @@
 import { useTransition } from 'react';
 import { toast } from 'sonner';
 import { Session } from 'next-auth';
-import { DownloadIcon } from 'lucide-react';
+import { DownloadIcon, Trash2Icon } from 'lucide-react';
 import { deleteTranslationAction, editTranslationAction } from '@/actions/about';
 import { AboutTranslation } from '@/types-portfolio/about';
 import { AVAILABLE_LOCALES } from '@/constants';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui';
 import { DialogAboutTranslationEdit } from './DialogAboutTranslationEdit';
 import { type AboutTranslationFormValues } from '@/lib/validations';
-import { DialogDelete } from '@/components/common';
+import { ConfirmDialog } from '@/components/common';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL!;
 const getLocaleInfo = (code: string) => AVAILABLE_LOCALES.find((l) => l.code === code);
@@ -36,15 +36,13 @@ export function TranslationAboutCard({ session, translation }: Props) {
       return;
     }
 
-    startTransition(async () => {
-      try {
-        await deleteTranslationAction(translation.locale, session.accessToken);
-        toast.success(`${localeInfo?.name} translation deleted successfully`);
-      } catch (error) {
-        toast.error(`Failed to delete ${localeInfo?.name} translation`);
-        console.error('Delete error:', error);
-      }
-    });
+    try {
+      await deleteTranslationAction(translation.locale, session.accessToken);
+      toast.success(`${localeInfo?.name} translation deleted successfully`);
+    } catch (error) {
+      toast.error(`Failed to delete ${localeInfo?.name} translation`);
+      throw error; // important
+    }
   };
 
   const handleEdit = async (values: AboutTranslationFormValues) => {
@@ -95,18 +93,29 @@ export function TranslationAboutCard({ session, translation }: Props) {
             isLoading={isPending}
           />
 
-          <DialogDelete
+          <ConfirmDialog
             title="Delete Translation"
-            handleDelete={handleDelete}
-            isLoading={isPending}
-          >
-            <>
-              Are you sure you want to delete the{' '}
-              {localeInfo?.name && <strong>{localeInfo.name} </strong>}translation?
-              <br />
-              <span className="text-destructive">This action cannot be undone.</span>
-            </>
-          </DialogDelete>
+            confirmLabel="Delete"
+            loading={isPending}
+            onConfirm={() =>
+              startTransition(async () => {
+                await handleDelete();
+              })
+            }
+            trigger={
+              <button className="p-2 hover:text-red-600">
+                <Trash2Icon className="w-4 h-4" />
+              </button>
+            }
+            description={
+              <>
+                Are you sure you want to delete the{' '}
+                {localeInfo?.name && <strong>{localeInfo.name} </strong>}translation?
+                <br />
+                <span className="text-destructive">This action cannot be undone.</span>
+              </>
+            }
+          />
         </div>
       </CardHeader>
       <CardContent className="space-y-4">

@@ -1,11 +1,11 @@
 'use client';
 
-import { useTransition } from 'react';
+import { useState, useTransition } from 'react';
 import { toast } from 'sonner';
 import { Session } from 'next-auth';
 import { useRouter } from 'next/navigation';
 import { format } from 'date-fns';
-import { ExternalLinkIcon, EyeIcon, MoreHorizontalIcon } from 'lucide-react';
+import { ExternalLinkIcon, EyeIcon, MoreHorizontalIcon, Trash2Icon } from 'lucide-react';
 import { SiGithub } from 'react-icons/si';
 import {
   Badge,
@@ -24,7 +24,7 @@ import {
 import { ProjectWithTranslations } from '@/types-portfolio/project';
 import { getStatusColor, getTypeColor } from '@/utils';
 import { deleteProjectAction } from '@/actions/projects';
-import { DialogDelete } from '@/components/common';
+import { ConfirmDialog } from '@/components/common';
 
 interface Props {
   session: Session | null;
@@ -33,6 +33,8 @@ interface Props {
 export function ProjectsTable({ session, projects }: Props) {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [projectToDelete, setProjectToDelete] = useState<ProjectWithTranslations | null>(null);
 
   const handleDelete = async (project: ProjectWithTranslations) => {
     if (!session?.accessToken) {
@@ -40,15 +42,13 @@ export function ProjectsTable({ session, projects }: Props) {
       return;
     }
 
-    startTransition(async () => {
-      try {
-        await deleteProjectAction(project._id, session.accessToken);
-        toast.success(`Project ${project.title} deleted successfully`);
-      } catch (error) {
-        toast.error(`Failed to delete project ${project.title}`);
-        console.error('Delete error:', error);
-      }
-    });
+    try {
+      await deleteProjectAction(project._id, session.accessToken);
+      toast.success(`Project ${project.title} deleted successfully`);
+    } catch (error) {
+      toast.error(`Failed to delete project ${project.title}`);
+      throw error;
+    }
   };
 
   const handleView = (project: ProjectWithTranslations) => {
@@ -183,25 +183,19 @@ export function ProjectsTable({ session, projects }: Props) {
                       onClick={() => handleView(project)}
                       className="cursor-pointer"
                     >
-                      <EyeIcon className="mr-2 h-4 w-4 text-black dark:text-white" />
+                      <EyeIcon className="h-4 w-4 text-black dark:text-white" />
                       Details
                     </DropdownMenuItem>
 
-                    <DropdownMenuItem className="cursor-pointer" asChild>
-                      <DialogDelete
-                        label={'Delete'}
-                        title="Delete Project"
-                        handleDelete={() => handleDelete(project)}
-                        isLoading={isPending}
-                      >
-                        <>
-                          Are you sure you want to delete <strong>{project.title}</strong>?
-                          <br />
-                          If the project has translations, they will also be deleted.
-                          <br />
-                          <span className="text-destructive">This action cannot be undone.</span>
-                        </>
-                      </DialogDelete>
+                    <DropdownMenuItem
+                      onClick={() => {
+                        setProjectToDelete(project);
+                        setIsModalOpen(true);
+                      }}
+                      className="cursor-pointer"
+                    >
+                      <Trash2Icon className="h-4 w-4 text-black dark:text-white" />
+                      Delete
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
@@ -210,6 +204,28 @@ export function ProjectsTable({ session, projects }: Props) {
           ))}
         </TableBody>
       </Table>
+
+      <ConfirmDialog
+        title="Delete Project"
+        confirmLabel="Delete"
+        loading={isPending}
+        open={isModalOpen}
+        onOpenChange={setIsModalOpen}
+        onConfirm={() =>
+          startTransition(async () => {
+            await handleDelete(projectToDelete!);
+          })
+        }
+        description={
+          <>
+            Are you sure you want to delete <strong>{projectToDelete?.title}</strong>?
+            <br />
+            If the project has translations, they will also be deleted.
+            <br />
+            <span className="text-destructive">This action cannot be undone.</span>
+          </>
+        }
+      />
     </div>
   );
 }
