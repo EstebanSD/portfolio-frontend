@@ -2,7 +2,7 @@ import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 import { auth as middleware } from './auth';
 import { languages, fallbackLng, i18CookieName } from './lib/i18n/settings';
-import { Language } from './types';
+import { Language } from './lib/i18n';
 
 export default middleware((req: NextRequest) => {
   const pathname = req.nextUrl.pathname;

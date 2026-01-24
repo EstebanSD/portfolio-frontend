@@ -81,6 +81,8 @@ export function ProjectGeneral({ projectId, initialData = {} }: Props) {
           cleanData.links = undefined;
         }
 
+        console.log({ cleanData });
+
         await updateGeneralInfoAction(projectId, cleanData, session.accessToken);
 
         toast.success('General Information updated successfully');
@@ -109,6 +111,7 @@ export function ProjectGeneral({ projectId, initialData = {} }: Props) {
       });
     }
   }, [initialData, form]);
+
   return (
     <Card>
       <CardHeader>
@@ -150,23 +153,21 @@ export function ProjectGeneral({ projectId, initialData = {} }: Props) {
                 ]}
               />
             </div>
-            <div className="grid grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <FormDatePicker
                 required={watchedStatus === 'completed'}
-                control={form.control}
                 name="startDate"
                 label="Start Date"
                 placeholder="Select a Start Date"
-                startMonth={2000}
+                fromYear={2000}
               />
 
               <FormDatePicker
                 required={watchedStatus === 'completed'}
-                control={form.control}
                 name="endDate"
                 label="End Date"
                 placeholder="Select a End Date"
-                startMonth={2000}
+                fromYear={2000}
               />
             </div>
             <FormTagsInput

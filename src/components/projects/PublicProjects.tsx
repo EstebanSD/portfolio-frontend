@@ -1,4 +1,4 @@
-import { serverTranslation } from '@/lib/i18n';
+import { serverTranslation } from '@/lib/i18n/server';
 import { Project } from '@/types-portfolio/project';
 import { ProjectCard } from './ProjectCard';
 import { CustomCarousel, EmptyStateCard } from '../common';

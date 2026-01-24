@@ -1,4 +1,4 @@
-import { serverTranslation } from '@/lib/i18n';
+import { serverTranslation } from '@/lib/i18n/server';
 import { Skill, SkillCategory } from '@/types-portfolio/skill';
 import { SkillCard } from './SkillCard';
 import { EmptyStateCard } from '../common';

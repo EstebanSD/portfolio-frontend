@@ -1,6 +1,6 @@
 import { ShieldIcon, HomeIcon, ArrowLeftIcon } from 'lucide-react';
 import { Alert, AlertDescription, Button } from '@/components/ui';
-import { serverTranslation } from '@/lib/i18n';
+import { serverTranslation } from '@/lib/i18n/server';
 import { ButtonBack } from '@/components/common';
 import Link from 'next/link';
 

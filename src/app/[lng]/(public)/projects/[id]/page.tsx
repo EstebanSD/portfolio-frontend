@@ -20,7 +20,7 @@ import {
 } from '@/components/ui';
 import { Project } from '@/types-portfolio/project';
 import { formatDate, getStatusColor, getTypeIcon } from '@/utils';
-import { serverTranslation } from '@/lib/i18n';
+import { serverTranslation } from '@/lib/i18n/server';
 import { CustomCarousel, EmptyStateCard } from '@/components/common';
 
 export const metadata: Metadata = {

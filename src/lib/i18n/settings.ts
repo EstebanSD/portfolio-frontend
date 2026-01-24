@@ -1,7 +1,6 @@
-import { AVAILABLE_LANGUAGES } from '@/constants/locales';
-import { Language } from '@/types';
+import { AVAILABLE_LANGUAGES, DEFAULT_LOCALE, Language } from './locales';
 
-export const fallbackLng: Language = AVAILABLE_LANGUAGES[0];
+export const fallbackLng: Language = DEFAULT_LOCALE;
 export const languages: readonly Language[] = AVAILABLE_LANGUAGES;
 export const defaultNS = 'common';
 export const i18CookieName = 'i18next';

@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { Control, FieldValues, Path } from 'react-hook-form';
-import { CalendarIcon, AsteriskIcon } from 'lucide-react';
+import { useFormContext } from 'react-hook-form';
+import { CalendarIcon } from 'lucide-react';
 import {
   Button,
   Popover,
@@ -11,58 +11,61 @@ import {
   Calendar,
   FormField,
   FormItem,
-  FormLabel,
   FormControl,
   FormMessage,
 } from '@/components/ui';
+import { FormInputLabel } from '../FormInputLabel';
+import { formatFormDate, formatFormDateForDisplay, parseFormDate } from './date-utils';
+import { useLocale } from '@/lib/i18n/utils';
+import { dateFnsLocales } from './date-locale.types';
 
-type FormDatePickerProps<T extends FieldValues, K extends Path<T>> = {
-  control: Control<T>;
-  name: K;
+interface FormDatePickerProps {
+  name: string;
   label?: string;
   labelIcon?: React.ReactNode;
   required?: boolean;
   placeholder?: string;
-  startMonth?: number;
-  endMonth?: number;
+  fromYear?: number;
+  toYear?: number;
   disabled?: boolean;
-};
+}
 
-export function FormDatePicker<T extends FieldValues, K extends Path<T>>({
-  control,
+export function FormDatePicker({
   name,
   label = '',
   labelIcon = null,
   required = false,
   placeholder = 'Select date',
-  startMonth = undefined,
-  endMonth = undefined,
+  fromYear,
+  toYear,
   disabled = false,
-}: FormDatePickerProps<T, K>) {
+}: FormDatePickerProps) {
+  const { control } = useFormContext();
+  const locale = useLocale();
   const [open, setOpen] = useState(false);
 
+  const dateFnsLocale = dateFnsLocales[locale];
   return (
     <FormField
       control={control}
       name={name}
       render={({ field }) => {
-        const selectedDate = field.value ? new Date(field.value) : undefined;
+        const selectedDate = parseFormDate(field.value);
+
+        const displayValue =
+          typeof field.value === 'string' && field.value
+            ? formatFormDateForDisplay(field.value, dateFnsLocale)
+            : placeholder;
 
         return (
           <FormItem className="w-full">
-            {label && (
-              <FormLabel
-                htmlFor={name}
-                aria-required={required}
-                className="data-[error=true]:text-foreground"
-              >
-                {labelIcon && <span>{labelIcon}</span>}
-                <p className="m-0 text-sm font-medium flex items-center gap-1">
-                  {label}
-                  {required && <AsteriskIcon className="text-destructive w-3 h-3 mb-1" />}
-                </p>
-              </FormLabel>
-            )}
+            <FormInputLabel
+              htmlFor={name}
+              label={label}
+              labelIcon={labelIcon}
+              inputRequired={required}
+            />
+
             <FormControl>
               <Popover open={open} onOpenChange={setOpen}>
                 <PopoverTrigger asChild>
@@ -72,7 +75,7 @@ export function FormDatePicker<T extends FieldValues, K extends Path<T>>({
                     className="w-full justify-between font-normal"
                     disabled={disabled}
                   >
-                    {selectedDate ? selectedDate.toLocaleDateString('en-EN') : placeholder}
+                    {displayValue}
                     <CalendarIcon className="h-4 w-4" />
                   </Button>
                 </PopoverTrigger>
@@ -81,12 +84,13 @@ export function FormDatePicker<T extends FieldValues, K extends Path<T>>({
                     mode="single"
                     selected={selectedDate}
                     onSelect={(date) => {
-                      field.onChange(date ? date.toISOString().split('T')[0] : '');
+                      field.onChange(date ? formatFormDate(date) : '');
                       setOpen(false);
                     }}
                     captionLayout="dropdown"
-                    startMonth={startMonth ? new Date(startMonth, 0) : undefined}
-                    endMonth={endMonth ? new Date(endMonth, 11) : undefined}
+                    startMonth={fromYear ? new Date(fromYear, 0, 1) : undefined}
+                    endMonth={toYear ? new Date(toYear, 11, 31) : undefined}
+                    disabled={disabled}
                   />
                 </PopoverContent>
               </Popover>

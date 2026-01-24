@@ -2,7 +2,7 @@ import { use } from 'react';
 import { ProjectQueryFilters, Project } from '@/types-portfolio/project';
 import { ProjectCard } from './ProjectCard';
 import { EmptyStatePage } from '../common';
-import { serverTranslation } from '@/lib/i18n';
+import { serverTranslation } from '@/lib/i18n/server';
 
 type Filters = Required<ProjectQueryFilters>;
 

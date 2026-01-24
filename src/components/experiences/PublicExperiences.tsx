@@ -1,4 +1,4 @@
-import { serverTranslation } from '@/lib/i18n';
+import { serverTranslation } from '@/lib/i18n/server';
 import { Experience } from '@/types-portfolio/experience';
 import { EmptyStateCard } from '../common';
 import { ExperienceCard } from './ExperienceCard';

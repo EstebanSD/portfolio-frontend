@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import { serverTranslation } from '@/lib/i18n';
+import { serverTranslation } from '@/lib/i18n/server';
 import { About } from '@/types-portfolio/about';
 import { Badge } from '../ui';
 

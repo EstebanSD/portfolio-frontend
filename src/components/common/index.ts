@@ -3,6 +3,7 @@ export * from './ButtonCopy';
 export * from './ConfirmDialog';
 export * from './CustomCarousel';
 export * from './EmptyState';
+export * from './FormDatePicker';
 export * from './FormInput';
 export * from './FormInputLabel';
 
@@ -20,4 +21,3 @@ export * from './SelectFilterBase';
 export * from './SelectFilterUrl';
 export * from './SelectFilterControlled';
 export * from './FormRadioGroup';
-export * from './FormDatePicker';
