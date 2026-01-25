@@ -129,14 +129,12 @@ export function DialogAboutTranslationEdit({
         />
 
         <FormFileUpload
-          control={form.control}
           name="cv"
           label={'Curriculum Vitae'}
           labelIcon={<FileIcon className="h-4 w-4" />}
-          accept=".pdf,.doc,.docx"
+          accept="application/*"
           maxSize={5}
           showPreview={true}
-          allowDownload={true}
         />
       </form>
     </Form>

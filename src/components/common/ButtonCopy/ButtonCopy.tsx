@@ -3,8 +3,8 @@
 import { CheckIcon, CopyIcon, MailIcon, PhoneIcon, LinkedinIcon, GlobeIcon } from 'lucide-react';
 import { SiGithub, SiX, SiInstagram } from 'react-icons/si';
 import { cn } from '@/lib/shadcn/utils';
+import { Button } from '../../ui';
 import { useCopyToClipboard } from './useCopyToClipboard';
-import { Button } from '@/components/ui';
 
 const ICON_MAP = {
   mail: MailIcon,

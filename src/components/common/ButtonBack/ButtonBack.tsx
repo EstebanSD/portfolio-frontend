@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { Button } from '@/components/ui';
+import { Button } from '../../ui';
 
 export function ButtonBack({
   fallbackHref,

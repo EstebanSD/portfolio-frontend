@@ -1,7 +1,7 @@
 import { cn } from '@/lib/shadcn/utils';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui';
-import { emptyIconMap } from './empty-state.icons';
-import { EmptyStateBaseProps } from './empty-state.types';
+import { Card, CardContent, CardHeader, CardTitle } from '../../ui';
+import { emptyIconMap } from './emptyState.icons';
+import { EmptyStateBaseProps } from './emptyState.types';
 
 export function EmptyStateCard({
   title,

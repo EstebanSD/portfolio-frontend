@@ -1,4 +1,4 @@
-import { EmptyStateIcon } from './empty-state.icons';
+import { EmptyStateIcon } from './emptyState.icons';
 
 export interface EmptyStateBaseProps {
   title: string;

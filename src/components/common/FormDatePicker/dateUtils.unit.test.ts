@@ -1,6 +1,6 @@
 import { enUS, es } from 'date-fns/locale';
 import { describe, test, expect } from 'vitest';
-import { formatFormDate, formatFormDateForDisplay, parseFormDate } from './date-utils';
+import { formatFormDate, formatFormDateForDisplay, parseFormDate } from './dateUtils';
 
 describe('Date Utils (unit)', () => {
   describe('parseFormDate()', () => {

@@ -1,6 +1,6 @@
 import { cn } from '@/lib/shadcn/utils';
-import { emptyIconMap } from './empty-state.icons';
-import { EmptyStateBaseProps } from './empty-state.types';
+import { emptyIconMap } from './emptyState.icons';
+import { EmptyStateBaseProps } from './emptyState.types';
 
 export function EmptyStatePage({
   title,

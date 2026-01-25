@@ -11,7 +11,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@/components/ui';
+} from '../../ui';
 
 type TriggerModeProps = {
   trigger: React.ReactNode;

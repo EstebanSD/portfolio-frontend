@@ -1,5 +1,5 @@
 import { AsteriskIcon } from 'lucide-react';
-import { FormLabel } from '@/components/ui';
+import { FormLabel } from '../../ui';
 
 type FormInputLabelProps = {
   htmlFor: string;

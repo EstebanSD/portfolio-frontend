@@ -1,26 +1,15 @@
-import { enUS } from 'date-fns/locale';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, test, expect, vi } from 'vitest';
 import { renderWithForm } from '@/test/utils/renderWithForm';
 import { FormDatePicker } from './FormDatePicker';
 
-vi.mock('@/components/ui/calendar', () => ({
+vi.mock('../../ui/calendar', () => ({
   Calendar: ({ onSelect }: { onSelect: (date: Date) => void }) => (
     <button data-testid="mock-calendar-day" onClick={() => onSelect(new Date(2026, 0, 15))}>
       Select Jan 15
     </button>
   ),
-}));
-
-vi.mock('@/lib/i18n/utils', () => ({
-  useLocale: () => 'en',
-}));
-
-vi.mock('./date-locale.types', () => ({
-  dateFnsLocales: {
-    en: enUS,
-  },
 }));
 
 describe('<FormDatePicker /> (integration)', () => {

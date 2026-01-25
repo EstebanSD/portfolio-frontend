@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { CalendarIcon } from 'lucide-react';
+import { useLocale } from '@/lib/i18n/utils';
 import {
   Button,
   Popover,
@@ -13,11 +14,10 @@ import {
   FormItem,
   FormControl,
   FormMessage,
-} from '@/components/ui';
+} from '../../ui';
 import { FormInputLabel } from '../FormInputLabel';
-import { formatFormDate, formatFormDateForDisplay, parseFormDate } from './date-utils';
-import { useLocale } from '@/lib/i18n/utils';
-import { dateFnsLocales } from './date-locale.types';
+import { formatFormDate, formatFormDateForDisplay, parseFormDate } from './dateUtils';
+import { dateFnsLocales } from './dateLocale.types';
 
 interface FormDatePickerProps {
   name: string;

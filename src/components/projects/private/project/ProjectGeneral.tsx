@@ -81,8 +81,6 @@ export function ProjectGeneral({ projectId, initialData = {} }: Props) {
           cleanData.links = undefined;
         }
 
-        console.log({ cleanData });
-
         await updateGeneralInfoAction(projectId, cleanData, session.accessToken);
 
         toast.success('General Information updated successfully');

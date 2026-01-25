@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Autoplay from 'embla-carousel-autoplay';
+import { cn } from '@/lib/shadcn/utils';
 import {
   Carousel,
   CarouselContent,
@@ -9,8 +10,7 @@ import {
   CarouselNext,
   CarouselPrevious,
   type CarouselApi,
-} from '@/components/ui';
-import { cn } from '@/lib/shadcn/utils';
+} from '../../ui';
 
 interface CustomCarouselProps {
   items: React.ReactNode[];

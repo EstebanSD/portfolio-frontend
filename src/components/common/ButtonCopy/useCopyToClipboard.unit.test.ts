@@ -125,7 +125,7 @@ describe('useCopyToClipboard (unit)', () => {
       await act(async () => {
         await result.current.copy('test');
       });
-      expect(result.current.error).toBeDefined();
+      expect(result.current.error).toBeInstanceOf(Error);
 
       mockWriteText.mockResolvedValue(undefined);
       await act(async () => {
