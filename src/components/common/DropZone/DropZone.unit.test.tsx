@@ -1,12 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 import { describe, test, expect, vi } from 'vitest';
+import { createFile } from '@/test/utils';
 import { DropZone } from './DropZone';
-
-const createFile = (name: string, size: number, type: string): File => {
-  const file = new File(['a'.repeat(size)], name, { type });
-  return file;
-};
 
 describe('<DropZone /> (unit)', () => {
   const defaultProps = {
@@ -23,7 +18,7 @@ describe('<DropZone /> (unit)', () => {
   };
 
   describe('render', () => {
-    test('display correct text', () => {
+    test('display correct text for multiple files', () => {
       render(<DropZone {...defaultProps} />);
 
       expect(screen.getByText('Drag files here or')).toBeInTheDocument();
@@ -36,40 +31,113 @@ describe('<DropZone /> (unit)', () => {
       expect(screen.getByText('Max 5MB')).toBeInTheDocument();
     });
 
-    test('disable the input file', () => {
+    test('apply correct styles when dragOver is true', () => {
+      const { container } = render(<DropZone {...defaultProps} dragOver={true} />);
+      const dropzone = container.firstChild as HTMLElement;
+
+      expect(dropzone).toHaveClass('border-primary', 'bg-primary/5');
+    });
+
+    test('apply correct styles when dragOver is false', () => {
+      const { container } = render(<DropZone {...defaultProps} dragOver={false} />);
+      const dropzone = container.firstChild as HTMLElement;
+
+      expect(dropzone).toHaveClass('border-muted-foreground/25');
+    });
+
+    test('apply disabled styles when disabled', () => {
+      const { container } = render(<DropZone {...defaultProps} disabled={true} />);
+      const dropzone = container.firstChild as HTMLElement;
+
+      expect(dropzone).toHaveClass('opacity-50', 'cursor-not-allowed');
+    });
+
+    test('disable the input when disabled prop is true', () => {
       render(<DropZone {...defaultProps} disabled={true} />);
 
       const input = screen.getByTestId(`file-input-${defaultProps.name}`);
       expect(input).toBeDisabled();
     });
+
+    test('render custom icon when provided', () => {
+      const customIcon = <div data-testid="custom-icon">Custom Icon</div>;
+      render(<DropZone {...defaultProps} icon={customIcon} />);
+
+      expect(screen.getByTestId('custom-icon')).toBeInTheDocument();
+    });
+
+    test('render custom texts when provided', () => {
+      render(
+        <DropZone
+          {...defaultProps}
+          dragText={'Drag images here or'}
+          selectText={'select images'}
+          itemLabel={'image'}
+        />,
+      );
+
+      expect(screen.getByText('Drag images here or')).toBeInTheDocument();
+      expect(screen.getByText(/select images/i)).toBeInTheDocument();
+      expect(screen.getByText(/Max 5 images/)).toBeInTheDocument();
+    });
   });
 
   describe('behavior', () => {
-    test('clicking "select files" triggers file input click', async () => {
-      const user = userEvent.setup();
-      render(<DropZone {...defaultProps} />);
+    test('call onChange when input fires change event', async () => {
+      const onChange = vi.fn();
 
-      const button = screen.getByText(/select files/i);
+      render(<DropZone {...defaultProps} onChange={onChange} />);
+
       const input = screen.getByTestId(`file-input-${defaultProps.name}`);
 
-      const clickSpy = vi.spyOn(input, 'click');
+      const file = createFile();
 
-      await user.click(button);
+      fireEvent.change(input, {
+        target: { files: [file] },
+      });
 
-      expect(clickSpy).toHaveBeenCalled();
+      expect(onChange).toHaveBeenCalledTimes(1);
     });
 
-    test('not accept files when is disabled', () => {
-      const { container } = render(<DropZone {...defaultProps} disabled />);
-
-      const file = createFile('test.txt', 1024, 'text/plain');
+    test('call onDragOver when dragging over dropzone', () => {
+      const onDragOver = vi.fn();
+      const { container } = render(<DropZone {...defaultProps} onDragOver={onDragOver} />);
       const dropzone = container.firstChild as HTMLElement;
 
+      fireEvent.dragOver(dropzone);
+
+      expect(onDragOver).toHaveBeenCalledTimes(1);
+    });
+
+    test('call onDragLeave when drag leaves dropzone', () => {
+      const onDragLeave = vi.fn();
+      const { container } = render(<DropZone {...defaultProps} onDragLeave={onDragLeave} />);
+      const dropzone = container.firstChild as HTMLElement;
+
+      fireEvent.dragLeave(dropzone);
+
+      expect(onDragLeave).toHaveBeenCalledTimes(1);
+    });
+
+    test('call onDrop when files are dropped', () => {
+      const onDrop = vi.fn();
+      const { container } = render(<DropZone {...defaultProps} onDrop={onDrop} />);
+      const dropzone = container.firstChild as HTMLElement;
+
+      const file = createFile();
       fireEvent.drop(dropzone, {
         dataTransfer: { files: [file] },
       });
 
-      expect(screen.queryByText('test.txt')).not.toBeInTheDocument();
+      expect(onDrop).toHaveBeenCalledTimes(1);
+    });
+
+    test('not show drag over styles when disabled even if dragOver prop is true', () => {
+      const { container } = render(<DropZone {...defaultProps} disabled dragOver={true} />);
+      const dropzone = container.firstChild as HTMLElement;
+
+      expect(dropzone).not.toHaveClass('border-primary');
+      expect(dropzone).toHaveClass('opacity-50');
     });
   });
 });

@@ -133,7 +133,6 @@ export function AboutGeneralForm({ initialData = {} }: Props) {
             />
 
             <FormImageUpload
-              control={form.control}
               name="image"
               label="Profile Image"
               labelIcon={<ImageIcon className="h-4 w-4" />}

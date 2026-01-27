@@ -1,15 +1,16 @@
 'use client';
 
-import React, { useCallback, useState } from 'react';
-import { useFormContext } from 'react-hook-form';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { FileImageIcon } from 'lucide-react';
+import { useFormContext, useWatch } from 'react-hook-form';
 import { cn } from '@/lib/shadcn/utils';
 import { FormControl, FormField, FormItem, FormMessage } from '../../ui';
-import { downloadFile, normalizeFileValue, validateFiles } from '../File';
-import { DropZone } from '../DropZone';
+import { normalizeFileValue, validateFiles } from '../File';
 import { FormInputLabel } from '../FormInputLabel';
-import { FilePreview } from './FilePreview';
+import { DropZone } from '../DropZone';
+import { ImagePreview } from './ImagePreview';
 
-type FormFileUploadProps = {
+type FormImageUploadProps = {
   name: string;
   label?: string;
   labelIcon?: React.ReactNode;
@@ -20,26 +21,44 @@ type FormFileUploadProps = {
   maxSize?: number; // MB
   accept?: string;
   className?: string;
-  showPreview?: boolean;
-  allowDownload?: boolean;
+  showImagePreview?: boolean;
+  previewSize?: 'sm' | 'md' | 'lg';
 };
 
-export function FormFileUpload({
+export function FormImageUpload({
   name,
   label = '',
   labelIcon = null,
   required = false,
   disabled = false,
   multiple = false,
-  maxFiles = 5,
-  maxSize = 10,
-  accept = '*/*',
-  showPreview = true,
-  allowDownload = false,
+  maxFiles = 1,
+  maxSize = 5,
+  accept = 'image/*',
+  showImagePreview = true,
+  previewSize = 'md',
   className,
-}: FormFileUploadProps) {
+}: FormImageUploadProps) {
   const { control } = useFormContext();
   const [dragOver, setDragOver] = useState(false);
+
+  const watchedFiles = useWatch({ control, name });
+  const fileArray = normalizeFileValue(watchedFiles);
+
+  const previewUrls = useMemo(() => {
+    const urls: { [key: string]: string } = {};
+    fileArray.forEach((file, index) => {
+      const key = `${index}-${file.name}-${file.size}`;
+      urls[key] = URL.createObjectURL(file);
+    });
+    return urls;
+  }, [fileArray]);
+
+  useEffect(() => {
+    return () => {
+      Object.values(previewUrls).forEach((url) => URL.revokeObjectURL(url));
+    };
+  }, [previewUrls]);
 
   const handleDragOver = useCallback(
     (e: React.DragEvent) => {
@@ -72,7 +91,6 @@ export function FormFileUpload({
             maxFiles,
             accept,
           }).valid;
-
           if (droppedFiles.length > 0) {
             const newFiles = multiple ? [...fileArray, ...droppedFiles] : droppedFiles;
             field.onChange(multiple ? newFiles : newFiles[0]);
@@ -85,7 +103,6 @@ export function FormFileUpload({
           if (disabled) return;
 
           const selectedFiles = validateFiles(e.target.files, { maxSize, maxFiles, accept }).valid;
-
           if (selectedFiles.length > 0) {
             const newFiles = multiple ? [...fileArray, ...selectedFiles] : selectedFiles;
             field.onChange(multiple ? newFiles : newFiles[0]);
@@ -108,28 +125,33 @@ export function FormFileUpload({
             />
 
             <FormControl>
-              <div className="space-y-4 overflow-hidden">
+              <div className="space-y-4">
                 <DropZone
                   name={name}
-                  dragOver={dragOver}
                   disabled={disabled}
                   multiple={multiple}
                   maxFiles={maxFiles}
                   maxSize={maxSize}
                   accept={accept}
+                  icon={<FileImageIcon className="mx-auto h-12 w-12 text-muted-foreground mb-4" />}
+                  dragText={'Drag images here or'}
+                  selectText={'select images'}
+                  itemLabel={'image'}
+                  dragOver={dragOver}
                   onDragOver={handleDragOver}
                   onDragLeave={handleDragLeave}
                   onDrop={handleDrop}
                   onChange={handleFileChange}
                 />
 
-                {showPreview && (
-                  <FilePreview
+                {showImagePreview && (
+                  <ImagePreview
                     files={fileArray}
-                    allowDownload={allowDownload}
+                    previewUrls={previewUrls}
+                    previewSize={previewSize}
+                    multiple={multiple}
                     disabled={disabled}
                     onRemove={removeFile}
-                    onDownload={allowDownload ? downloadFile : undefined}
                   />
                 )}
               </div>

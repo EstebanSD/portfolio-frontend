@@ -18,6 +18,8 @@ interface ValidateFilesOptions {
   accept?: string; // MIME types
 }
 
+export type ImageSize = 'sm' | 'md' | 'lg';
+
 export function validateFiles(
   files: FileList | File[] | null,
   options: ValidateFilesOptions,
@@ -138,3 +140,25 @@ export function downloadFile(file: File): void {
     URL.revokeObjectURL(url);
   }
 }
+
+export const getPreviewSize = (previewSize: ImageSize) => {
+  switch (previewSize) {
+    case 'sm':
+      return 'h-20 w-20'; // 80px
+    case 'lg':
+      return 'h-40 w-40'; // 160px
+    default:
+      return 'h-28 w-28'; // 112px
+  }
+};
+
+export const getContainerSize = (previewSize: ImageSize) => {
+  switch (previewSize) {
+    case 'sm':
+      return 'min-h-[6rem]'; // 96px
+    case 'lg':
+      return 'min-h-[11rem]'; // 176px
+    default:
+      return 'min-h-[8rem]'; // 128px
+  }
+};

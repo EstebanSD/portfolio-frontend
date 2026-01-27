@@ -23,16 +23,3 @@ export function renderWithForm(
 
   return render(ui, { wrapper: Wrapper });
 }
-
-export function renderWrapper(
-  ui: React.ReactElement,
-  { defaultValues }: RenderWithFormOptions = {},
-) {
-  function Wrapper({ children }: { children: React.ReactNode }) {
-    const methods = useForm({ defaultValues });
-
-    return <FormProvider {...methods}>{children}</FormProvider>;
-  }
-
-  return render(ui, { wrapper: Wrapper });
-}

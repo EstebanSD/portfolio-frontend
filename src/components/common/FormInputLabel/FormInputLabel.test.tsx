@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import { renderWithForm } from '@/test/utils/renderWithForm';
+import { renderWithForm } from '@/test/utils';
 import { FormInputLabel } from './FormInputLabel';
 
 describe('<FormInputLabel /> (react-hook-form integration)', () => {

@@ -5,11 +5,11 @@ export * from './CustomCarousel';
 export * from './EmptyState';
 export * from './FormDatePicker';
 export * from './FormFileUpload';
+export * from './FormImageUpload';
 export * from './FormInput';
 export * from './FormInputLabel';
 
 export * from './SelectFilter';
-export * from './FormImageUpload';
 export * from './FormTagsInput';
 export * from './FormSelect';
 export * from './FormTextArea';

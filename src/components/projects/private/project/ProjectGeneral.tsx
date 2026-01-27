@@ -190,7 +190,6 @@ export function ProjectGeneral({ projectId, initialData = {} }: Props) {
             <FormImageUpload
               multiple
               maxFiles={5}
-              control={form.control}
               name="files"
               label="Project Images"
               accept="image/jpeg,image/png,image/webp"

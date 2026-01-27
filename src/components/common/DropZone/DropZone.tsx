@@ -1,29 +1,39 @@
+'use client';
+
 import { cn } from '@/lib/shadcn/utils';
 import { UploadIcon } from 'lucide-react';
 import { Button, Input } from '../../ui';
 
 interface DropZoneProps {
   name: string;
-  dragOver: boolean;
   disabled: boolean;
   multiple: boolean;
   maxFiles: number;
   maxSize: number;
   accept?: string;
-  onDragOver: (e: React.DragEvent) => void;
-  onDragLeave: (e: React.DragEvent) => void;
-  onDrop: (e: React.DragEvent) => void;
+  icon?: React.ReactNode;
+  dragText?: string;
+  selectText?: string;
+  itemLabel?: string;
+  dragOver: boolean;
+  onDragOver: (e: React.DragEvent<HTMLDivElement>) => void;
+  onDragLeave: (e: React.DragEvent<HTMLDivElement>) => void;
+  onDrop: (e: React.DragEvent<HTMLDivElement>) => void;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export function DropZone({
   name,
-  dragOver,
   disabled,
   multiple,
   maxFiles,
   maxSize,
   accept = '*/*',
+  icon = <UploadIcon className="mx-auto h-12 w-12 text-muted-foreground mb-4" />,
+  dragText = 'Drag files here or',
+  selectText = 'select files',
+  itemLabel = 'file',
+  dragOver,
   onDragOver,
   onDragLeave,
   onDrop,
@@ -43,10 +53,10 @@ export function DropZone({
       )}
     >
       <div className="text-center">
-        <UploadIcon className="mx-auto h-12 w-12 text-muted-foreground mb-4" />
+        {icon}
         <div className="space-y-2">
           <p className="text-sm text-muted-foreground space-x-1">
-            <span>Drag files here or</span>
+            <span>{dragText}</span>
             <Button
               type="button"
               variant="link"
@@ -54,12 +64,13 @@ export function DropZone({
               disabled={disabled}
               onClick={() => document.getElementById(inputId)?.click()}
             >
-              select files
+              {selectText}
             </Button>
           </p>
           {multiple ? (
             <p className="text-xs text-muted-foreground">
-              Max {maxFiles} file{maxFiles > 1 ? 's' : ''}, {maxSize}MB each
+              Max {maxFiles} {itemLabel}
+              {maxFiles > 1 ? 's' : ''}, {maxSize}MB each
             </p>
           ) : (
             <p className="text-xs text-muted-foreground">Max {maxSize}MB</p>

@@ -38,6 +38,7 @@ export function FilePreview({
           <div className="flex items-center gap-1">
             {allowDownload && onDownload && (
               <Button
+                data-testid={'download-file'}
                 aria-label="download-file"
                 type="button"
                 variant="ghost"
@@ -49,6 +50,7 @@ export function FilePreview({
               </Button>
             )}
             <Button
+              data-testid={'remove-file'}
               aria-label="remove-file"
               type="button"
               variant="ghost"

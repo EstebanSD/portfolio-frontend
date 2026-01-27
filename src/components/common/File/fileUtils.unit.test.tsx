@@ -2,6 +2,7 @@
 import React from 'react';
 import { FileAudioIcon, FileIcon, FileImageIcon, FileTextIcon, FileVideoIcon } from 'lucide-react';
 import { describe, test, expect, beforeEach, afterEach, vi } from 'vitest';
+import { createFile } from '@/test/utils';
 import {
   validateFiles,
   formatFileSize,
@@ -170,10 +171,8 @@ describe('fileUtils (unit)', () => {
   });
 
   describe('getFileIcon', () => {
-    const createFile = (type: string) => new File([''], 'test', { type });
-
     test('returns FileImageIcon for images', () => {
-      const file = createFile('image/png');
+      const file = createFile({ type: 'image/png' });
       const icon = getFileIcon(file);
 
       expect(React.isValidElement(icon)).toBe(true);
@@ -181,7 +180,7 @@ describe('fileUtils (unit)', () => {
     });
 
     test('returns FileVideoIcon for videos', () => {
-      const file = createFile('video/mp4');
+      const file = createFile({ type: 'video/mp4' });
       const icon = getFileIcon(file);
 
       expect(React.isValidElement(icon)).toBe(true);
@@ -189,7 +188,7 @@ describe('fileUtils (unit)', () => {
     });
 
     test('returns FileAudioIcon for audio', () => {
-      const file = createFile('audio/mp3');
+      const file = createFile({ type: 'audio/mp3' });
       const icon = getFileIcon(file);
 
       expect(React.isValidElement(icon)).toBe(true);
@@ -197,7 +196,7 @@ describe('fileUtils (unit)', () => {
     });
 
     test('returns FileTextIcon for PDFs', () => {
-      const file = createFile('application/pdf');
+      const file = createFile();
       const icon = getFileIcon(file);
 
       expect(React.isValidElement(icon)).toBe(true);
@@ -205,7 +204,7 @@ describe('fileUtils (unit)', () => {
     });
 
     test('returns FileTextIcon for text', () => {
-      const file = createFile('text/plain');
+      const file = createFile({ type: 'text/plain' });
       const icon = getFileIcon(file);
 
       expect(React.isValidElement(icon)).toBe(true);
@@ -213,7 +212,7 @@ describe('fileUtils (unit)', () => {
     });
 
     test('returns the default FileIcon for unknown types', () => {
-      const file = createFile('application/octet-stream');
+      const file = createFile({ type: 'application/octet-stream' });
       const icon = getFileIcon(file);
 
       expect(React.isValidElement(icon)).toBe(true);
