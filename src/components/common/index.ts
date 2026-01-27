@@ -8,6 +8,7 @@ export * from './FormFileUpload';
 export * from './FormImageUpload';
 export * from './FormInput';
 export * from './FormInputLabel';
+export * from './FormRadioGroup';
 
 export * from './SelectFilter';
 export * from './FormTagsInput';
@@ -20,4 +21,3 @@ export * from './SearchFilterInputControlled';
 export * from './SelectFilterBase';
 export * from './SelectFilterUrl';
 export * from './SelectFilterControlled';
-export * from './FormRadioGroup';

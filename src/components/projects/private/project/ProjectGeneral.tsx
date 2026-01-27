@@ -129,7 +129,6 @@ export function ProjectGeneral({ projectId, initialData = {} }: Props) {
             <div className="grid grid-cols-2 gap-6">
               <FormRadioGroup
                 required
-                control={form.control}
                 name={'type'}
                 label={'Type'}
                 options={[
@@ -141,7 +140,6 @@ export function ProjectGeneral({ projectId, initialData = {} }: Props) {
 
               <FormRadioGroup
                 required
-                control={form.control}
                 name={'status'}
                 label={'Status'}
                 options={[

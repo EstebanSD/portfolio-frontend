@@ -94,7 +94,6 @@ export function ProjectForm() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
               <FormRadioGroup
                 required
-                control={form.control}
                 name={'type'}
                 label={'Type'}
                 options={[
@@ -106,7 +105,6 @@ export function ProjectForm() {
 
               <FormRadioGroup
                 required
-                control={form.control}
                 name={'status'}
                 label={'Status'}
                 options={[
