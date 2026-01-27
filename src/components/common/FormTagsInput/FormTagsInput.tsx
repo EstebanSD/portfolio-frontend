@@ -1,14 +1,14 @@
 'use client';
 
 import { useState, useRef, KeyboardEvent } from 'react';
-import { Control, ControllerRenderProps, FieldValues, Path } from 'react-hook-form';
-import { AsteriskIcon, XIcon } from 'lucide-react';
-import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '../ui';
+import { ControllerRenderProps, useFormContext } from 'react-hook-form';
+import { XIcon } from 'lucide-react';
 import { cn } from '@/lib/shadcn/utils';
+import { FormControl, FormField, FormItem, FormMessage } from '../../ui';
+import { FormInputLabel } from '../FormInputLabel';
 
-type FormTagsInputProps<T extends FieldValues, K extends Path<T>> = {
-  control: Control<T>;
-  name: K;
+type FormTagsInputProps = {
+  name: string;
   label?: string;
   labelIcon?: React.ReactNode;
   required?: boolean;
@@ -17,8 +17,7 @@ type FormTagsInputProps<T extends FieldValues, K extends Path<T>> = {
   allowDuplicates?: boolean;
 };
 
-export function FormTagsInput<T extends FieldValues, K extends Path<T>>({
-  control,
+export function FormTagsInput({
   name,
   label,
   labelIcon,
@@ -26,19 +25,18 @@ export function FormTagsInput<T extends FieldValues, K extends Path<T>>({
   placeholder,
   disabled = false,
   allowDuplicates = false,
-}: FormTagsInputProps<T, K>) {
+}: FormTagsInputProps) {
+  const { control } = useFormContext();
   const inputRef = useRef<HTMLInputElement>(null);
   const [inputValue, setInputValue] = useState('');
 
-  const handleKeyDown = (
-    e: KeyboardEvent<HTMLInputElement>,
-    field: ControllerRenderProps<T, K>,
-  ) => {
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>, field: ControllerRenderProps) => {
     if (e.key === 'Enter' || e.key === ',') {
       e.preventDefault();
       const newTag = inputValue.trim();
 
       if (!newTag) return;
+      if (/[,\n\r]/.test(newTag)) return;
 
       const tags = Array.isArray(field.value) ? [...field.value] : [];
 
@@ -59,8 +57,8 @@ export function FormTagsInput<T extends FieldValues, K extends Path<T>>({
     }
   };
 
-  const removeTag = (tagToRemove: string, field: ControllerRenderProps<T, K>) => {
-    const updatedTags = field.value.filter((tag: string) => tag !== tagToRemove);
+  const removeTag = (indexToRemove: number, field: ControllerRenderProps) => {
+    const updatedTags = field.value.filter((_: string, index: number) => index !== indexToRemove);
     field.onChange(updatedTags);
   };
 
@@ -74,21 +72,17 @@ export function FormTagsInput<T extends FieldValues, K extends Path<T>>({
 
         return (
           <FormItem className="w-full">
-            {label && (
-              <FormLabel
-                htmlFor={name}
-                aria-required={required}
-                className="data-[error=true]:text-foreground"
-              >
-                {labelIcon && <span>{labelIcon}</span>}
-                <p className="m-0 text-sm font-medium flex items-center gap-1">
-                  {label}
-                  {required && <AsteriskIcon className="text-destructive w-3 h-3 mb-1" />}
-                </p>
-              </FormLabel>
-            )}
+            <FormInputLabel
+              htmlFor={name}
+              label={label}
+              labelIcon={labelIcon}
+              inputRequired={required}
+            />
             <FormControl>
               <div
+                role="group"
+                aria-labelledby={label ? `${name}-label` : undefined}
+                aria-describedby={`${name}-description`}
                 className={cn(
                   'flex min-h-9 w-full flex-wrap items-center gap-2 rounded-md border border-input bg-transparent dark:bg-input/30 px-3 py-1 text-sm shadow-xs transition-colors placeholder:text-muted-foreground ',
                   'focus-within:border-ring focus-within:ring-ring/50 focus-within:ring-[3px]',
@@ -104,11 +98,12 @@ export function FormTagsInput<T extends FieldValues, K extends Path<T>>({
                       <span>{tag}</span>
                       <button
                         type="button"
-                        onClick={() => removeTag(tag, field)}
+                        onClick={() => removeTag(index, field)}
                         className="hover:text-destructive"
                         disabled={disabled}
+                        aria-label={`Remove ${tag} tag`}
                       >
-                        <XIcon className="h-3.5 w-3.5" />
+                        <XIcon className="h-3.5 w-3.5" aria-hidden="true" />
                       </button>
                     </div>
                   ))}

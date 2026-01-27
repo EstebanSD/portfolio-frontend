@@ -10,9 +10,9 @@ export * from './FormInput';
 export * from './FormInputLabel';
 export * from './FormRadioGroup';
 export * from './FormSelect';
+export * from './FormTagsInput';
 
 export * from './SelectFilter';
-export * from './FormTagsInput';
 export * from './FormTextArea';
 export * from './Spinner';
 export * from './SearchInputBase';
