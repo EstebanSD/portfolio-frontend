@@ -12,7 +12,9 @@ const OPTIONS: RadioOption[] = [
 
 describe('<FormRadioGroup /> (integration)', () => {
   test('renders the group label and radio options', () => {
-    renderWithForm(<FormRadioGroup name="gender" label="Gender" options={OPTIONS} />);
+    renderWithForm(<FormRadioGroup name="gender" label="Gender" options={OPTIONS} />, {
+      defaultValues: { gender: '' },
+    });
 
     expect(screen.getByText('Gender')).toBeInTheDocument();
     expect(screen.getByLabelText('Male')).toBeInTheDocument();
@@ -22,7 +24,9 @@ describe('<FormRadioGroup /> (integration)', () => {
   test('allows the user to select a radio option', async () => {
     const user = userEvent.setup();
 
-    renderWithForm(<FormRadioGroup name="gender" label="Gender" options={OPTIONS} />);
+    renderWithForm(<FormRadioGroup name="gender" label="Gender" options={OPTIONS} />, {
+      defaultValues: { gender: '' },
+    });
 
     await user.click(screen.getByLabelText('Male'));
 
@@ -32,7 +36,9 @@ describe('<FormRadioGroup /> (integration)', () => {
   test('updates the selection when another option is chosen', async () => {
     const user = userEvent.setup();
 
-    renderWithForm(<FormRadioGroup name="gender" label="Gender" options={OPTIONS} />);
+    renderWithForm(<FormRadioGroup name="gender" label="Gender" options={OPTIONS} />, {
+      defaultValues: { gender: '' },
+    });
 
     await user.click(screen.getByLabelText('Male'));
     await user.click(screen.getByLabelText('Female'));

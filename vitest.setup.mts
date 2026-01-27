@@ -37,3 +37,17 @@ class IntersectionObserverMock {
   thresholds: number[] = [];
 }
 global.IntersectionObserver = IntersectionObserverMock as any;
+
+// Radix UI + JSDOM pointer events fix
+if (!Element.prototype.hasPointerCapture) {
+  Element.prototype.hasPointerCapture = () => false;
+}
+if (!Element.prototype.setPointerCapture) {
+  Element.prototype.setPointerCapture = () => {};
+}
+if (!Element.prototype.releasePointerCapture) {
+  Element.prototype.releasePointerCapture = () => {};
+}
+if (!Element.prototype.scrollIntoView) {
+  Element.prototype.scrollIntoView = () => {};
+}

@@ -60,7 +60,6 @@ export function AddTranslationProjectForm({ projectId, cancelNew, locales, sessi
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
             <FormSelect
               required
-              control={form.control}
               name="locale"
               label={'Language'}
               labelIcon={<GlobeIcon className="w-4 h-4" />}

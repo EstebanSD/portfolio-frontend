@@ -17,13 +17,11 @@ export function FormInputLabel({ htmlFor, label, labelIcon, inputRequired }: For
     <FormLabel
       htmlFor={htmlFor}
       aria-required={inputRequired || undefined}
-      className="data-[error=true]:text-foreground"
+      className="flex items-center gap-1 data-[error=true]:text-foreground"
     >
       {labelIcon && <span>{labelIcon}</span>}
-      <p className="m-0 text-sm font-medium flex items-center gap-1">
-        {label}
-        {inputRequired && <AsteriskIcon className="text-destructive w-3 h-3 mb-1" />}
-      </p>
+      <span>{label}</span>
+      {inputRequired && <AsteriskIcon className="text-destructive w-3 h-3" />}
     </FormLabel>
   );
 }

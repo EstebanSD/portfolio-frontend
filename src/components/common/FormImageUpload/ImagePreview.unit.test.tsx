@@ -7,8 +7,8 @@ import { ImagePreview } from './ImagePreview';
 
 vi.mock('next/image', () => ({
   __esModule: true,
-  // eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text
-  default: (props: any) => <img {...props} />,
+  // eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text, @typescript-eslint/no-unused-vars
+  default: ({ fill, ...props }: any) => <img {...props} />,
 }));
 
 describe('<ImagePreview /> (unit)', () => {
