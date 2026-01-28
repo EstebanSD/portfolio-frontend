@@ -79,9 +79,8 @@ export function DropZone({
       </div>
 
       <Input
-        name={name}
+        id={name}
         data-testid={inputId}
-        id={inputId}
         type="file"
         accept={accept}
         multiple={multiple}

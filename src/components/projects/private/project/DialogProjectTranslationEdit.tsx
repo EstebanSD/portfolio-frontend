@@ -97,7 +97,6 @@ export function DialogProjectTranslationEdit({
 
         <FormTextArea
           required
-          control={form.control}
           name="description"
           label={'Description'}
           labelIcon={<FileTextIcon className="w-4 h-4" />}

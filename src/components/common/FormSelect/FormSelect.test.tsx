@@ -27,7 +27,9 @@ describe('<FormSelect /> (integration)', () => {
   test('allows the user to select an option', async () => {
     const user = userEvent.setup();
 
-    renderWithForm(<FormSelect name="country" label="Country" options={OPTIONS} />);
+    renderWithForm(<FormSelect name="country" label="Country" options={OPTIONS} />, {
+      defaultValues: { country: 'br' },
+    });
 
     const trigger = screen.getByRole('combobox');
 

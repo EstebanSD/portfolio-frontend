@@ -125,7 +125,6 @@ export function AboutGeneralForm({ initialData = {} }: Props) {
             />
 
             <FormTagsInput
-              control={form.control}
               name="positioningTags"
               label="Tags"
               labelIcon={<TagIcon className="h-4 w-4" />}

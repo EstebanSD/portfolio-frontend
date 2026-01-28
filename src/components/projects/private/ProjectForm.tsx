@@ -132,7 +132,6 @@ export function ProjectForm() {
             </div>
 
             <FormTagsInput
-              control={form.control}
               name="technologies"
               label="Technologies"
               placeholder="Type and press Enter or comma"
