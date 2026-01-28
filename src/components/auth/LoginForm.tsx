@@ -43,7 +43,6 @@ export function LoginForm() {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         <FormInput
-          control={form.control}
           name="email"
           label={'Email'}
           placeholder="example@example.com"
@@ -52,8 +51,6 @@ export function LoginForm() {
         />
 
         <FormInput
-          showIconPassword
-          control={form.control}
           name="password"
           label={'Password'}
           type="password"

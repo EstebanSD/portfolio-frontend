@@ -2,7 +2,7 @@ import { Suspense } from 'react';
 import Link from 'next/link';
 import { ChevronsDownIcon } from 'lucide-react';
 
-import { serverTranslation } from '@/lib/i18n';
+import { serverTranslation } from '@/lib/i18n/server';
 import { PublicProjects, PublicProjectsSkeleton } from '@/components/projects';
 import { PublicAbout, PublicAboutSkeleton } from '@/components/about';
 import { PublicSkills, PublicSkillsSkeleton } from '@/components/skills';

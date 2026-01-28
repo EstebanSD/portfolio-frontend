@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { FolderXIcon, PlusIcon } from 'lucide-react';
 import { useSession } from 'next-auth/react';
-import { AboutTranslation } from '@/types';
+import { AboutTranslation } from '@/types-portfolio/about';
 import { getAvailableLocales } from '@/utils';
 import { Button, Card, CardContent } from '@/components/ui';
 import { AddTranslationAboutForm } from './AddTranslationAboutForm';

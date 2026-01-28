@@ -32,9 +32,9 @@ import {
   Form,
   SheetClose,
 } from '@/components/ui';
-import { useIsMobile } from '@/hooks';
-import { AboutTranslation } from '@/types';
+import { useIsMobile } from '@/hooks/useIsMobile';
 import { FormFileUpload, FormInput, FormTextArea, Spinner } from '@/components/common';
+import { AboutTranslation } from '@/types-portfolio/about';
 
 const translationFormSchema = z.object({
   locale: z.string().nonempty('This field is required.'),
@@ -97,7 +97,6 @@ export function DialogAboutTranslationEdit({
         <FormInput
           disabled
           required
-          control={form.control}
           name="locale"
           label={'Language'}
           labelIcon={<GlobeIcon className="w-4 h-4" />}
@@ -105,7 +104,6 @@ export function DialogAboutTranslationEdit({
 
         <FormInput
           required
-          control={form.control}
           name="title"
           label={'Title'}
           labelIcon={<BriefcaseIcon className="w-4 h-4" />}
@@ -113,7 +111,6 @@ export function DialogAboutTranslationEdit({
         />
 
         <FormInput
-          control={form.control}
           name="tagline"
           label={'Tagline (Optional)'}
           labelIcon={<MessageSquareDashedIcon className="w-4 h-4" />}
@@ -122,7 +119,6 @@ export function DialogAboutTranslationEdit({
 
         <FormTextArea
           required
-          control={form.control}
           name={'bio'}
           label={'Biography'}
           labelIcon={<FileTextIcon className="w-4 h-4" />}
@@ -132,14 +128,12 @@ export function DialogAboutTranslationEdit({
         />
 
         <FormFileUpload
-          control={form.control}
           name="cv"
           label={'Curriculum Vitae'}
           labelIcon={<FileIcon className="h-4 w-4" />}
-          accept=".pdf,.doc,.docx"
+          accept="application/*"
           maxSize={5}
           showPreview={true}
-          allowDownload={true}
         />
       </form>
     </Form>

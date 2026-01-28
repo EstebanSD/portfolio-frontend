@@ -20,7 +20,7 @@
       "typeLabelFreelance": "Freelance",
       "statusLabelCompleted": "Completed",
       "statusLabelInProgress": "In Progress",
-      "statusLabePaused": "Paused",
+      "statusLabelPaused": "Paused",
       "cleanFilters": "Clean filters"
     },
     "projects": {

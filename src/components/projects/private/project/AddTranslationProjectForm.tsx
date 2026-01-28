@@ -60,7 +60,6 @@ export function AddTranslationProjectForm({ projectId, cancelNew, locales, sessi
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
             <FormSelect
               required
-              control={form.control}
               name="locale"
               label={'Language'}
               labelIcon={<GlobeIcon className="w-4 h-4" />}
@@ -69,7 +68,6 @@ export function AddTranslationProjectForm({ projectId, cancelNew, locales, sessi
 
             <FormInput
               required
-              control={form.control}
               name="summary"
               label={'Summary'}
               labelIcon={<BriefcaseIcon className="w-4 h-4" />}
@@ -78,7 +76,6 @@ export function AddTranslationProjectForm({ projectId, cancelNew, locales, sessi
 
             <FormTextArea
               required
-              control={form.control}
               name="description"
               label={'Description'}
               labelIcon={<FileTextIcon className="w-4 h-4" />}
@@ -93,7 +90,7 @@ export function AddTranslationProjectForm({ projectId, cancelNew, locales, sessi
                   loading={isPending}
                   text={'Save Translation'}
                   loadingText={'Saving...'}
-                  icon={<SaveIcon className="h-4 w-4" />}
+                  icon={<SaveIcon className="h-4 w-4" aria-hidden="true" />}
                 />
               </Button>
               <Button variant="outline" onClick={cancelNew}>

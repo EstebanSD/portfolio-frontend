@@ -23,17 +23,30 @@
       }
     ],
     "paths": {
-      "@/*": [
-        "./src/*"
-      ]
-    }
+      "@/actions/*":["./src/actions/*"],
+      "@/components/*":["./src/components/*"],
+      "@/constants/*":["./src/constants/*"],
+      "@/hooks/*":["./src/hooks/*"],
+      "@/lib/*":["./src/lib/*"],
+      "@/types":["./src/types/index.ts"],
+      "@/types-portfolio/*":["./src/types/portfolio/*"],
+      "@/styles/*":["./src/styles/*"],
+      "@/test/*":["./src/test/*"],
+      "@/utils":["./src/utils/index.ts"],
+      "@/auth":["./src/auth.ts"]
+    },
+    "types": [
+      "vitest/globals", 
+      "@testing-library/jest-dom"
+    ]
   },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    ".next/dev/types/**/*.ts"
+    ".next/dev/types/**/*.ts", 
+    "vitest.config.mts"
   ],
   "exclude": [
     "node_modules"

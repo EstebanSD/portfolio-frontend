@@ -1,4 +1,4 @@
-import { serverTranslation } from '@/lib/i18n';
+import { serverTranslation } from '@/lib/i18n/server';
 import {
   Card,
   CardContent,

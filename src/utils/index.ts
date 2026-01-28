@@ -1,7 +1,7 @@
-export * from './getMonthYearDate';
-export * from './getStatusColor';
-export * from './getTypeColor';
-export * from './getTypeIcon';
-export * from './formatDate';
-export * from './getInitials';
-export * from './getAvailableLocales';
+export { formatDate } from './formatDate';
+export { getAvailableLocales } from './getAvailableLocales';
+export { getInitials } from './getInitials';
+export { getMonthYearDate } from './getMonthYearDate';
+export { getStatusColor } from './getStatusColor';
+export { getTypeColor } from './getTypeColor';
+export { getTypeIcon } from './getTypeIcon';

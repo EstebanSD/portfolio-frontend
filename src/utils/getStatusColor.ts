@@ -1,4 +1,4 @@
-import { ProjectStatus } from '@/types';
+import { ProjectStatus } from '@/types-portfolio/project';
 
 export const getStatusColor = (status: ProjectStatus) => {
   switch (status) {

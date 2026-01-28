@@ -1,4 +1,4 @@
-import { ProjectType } from '@/types';
+import { ProjectType } from '@/types-portfolio/project';
 
 export const getTypeColor = (type: ProjectType) => {
   switch (type) {

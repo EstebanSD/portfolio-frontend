@@ -8,7 +8,7 @@ export const EXPERIENCE_TYPE_ENUM = [
   'contract',
 ] as const;
 
-export type ExperienceType = (typeof EXPERIENCE_TYPE_ENUM)[number];
+type ExperienceType = (typeof EXPERIENCE_TYPE_ENUM)[number];
 
 export interface Experience {
   _id: string;

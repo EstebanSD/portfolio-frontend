@@ -1,4 +1,4 @@
-import { serverTranslation } from '@/lib/i18n';
+import { serverTranslation } from '@/lib/i18n/server';
 import { Card, CardContent, CardHeader, Skeleton } from '../ui';
 
 export async function PublicSkillsSkeleton({ lng }: { lng: string }) {

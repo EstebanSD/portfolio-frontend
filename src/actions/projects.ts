@@ -2,7 +2,11 @@
 
 import { auth } from '@/auth';
 import { revalidateTag } from 'next/cache';
-import { ProjectIdWithTranslations, ProjectTranslation, ProjectWithTranslations } from '@/types';
+import {
+  ProjectIdWithTranslations,
+  ProjectTranslation,
+  ProjectWithTranslations,
+} from '@/types-portfolio/project';
 import { ProjectFormValues } from '@/lib/validations';
 import { ZodError } from 'zod';
 

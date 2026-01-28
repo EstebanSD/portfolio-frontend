@@ -1,6 +1,6 @@
 'use client';
 
-import { useScrollToTop } from '@/hooks';
+import { useScrollToTop } from '@/hooks/useScrollToTop';
 import { Button } from '../ui';
 import { cn } from '@/lib/shadcn/utils';
 import { ArrowUpIcon } from 'lucide-react';

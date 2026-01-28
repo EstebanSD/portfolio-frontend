@@ -101,7 +101,6 @@ export function AboutGeneralForm({ initialData = {} }: Props) {
             className="grid grid-cols-1 lg:grid-cols-2 gap-6"
           >
             <FormInput
-              control={form.control}
               name="fullName"
               label={'Full Name'}
               labelIcon={<UserIcon className="w-4 h-4" />}
@@ -110,7 +109,6 @@ export function AboutGeneralForm({ initialData = {} }: Props) {
             />
 
             <FormInput
-              control={form.control}
               name="birthYear"
               label={'Birth Year'}
               labelIcon={<CalendarIcon className="w-4 h-4" />}
@@ -119,7 +117,6 @@ export function AboutGeneralForm({ initialData = {} }: Props) {
             />
 
             <FormInput
-              control={form.control}
               name="location"
               label={'Location'}
               labelIcon={<MapPinIcon className="w-4 h-4" />}
@@ -128,7 +125,6 @@ export function AboutGeneralForm({ initialData = {} }: Props) {
             />
 
             <FormTagsInput
-              control={form.control}
               name="positioningTags"
               label="Tags"
               labelIcon={<TagIcon className="h-4 w-4" />}
@@ -136,7 +132,6 @@ export function AboutGeneralForm({ initialData = {} }: Props) {
             />
 
             <FormImageUpload
-              control={form.control}
               name="image"
               label="Profile Image"
               labelIcon={<ImageIcon className="h-4 w-4" />}

@@ -109,6 +109,7 @@ export function ProjectGeneral({ projectId, initialData = {} }: Props) {
       });
     }
   }, [initialData, form]);
+
   return (
     <Card>
       <CardHeader>
@@ -123,18 +124,11 @@ export function ProjectGeneral({ projectId, initialData = {} }: Props) {
             onSubmit={form.handleSubmit(onSubmit)}
             className="grid grid-cols-1 lg:grid-cols-2 gap-6"
           >
-            <FormInput
-              required
-              control={form.control}
-              name="title"
-              label={'Title'}
-              placeholder="Project Title"
-            />
+            <FormInput required name="title" label={'Title'} placeholder="Project Title" />
 
             <div className="grid grid-cols-2 gap-6">
               <FormRadioGroup
                 required
-                control={form.control}
                 name={'type'}
                 label={'Type'}
                 options={[
@@ -146,7 +140,6 @@ export function ProjectGeneral({ projectId, initialData = {} }: Props) {
 
               <FormRadioGroup
                 required
-                control={form.control}
                 name={'status'}
                 label={'Status'}
                 options={[
@@ -156,41 +149,36 @@ export function ProjectGeneral({ projectId, initialData = {} }: Props) {
                 ]}
               />
             </div>
-            <div className="grid grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <FormDatePicker
                 required={watchedStatus === 'completed'}
-                control={form.control}
                 name="startDate"
                 label="Start Date"
                 placeholder="Select a Start Date"
-                startMonth={2000}
+                fromYear={2000}
               />
 
               <FormDatePicker
                 required={watchedStatus === 'completed'}
-                control={form.control}
                 name="endDate"
                 label="End Date"
                 placeholder="Select a End Date"
-                startMonth={2000}
+                fromYear={2000}
               />
             </div>
             <FormTagsInput
-              control={form.control}
               name="technologies"
               label="Technologies"
               placeholder="Type and press Enter or comma"
             />
 
             <FormInput
-              control={form.control}
               name={'links.github'}
               label={'GitHub'}
               placeholder="https://github.com/user/repo"
             />
 
             <FormInput
-              control={form.control}
               name={'links.website'}
               label={'Web Site'}
               placeholder="https://myproject.com"
@@ -199,7 +187,6 @@ export function ProjectGeneral({ projectId, initialData = {} }: Props) {
             <FormImageUpload
               multiple
               maxFiles={5}
-              control={form.control}
               name="files"
               label="Project Images"
               accept="image/jpeg,image/png,image/webp"

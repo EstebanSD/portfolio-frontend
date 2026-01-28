@@ -1,7 +1,7 @@
 import NextAuth from 'next-auth';
 import type { NextAuthConfig } from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
-import { MINUTE } from './lib/common';
+import { MINUTE } from './constants/times';
 import { JWT } from 'next-auth/jwt';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000/api';

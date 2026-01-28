@@ -2,8 +2,10 @@
 
 import { SearchIcon, HomeIcon, ArrowLeftIcon, FileQuestionIcon } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { ButtonRouter } from '@/components/common';
+import { ButtonBack } from '@/components/common';
 import { useTranslation } from '@/lib/i18n/client';
+import { Button } from '../ui';
+import Link from 'next/link';
 
 export default function NotFound({ lng }: { lng: string }) {
   const { t } = useTranslation(lng, 'not-found');
@@ -50,71 +52,23 @@ export default function NotFound({ lng }: { lng: string }) {
           </ul>
         </div>
 
-        {/* TODO */}
-        {/* <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4 border border-blue-200 dark:border-blue-800">
-          <h4 className="font-semibold text-blue-900 dark:text-blue-100 mb-2">
-            Páginas populares:
-          </h4>
-          <div className="space-y-1 text-sm">
-            <button
-              onClick={() => (window.location.href = '/')}
-              className="block w-full text-left text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200 transition-colors"
-            >
-              → Página Principal
-            </button>
-            <button
-              onClick={() => (window.location.href = '/about')}
-              className="block w-full text-left text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200 transition-colors"
-            >
-              → Sobre Mí
-            </button>
-            <button
-              onClick={() => (window.location.href = '/projects')}
-              className="block w-full text-left text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200 transition-colors"
-            >
-              → Proyectos
-            </button>
-            <button
-              onClick={() => (window.location.href = '/contact')}
-              className="block w-full text-left text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200 transition-colors"
-            >
-              → Contacto
-            </button>
-          </div>
-        </div> */}
+        {/* TODO Páginas populares (GitLens) */}
 
         <div className="space-y-3">
-          <ButtonRouter action="back" className="w-full" size={'lg'}>
+          <ButtonBack fallbackHref="/" className="w-full" size={'lg'}>
             <ArrowLeftIcon className="w-5 h-5 mr-2" />
             {t('buttonBack')}
-          </ButtonRouter>
+          </ButtonBack>
 
-          <ButtonRouter
-            action="push"
-            href="/"
-            size={'lg'}
-            className="w-full bg-gray-600 hover:bg-gray-700"
-          >
-            <HomeIcon className="w-5 h-5 mr-2" />
-            {t('buttonHome')}
-          </ButtonRouter>
+          <Button asChild className="w-full bg-gray-600 hover:bg-gray-700" size={'lg'}>
+            <Link href="/">
+              <HomeIcon className="w-5 h-5 mr-2" />
+              {t('buttonHome')}
+            </Link>
+          </Button>
         </div>
 
-        {/* TODO */}
-        {/* <div className="text-center pt-6 border-t border-gray-200 dark:border-gray-700">
-          <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">
-            ¿El enlace debería funcionar?
-          </p>
-          <button
-            onClick={() =>
-              (window.location.href = 'mailto:tu-email@ejemplo.com?subject=Enlace roto - 404')
-            }
-            className="inline-flex items-center text-sm text-orange-600 hover:text-orange-700 dark:text-orange-400 dark:hover:text-orange-300 transition-colors duration-200"
-          >
-            <Mail className="w-4 h-4 mr-1" />
-            Reportar Enlace Roto
-          </button>
-        </div> */}
+        {/* TODO El enlace debería funcionar? (GitLens) */}
       </div>
     </div>
   );
