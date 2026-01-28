@@ -3,7 +3,7 @@
 import { useCallback } from 'react';
 import { XIcon } from 'lucide-react';
 import { Button } from '@/components/ui';
-import { SearchInputControlled, SelectFilterControlled } from '@/components/common';
+import { SearchInputControlled, SelectFilter } from '@/components/common';
 import { ProjectStatus, ProjectType, RequiredProjectFilters } from '@/types-portfolio/project';
 
 const TYPE_OPTIONS: { label: string; value: ProjectType | 'all' }[] = [
@@ -44,8 +44,8 @@ export function ProjectsToolbar({ filters, setFilters }: Props) {
           className="flex-1 min-w-full md:min-w-[100px]"
         />
 
-        <SelectFilterControlled
-          paramKey={'type'}
+        <SelectFilter
+          id={'type'}
           label={'Type'}
           placeholder={'Select a type...'}
           options={TYPE_OPTIONS}
@@ -54,8 +54,8 @@ export function ProjectsToolbar({ filters, setFilters }: Props) {
           className="min-w-[100px]"
         />
 
-        <SelectFilterControlled
-          paramKey={'status'}
+        <SelectFilter
+          id={'status'}
           label={'Status'}
           placeholder={'Select a status...'}
           options={STATUS_OPTIONS}

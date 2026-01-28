@@ -1,40 +1,39 @@
 'use client';
 
 import { cn } from '@/lib/shadcn/utils';
-import { Option } from '@/types';
-import { Label, Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui';
-import { useUrlParams } from '@/hooks/useUrlParams';
+import { Label, Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../ui';
 
-interface Props {
-  paramKey: string;
+interface Option<T extends string> {
+  value: T;
   label: string;
-  placeholder: string;
-  options: Option[];
-  initialValue?: string;
-  basePath: string;
-  className?: string;
 }
 
-export function SelectFilter({
-  paramKey,
+interface SelectFilterProps<T extends string> {
+  id: string;
+  label: string;
+  placeholder: string;
+  options: readonly Option<T>[];
+  className?: string;
+  value: T;
+  onValueChange: (value: T) => void;
+}
+
+export function SelectFilter<T extends string>({
+  id,
   label,
   placeholder,
   options,
-  initialValue = 'all',
-  basePath,
   className,
-}: Props) {
-  const { value, setValue } = useUrlParams(paramKey, {
-    basePath,
-    defaultValue: initialValue,
-  });
+  value,
+  onValueChange,
+}: SelectFilterProps<T>) {
   return (
     <div className={cn('w-fit', className)}>
-      <Label htmlFor={paramKey}>{label}</Label>
-      <Select onValueChange={setValue} value={value}>
+      <Label htmlFor={id}>{label}</Label>
+      <Select onValueChange={onValueChange} value={value}>
         <SelectTrigger
-          id={paramKey}
-          name={paramKey}
+          id={id}
+          name={id}
           className="w-full mt-1 bg-background dark:hover:bg-gray-800"
         >
           <SelectValue placeholder={placeholder} />

@@ -15,9 +15,6 @@ export * from './FormTextArea';
 export * from './SearchInput';
 export * from './SearchInputControlled';
 export * from './SearchInputFromUrl';
-export * from './Spinner';
-
 export * from './SelectFilter';
-export * from './SelectFilterBase';
-export * from './SelectFilterUrl';
-export * from './SelectFilterControlled';
+export * from './SelectFilterFromUrl';
+export * from './Spinner';
