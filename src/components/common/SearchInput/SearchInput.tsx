@@ -1,36 +1,38 @@
 'use client';
 
 import { cn } from '@/lib/shadcn/utils';
-import { Input, Label } from '../ui';
+import { Input, Label } from '../../ui';
 import { SearchIcon } from 'lucide-react';
 
-export interface SearchInputBaseProps {
-  paramKey: string;
+interface SearchInputProps {
+  id: string;
   label: string;
   placeholder: string;
+  value: string;
+  onChange: (value: string) => void;
   className?: string;
 }
 
-export function SearchInputBase({
-  paramKey,
+export function SearchInput({
+  id,
   label,
   placeholder,
   className,
   value,
   onChange,
-}: SearchInputBaseProps & { value: string; onChange: (value: string) => void }) {
+}: SearchInputProps) {
   return (
     <div className={cn('w-full', className)}>
-      <Label htmlFor={paramKey}>{label}</Label>
+      <Label htmlFor={id}>{label}</Label>
       <div className="relative mt-1">
         <SearchIcon
           className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4"
           aria-hidden="true"
         />
         <Input
-          id={paramKey}
+          id={id}
           type="search"
-          name={paramKey}
+          name={id}
           value={value}
           onChange={(e) => onChange(e.target.value)}
           placeholder={placeholder}

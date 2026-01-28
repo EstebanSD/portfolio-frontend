@@ -1,3 +1,5 @@
+'use client';
+
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useCallback, useEffect, useState } from 'react';
 
@@ -20,7 +22,8 @@ export function useUrlParams(paramKey: string, options: UseUrlParamsOptions) {
     if (urlValue !== localValue) {
       setLocalValue(urlValue);
     }
-  }, [urlValue, localValue]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [urlValue]);
 
   const updateUrl = useCallback(
     (value: string) => {

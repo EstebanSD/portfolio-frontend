@@ -12,12 +12,12 @@ export * from './FormRadioGroup';
 export * from './FormSelect';
 export * from './FormTagsInput';
 export * from './FormTextArea';
+export * from './SearchInput';
+export * from './SearchInputControlled';
+export * from './SearchInputFromUrl';
 export * from './Spinner';
 
 export * from './SelectFilter';
-export * from './SearchInputBase';
-export * from './SearchFilterInputUrl';
-export * from './SearchFilterInputControlled';
 export * from './SelectFilterBase';
 export * from './SelectFilterUrl';
 export * from './SelectFilterControlled';

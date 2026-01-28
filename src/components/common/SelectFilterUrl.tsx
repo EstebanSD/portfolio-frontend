@@ -1,6 +1,6 @@
 'use client';
 
-import { useUrlParams } from '@/hooks/use-url-params';
+import { useUrlParams } from '@/hooks/useUrlParams';
 import { SelectFilterBase, SelectFilterBaseProps } from './SelectFilterBase';
 
 interface SelectFilterUrlProps<T extends string> extends Omit<

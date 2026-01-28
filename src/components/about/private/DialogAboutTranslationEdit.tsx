@@ -32,7 +32,7 @@ import {
   Form,
   SheetClose,
 } from '@/components/ui';
-import { useIsMobile } from '@/hooks/use-mobile';
+import { useIsMobile } from '@/hooks/useIsMobile';
 import { FormFileUpload, FormInput, FormTextArea, Spinner } from '@/components/common';
 import { AboutTranslation } from '@/types-portfolio/about';
 

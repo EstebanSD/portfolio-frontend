@@ -1,15 +1,19 @@
 'use client';
 
-import { useUrlParams } from '@/hooks/use-url-params';
-import { SearchInputBase, SearchInputBaseProps } from './SearchInputBase';
+import { useUrlParams } from '@/hooks/useUrlParams';
+import { SearchInput } from '../SearchInput';
 
-interface UrlModeProps extends SearchInputBaseProps {
+interface SearchInputFromUrlProps {
+  paramKey: string;
+  label: string;
+  placeholder: string;
+  className?: string;
   basePath: string;
   debounceMs?: number;
   defaultValue?: string;
 }
 
-export function SearchFilterInputUrl({
+export function SearchInputFromUrl({
   paramKey,
   label,
   placeholder,
@@ -17,7 +21,7 @@ export function SearchFilterInputUrl({
   basePath,
   debounceMs = 600,
   defaultValue,
-}: UrlModeProps) {
+}: SearchInputFromUrlProps) {
   const { value, setValue } = useUrlParams(paramKey, {
     basePath,
     debounceMs,
@@ -25,8 +29,8 @@ export function SearchFilterInputUrl({
   });
 
   return (
-    <SearchInputBase
-      paramKey={paramKey}
+    <SearchInput
+      id={paramKey}
       label={label}
       placeholder={placeholder}
       className={className}

@@ -1,23 +1,27 @@
 'use client';
 
-import { SearchInputBase, SearchInputBaseProps } from './SearchInputBase';
+import { SearchInput } from '../SearchInput';
 
-interface ControlledModeProps extends SearchInputBaseProps {
+interface SearchInputControlledProps {
+  paramKey: string;
+  label: string;
+  placeholder: string;
   value: string;
   onChange: (value: string) => void;
+  className?: string;
 }
 
-export function SearchFilterInputControlled({
+export function SearchInputControlled({
   paramKey,
   label,
   placeholder,
   className,
   value,
   onChange,
-}: ControlledModeProps) {
+}: SearchInputControlledProps) {
   return (
-    <SearchInputBase
-      paramKey={paramKey}
+    <SearchInput
+      id={paramKey}
       label={label}
       placeholder={placeholder}
       className={className}

@@ -4,7 +4,7 @@ import { useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { XIcon } from 'lucide-react';
 import { Button, Card, CardContent } from '../ui';
-import { SearchFilterInputUrl, SelectFilterUrl } from '../common';
+import { SearchInputFromUrl, SelectFilterUrl } from '../common';
 import { ProjectQueryFilters, ProjectStatus, ProjectType } from '@/types-portfolio/project';
 import { useTranslation } from '@/lib/i18n/client';
 
@@ -62,7 +62,7 @@ export function ProjectFilters({ lng, currentFilters }: ProjectFiltersProps) {
               options={STATUS_OPTIONS}
             />
 
-            <SearchFilterInputUrl
+            <SearchInputFromUrl
               paramKey="title"
               label={t('page.filter.search')}
               placeholder={t('page.filter.searchPlaceholder')}

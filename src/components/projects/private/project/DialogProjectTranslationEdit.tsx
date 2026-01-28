@@ -25,7 +25,7 @@ import {
   Form,
   SheetClose,
 } from '@/components/ui';
-import { useIsMobile } from '@/hooks/use-mobile';
+import { useIsMobile } from '@/hooks/useIsMobile';
 import { ProjectTranslation } from '@/types-portfolio/project';
 import { FormInput, FormTextArea, Spinner } from '@/components/common';
 

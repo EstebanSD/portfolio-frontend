@@ -1,0 +1,1 @@
+export { SearchInputFromUrl } from './SearchInputFromUrl';

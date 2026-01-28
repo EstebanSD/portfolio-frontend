@@ -39,7 +39,7 @@ export function ProjectList({ lng, filters }: Props) {
   const { t } = use(serverTranslation(lng, 'projects'));
   const projects: Project[] = use(getProjects(lng, filters));
 
-  if (projects.length !== 0) {
+  if (projects.length === 0) {
     return (
       <EmptyStatePage
         title={t('page.projects.emptyTitle')}
