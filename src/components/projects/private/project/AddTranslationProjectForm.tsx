@@ -90,7 +90,7 @@ export function AddTranslationProjectForm({ projectId, cancelNew, locales, sessi
                   loading={isPending}
                   text={'Save Translation'}
                   loadingText={'Saving...'}
-                  icon={<SaveIcon className="h-4 w-4" />}
+                  icon={<SaveIcon className="h-4 w-4" aria-hidden="true" />}
                 />
               </Button>
               <Button variant="outline" onClick={cancelNew}>
