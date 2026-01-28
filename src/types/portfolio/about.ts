@@ -1,6 +1,6 @@
 import { FileMetadata } from './image';
 
-export interface AboutGeneral {
+interface AboutGeneral {
   _id: string;
   fullName: string;
   birthYear?: number;

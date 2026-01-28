@@ -1,4 +1,4 @@
-import { Language } from '../common';
+import { Language } from '@/lib/i18n';
 import { FileMetadata } from './image';
 
 export const PROJECT_STATUSES = ['in_progress', 'completed', 'paused'] as const;

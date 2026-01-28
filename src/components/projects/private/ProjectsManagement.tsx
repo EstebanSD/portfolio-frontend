@@ -6,7 +6,7 @@ import { CalendarIcon, CheckCircleIcon, ClockIcon, FolderOpenIcon } from 'lucide
 import { ProjectsToolbar } from './ProjectsToolbar';
 import { StatsCard } from './StatsCard';
 import { ProjectsTable } from './ProjectsTable';
-import { ProjectWithTranslations, RequiredProjectFilters } from '@/types';
+import { ProjectWithTranslations, RequiredProjectFilters } from '@/types-portfolio/project';
 import { PrivProjectCard } from './PrivProjectCard';
 
 interface Props {

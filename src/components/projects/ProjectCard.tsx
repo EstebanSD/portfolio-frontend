@@ -14,7 +14,7 @@ import {
 } from '../ui';
 import { CalendarIcon, ClockIcon, ExternalLinkIcon, ImageIcon } from 'lucide-react';
 import { SiGithub } from 'react-icons/si';
-import { Project } from '@/types';
+import { Project } from '@/types-portfolio/project';
 import { useTranslation } from '@/lib/i18n/client';
 import { formatDate, getStatusColor, getTypeColor } from '@/utils';
 

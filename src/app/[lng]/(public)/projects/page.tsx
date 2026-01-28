@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 import { Metadata } from 'next';
 import { ProjectFilters, ProjectList, ProjectsSkeleton } from '@/components/projects';
-import { ProjectQueryFilters } from '@/types';
+import { ProjectQueryFilters } from '@/types-portfolio/project';
 
 export const metadata: Metadata = {
   title: 'List of Projects',

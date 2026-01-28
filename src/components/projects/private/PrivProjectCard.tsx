@@ -4,11 +4,11 @@ import { useTransition } from 'react';
 import { toast } from 'sonner';
 import { Session } from 'next-auth';
 import { useRouter } from 'next/navigation';
-import { CalendarIcon, EditIcon, ExternalLinkIcon, ImageIcon } from 'lucide-react';
+import { CalendarIcon, EditIcon, ExternalLinkIcon, ImageIcon, Trash2Icon } from 'lucide-react';
 import { SiGithub } from 'react-icons/si';
 import { getStatusColor, getTypeColor } from '@/utils';
-import { ProjectWithTranslations } from '@/types';
-import { DialogDelete } from '@/components/common';
+import { ProjectWithTranslations } from '@/types-portfolio/project';
+import { ConfirmDialog } from '@/components/common';
 import { deleteProjectAction } from '@/actions/projects';
 
 const PROJECT_TYPES = {
@@ -28,6 +28,7 @@ interface Props {
   project: ProjectWithTranslations;
 }
 
+// MOBILE
 export function PrivProjectCard({ session, project }: Props) {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
@@ -38,15 +39,13 @@ export function PrivProjectCard({ session, project }: Props) {
       return;
     }
 
-    startTransition(async () => {
-      try {
-        await deleteProjectAction(project._id, session.accessToken);
-        toast.success(`Project ${project.title} deleted successfully`);
-      } catch (error) {
-        toast.error(`Failed to delete project ${project.title}`);
-        console.error('Delete error:', error);
-      }
-    });
+    try {
+      await deleteProjectAction(project._id, session.accessToken);
+      toast.success(`Project ${project.title} deleted successfully`);
+    } catch (error) {
+      toast.error(`Failed to delete project ${project.title}`);
+      throw error;
+    }
   };
 
   const handleEdit = (project: ProjectWithTranslations) => {
@@ -84,15 +83,30 @@ export function PrivProjectCard({ session, project }: Props) {
               <EditIcon className="w-4 h-4 text-black dark:text-white" />
             </button>
 
-            <DialogDelete title="Delete Project" handleDelete={handleDelete} isLoading={isPending}>
-              <>
-                Are you sure you want to delete <strong>{project.title}</strong>?
-                <br />
-                If the project has translations, they will also be deleted.
-                <br />
-                <span className="text-destructive">This action cannot be undone.</span>
-              </>
-            </DialogDelete>
+            <ConfirmDialog
+              title="Delete Project"
+              confirmLabel="Delete"
+              loading={isPending}
+              onConfirm={() =>
+                startTransition(async () => {
+                  await handleDelete();
+                })
+              }
+              trigger={
+                <button className="p-2 hover:text-red-600">
+                  <Trash2Icon className="w-4 h-4" />
+                </button>
+              }
+              description={
+                <>
+                  Are you sure you want to delete <strong>{project.title}</strong>?
+                  <br />
+                  If the project has translations, they will also be deleted.
+                  <br />
+                  <span className="text-destructive">This action cannot be undone.</span>
+                </>
+              }
+            />
           </div>
         </div>
 
@@ -122,9 +136,9 @@ export function PrivProjectCard({ session, project }: Props) {
             <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
               <CalendarIcon className="w-4 h-4" />
               <span>
-                {project.startDate && new Date(project.startDate).toLocaleDateString('en-EN')}
+                {project.startDate && new Date(project.startDate).toLocaleDateString('en-US')}
                 {project.startDate && project.endDate && ' - '}
-                {project.endDate && new Date(project.endDate).toLocaleDateString('en-EN')}
+                {project.endDate && new Date(project.endDate).toLocaleDateString('en-US')}
               </span>
             </div>
           </div>

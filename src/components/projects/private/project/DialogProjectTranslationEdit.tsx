@@ -25,8 +25,8 @@ import {
   Form,
   SheetClose,
 } from '@/components/ui';
-import { useIsMobile } from '@/hooks';
-import { ProjectTranslation } from '@/types';
+import { useIsMobile } from '@/hooks/useIsMobile';
+import { ProjectTranslation } from '@/types-portfolio/project';
 import { FormInput, FormTextArea, Spinner } from '@/components/common';
 
 const translationFormSchema = z.object({
@@ -82,7 +82,6 @@ export function DialogProjectTranslationEdit({
         <FormInput
           disabled
           required
-          control={form.control}
           name="locale"
           label={'Language'}
           labelIcon={<GlobeIcon className="w-4 h-4" />}
@@ -90,7 +89,6 @@ export function DialogProjectTranslationEdit({
 
         <FormInput
           required
-          control={form.control}
           name="summary"
           label={'Summary'}
           labelIcon={<BriefcaseIcon className="w-4 h-4" />}
@@ -99,7 +97,6 @@ export function DialogProjectTranslationEdit({
 
         <FormTextArea
           required
-          control={form.control}
           name="description"
           label={'Description'}
           labelIcon={<FileTextIcon className="w-4 h-4" />}

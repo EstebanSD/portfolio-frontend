@@ -7,7 +7,7 @@ export const SOCIAL_PLATFORM_ENUM = [
 ] as const;
 
 export type SocialPlatformType = (typeof SOCIAL_PLATFORM_ENUM)[number];
-export type SocialLinks = Partial<Record<SocialPlatformType, string>>;
+type SocialLinks = Partial<Record<SocialPlatformType, string>>;
 
 export interface Contact {
   email: string;

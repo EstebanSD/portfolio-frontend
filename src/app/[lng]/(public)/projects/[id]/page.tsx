@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import Image from 'next/image';
+import Link from 'next/link';
 import {
   ArrowLeftIcon,
   CalendarDaysIcon,
@@ -17,10 +18,10 @@ import {
   CardTitle,
   Separator,
 } from '@/components/ui';
-import { Project } from '@/types';
+import { Project } from '@/types-portfolio/project';
 import { formatDate, getStatusColor, getTypeIcon } from '@/utils';
-import { serverTranslation } from '@/lib/i18n';
-import { ButtonLink, CustomCarousel, EmptyState } from '@/components/common';
+import { serverTranslation } from '@/lib/i18n/server';
+import { CustomCarousel, EmptyStateCard } from '@/components/common';
 
 export const metadata: Metadata = {
   title: 'Project Details',
@@ -56,14 +57,15 @@ export default async function page({ params }: Props) {
         {/* Main Container */}
         <div>
           <div className="py-6 md:px-2 lg:px-4">
-            <ButtonLink
+            <Button
               variant={'ghost'}
               className="group hover:bg-accent/80 hover:text-white transition-colors"
-              href={`/${lng}/projects`}
             >
-              <ArrowLeftIcon className="w-4 h-4 mr-3 transition-transform duration-200 group-hover:-translate-x-1" />
-              {t('project.goBack')}
-            </ButtonLink>
+              <Link href={`/${lng}/projects`} className="inline-flex items-center">
+                <ArrowLeftIcon className="w-4 h-4 mr-3 transition-transform duration-200 group-hover:-translate-x-1" />
+                {t('project.goBack')}
+              </Link>
+            </Button>
           </div>
 
           <div className="px-4 md:px-6 lg:px-8 pb-8">
@@ -252,15 +254,15 @@ export default async function page({ params }: Props) {
     return (
       <div className="min-h-screen pt-8">
         <div className="max-w-2xl mx-auto px-4 text-center">
-          <EmptyState
-            asCard
+          <EmptyStateCard
             title={t('project.error.title')}
             description={t('project.error.description')}
             iconName="ban"
           />
-          <ButtonLink className="mt-10" href={`/${lng}/projects`}>
-            {t('project.goBack')}
-          </ButtonLink>
+
+          <Button className="mt-10">
+            <Link href={`/${lng}/projects`}>{t('project.goBack')}</Link>
+          </Button>
         </div>
       </div>
     );

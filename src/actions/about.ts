@@ -3,7 +3,7 @@
 import { ZodError } from 'zod';
 import { auth } from '@/auth';
 import { revalidateTag } from 'next/cache';
-import { AboutAll } from '@/types';
+import { AboutAll } from '@/types-portfolio/about';
 import { aboutGeneralFormServerSchema, aboutTranslationFormServerSchema } from '@/lib/validations';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL!;

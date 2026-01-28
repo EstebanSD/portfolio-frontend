@@ -1,4 +1,4 @@
-import { ProjectType } from '@/types';
+import { ProjectType } from '@/types-portfolio/project';
 import { BriefcaseIcon, BuildingIcon, UserIcon } from 'lucide-react';
 
 export const getTypeIcon = (type: ProjectType) => {

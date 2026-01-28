@@ -1,7 +1,9 @@
-import { serverTranslation } from '@/lib/i18n';
-import { Project } from '@/types';
+import { serverTranslation } from '@/lib/i18n/server';
+import { Project } from '@/types-portfolio/project';
 import { ProjectCard } from './ProjectCard';
-import { ButtonLink, CustomCarousel, EmptyState } from '../common';
+import { CustomCarousel, EmptyStateCard } from '../common';
+import { Button } from '../ui';
+import Link from 'next/link';
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL!;
 
@@ -39,9 +41,9 @@ export async function PublicProjects({ lng }: { lng: string }) {
         </div>
 
         <div className="flex items-center justify-end">
-          <ButtonLink href={'projects'} variant={'outline'}>
-            {t('section.seeAll')}
-          </ButtonLink>
+          <Button variant={'outline'}>
+            <Link href={'projects'}>{t('section.seeAll')}</Link>
+          </Button>
         </div>
 
         {projects.length > 0 ? (
@@ -56,8 +58,7 @@ export async function PublicProjects({ lng }: { lng: string }) {
             ))}
           />
         ) : (
-          <EmptyState
-            asCard
+          <EmptyStateCard
             title={t('section.emptyTitle')}
             description={t('section.emptyDescription')}
             iconName="ban"

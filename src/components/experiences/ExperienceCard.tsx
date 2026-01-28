@@ -10,7 +10,7 @@ import {
   CardTitle,
 } from '../ui';
 import { CalendarIcon, MapPinIcon } from 'lucide-react';
-import { Experience } from '@/types';
+import { Experience } from '@/types-portfolio/experience';
 import { getMonthYearDate } from '@/utils';
 
 const formatDateRange = (

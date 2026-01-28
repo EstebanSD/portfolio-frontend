@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { FileIcon, AlertCircleIcon } from 'lucide-react';
 import { cn } from '@/lib/shadcn/utils';
-import { MINUTE } from '@/lib/common';
+import { MINUTE } from '@/constants/times';
 import { SidebarMenuButton, SidebarMenuItem, useSidebar } from '../ui';
 import { useTranslation } from '@/lib/i18n/client';
 

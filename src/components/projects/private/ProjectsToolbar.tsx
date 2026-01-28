@@ -3,8 +3,8 @@
 import { useCallback } from 'react';
 import { XIcon } from 'lucide-react';
 import { Button } from '@/components/ui';
-import { SearchFilterInputControlled, SelectFilterControlled } from '@/components/common';
-import { ProjectStatus, ProjectType, RequiredProjectFilters } from '@/types';
+import { SearchInputControlled, SelectFilter } from '@/components/common';
+import { ProjectStatus, ProjectType, RequiredProjectFilters } from '@/types-portfolio/project';
 
 const TYPE_OPTIONS: { label: string; value: ProjectType | 'all' }[] = [
   { label: 'All', value: 'all' },
@@ -35,7 +35,7 @@ export function ProjectsToolbar({ filters, setFilters }: Props) {
   return (
     <div className="p-2 md:p-4 w-full overflow-hidden space-y-4 border rounded-md">
       <div className="flex flex-wrap gap-2">
-        <SearchFilterInputControlled
+        <SearchInputControlled
           paramKey="title"
           label="Title"
           placeholder="Search by title..."
@@ -44,8 +44,8 @@ export function ProjectsToolbar({ filters, setFilters }: Props) {
           className="flex-1 min-w-full md:min-w-[100px]"
         />
 
-        <SelectFilterControlled
-          paramKey={'type'}
+        <SelectFilter
+          id={'type'}
           label={'Type'}
           placeholder={'Select a type...'}
           options={TYPE_OPTIONS}
@@ -54,8 +54,8 @@ export function ProjectsToolbar({ filters, setFilters }: Props) {
           className="min-w-[100px]"
         />
 
-        <SelectFilterControlled
-          paramKey={'status'}
+        <SelectFilter
+          id={'status'}
           label={'Status'}
           placeholder={'Select a status...'}
           options={STATUS_OPTIONS}

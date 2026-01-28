@@ -1,8 +1,8 @@
 import { use } from 'react';
-import { ProjectQueryFilters, Project } from '@/types';
+import { ProjectQueryFilters, Project } from '@/types-portfolio/project';
 import { ProjectCard } from './ProjectCard';
-import { EmptyState } from '../common';
-import { serverTranslation } from '@/lib/i18n';
+import { EmptyStatePage } from '../common';
+import { serverTranslation } from '@/lib/i18n/server';
 
 type Filters = Required<ProjectQueryFilters>;
 
@@ -41,7 +41,7 @@ export function ProjectList({ lng, filters }: Props) {
 
   if (projects.length === 0) {
     return (
-      <EmptyState
+      <EmptyStatePage
         title={t('page.projects.emptyTitle')}
         description={t('page.projects.emptyDescription')}
         iconName="search"
