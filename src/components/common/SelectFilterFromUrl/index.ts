@@ -1,1 +1,0 @@
-export { SelectFilterFromUrl } from './SelectFilterFromUrl';
