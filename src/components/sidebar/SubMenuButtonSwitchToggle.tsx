@@ -2,14 +2,14 @@
 
 import { useEffect, useState } from 'react';
 import { useTheme } from 'next-themes';
-import { usePathname } from 'next/navigation';
 import { useTranslation } from '@/lib/i18n/client';
 import { MoonIcon, SunIcon } from 'lucide-react';
 import { cn } from '@/lib/shadcn/utils';
 import { SidebarMenuSubButton, Switch } from '../ui';
+import { useLocale } from '@/lib/i18n/utils';
 
 export function SubMenuButtonSwitchToggle() {
-  const lng = usePathname().split('/')[1];
+  const lng = useLocale();
   const { t } = useTranslation(lng, 'header');
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);

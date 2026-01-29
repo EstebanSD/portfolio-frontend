@@ -1,31 +1,19 @@
 import { Suspense } from 'react';
 import { Metadata } from 'next';
-import { ProjectFilters, ProjectList, ProjectsSkeleton } from '@/components/projects';
-import { ProjectQueryFilters } from '@/types-portfolio/project';
+import { ProjectFilters, ProjectList, ProjectsSkeleton } from './components';
 
 export const metadata: Metadata = {
   title: 'List of Projects',
   description: 'Explore all projects in the portfolio',
 };
 
-interface Props {
-  params: Promise<{ lng: string }>;
-  searchParams: Promise<ProjectQueryFilters>;
-}
-
-export default async function page({ params, searchParams }: Props) {
+export default async function page({ params, searchParams }: PageProps<'/[lng]/projects'>) {
   const { lng } = await params;
-  const sp = await searchParams;
-
-  const filters = {
-    title: sp.title || '',
-    status: sp.status || 'all',
-    type: sp.type || 'all',
-  };
+  const filters = await searchParams;
 
   return (
     <div className="min-h-screen px-2 md:px-6 lg:px-10">
-      <ProjectFilters lng={lng} currentFilters={filters} />
+      <ProjectFilters lng={lng} />
 
       <Suspense fallback={<ProjectsSkeleton />}>
         <ProjectList lng={lng} filters={filters} />

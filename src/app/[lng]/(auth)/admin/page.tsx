@@ -1,10 +1,6 @@
 import { serverTranslation } from '@/lib/i18n/server';
 
-type Props = {
-  params: Promise<{ lng: string }>;
-};
-
-export default async function HomePage({ params }: Props) {
+export default async function HomePage({ params }: PageProps<'/[lng]/admin'>) {
   const { lng } = await params;
   const { t } = await serverTranslation(lng, 'common');
 

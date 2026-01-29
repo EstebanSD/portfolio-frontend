@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import { ForwardRefExoticComponent, RefAttributes } from 'react';
-import { usePathname } from 'next/navigation';
 import {
   BrainCircuitIcon,
   BriefcaseIcon,
@@ -25,10 +24,10 @@ import {
 } from '../ui';
 import { PublicCollapsibleSettings, SidebarMenuItemDownloadCv } from '../sidebar';
 import { useTranslation } from '@/lib/i18n/client';
+import { useLocale } from '@/lib/i18n/utils';
 
 export function PublicSidebar() {
-  const pathname = usePathname();
-  const lng = pathname.split('/')[1] || 'en';
+  const lng = useLocale();
   const { t } = useTranslation(lng, 'header');
   const sections: {
     key: string;

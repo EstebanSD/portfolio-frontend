@@ -1,10 +1,9 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
+import { useLocale } from '@/lib/i18n/utils';
 
 export function SidebarLanguageSwitcherIcon() {
-  const pathname = usePathname();
-  const lng = pathname.split('/')[1] || 'en';
+  const lng = useLocale();
 
   return (
     <div className="flex items-center justify-center">
