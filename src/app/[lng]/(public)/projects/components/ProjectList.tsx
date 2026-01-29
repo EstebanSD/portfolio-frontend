@@ -4,8 +4,6 @@ import { Project, ProjectQueryFilters } from '@/types-portfolio/project';
 import { EmptyStatePage } from '@/components/common';
 import { ProjectCard } from '@/components/projects';
 
-type Filters = Required<ProjectQueryFilters>;
-
 const apiUrl = process.env.NEXT_PUBLIC_API_URL!;
 
 async function getProjects(lng: string, filters: ProjectQueryFilters) {
@@ -32,7 +30,7 @@ async function getProjects(lng: string, filters: ProjectQueryFilters) {
 
 interface Props {
   lng: string;
-  filters: Filters;
+  filters: ProjectQueryFilters;
 }
 
 export function ProjectList({ lng, filters }: Props) {

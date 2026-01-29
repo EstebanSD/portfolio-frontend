@@ -1,6 +1,5 @@
 import { Suspense } from 'react';
 import { Metadata } from 'next';
-import { ProjectQueryFilters } from '@/types-portfolio/project';
 import { ProjectFilters, ProjectList, ProjectsSkeleton } from './components';
 
 export const metadata: Metadata = {
@@ -8,20 +7,9 @@ export const metadata: Metadata = {
   description: 'Explore all projects in the portfolio',
 };
 
-interface Props {
-  params: Promise<{ lng: string }>;
-  searchParams: Promise<ProjectQueryFilters>;
-}
-
-export default async function page({ params, searchParams }: Props) {
+export default async function page({ params, searchParams }: PageProps<'/[lng]/projects'>) {
   const { lng } = await params;
-  const sp = await searchParams;
-
-  const filters = {
-    title: sp.title || '',
-    status: sp.status || 'all',
-    type: sp.type || 'all',
-  };
+  const filters = await searchParams;
 
   return (
     <div className="min-h-screen px-2 md:px-6 lg:px-10">
