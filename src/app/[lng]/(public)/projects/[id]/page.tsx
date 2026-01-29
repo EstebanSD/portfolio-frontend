@@ -28,12 +28,8 @@ export const metadata: Metadata = {
   description: 'Detailed view of a specific project in the portfolio',
 };
 
-interface Props {
-  params: Promise<{ lng: string; id: string }>;
-}
-
 const apiUrl = process.env.NEXT_PUBLIC_API_URL!;
-export default async function page({ params }: Props) {
+export default async function page({ params }: PageProps<'/[lng]/projects/[id]'>) {
   const { lng, id } = await params;
   const { t } = await serverTranslation(lng, 'projects');
 

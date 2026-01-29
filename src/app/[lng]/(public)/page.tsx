@@ -1,18 +1,13 @@
 import { Suspense } from 'react';
 import Link from 'next/link';
 import { ChevronsDownIcon } from 'lucide-react';
-
 import { serverTranslation } from '@/lib/i18n/server';
 import { PublicProjects, PublicProjectsSkeleton } from '@/components/projects';
 import { PublicAbout, PublicAboutSkeleton } from '@/components/about';
 import { PublicSkills, PublicSkillsSkeleton } from '@/components/skills';
 import { PublicExperiences, PublicExperiencesSkeleton } from '@/components/experiences';
 
-type Props = {
-  params: Promise<{ lng: string }>;
-};
-
-export default async function HomePage({ params }: Props) {
+export default async function HomePage({ params }: PageProps<'/[lng]'>) {
   const { lng } = await params;
   const { t } = await serverTranslation(lng, 'hero');
 
