@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { usePathname } from 'next/navigation';
 import { ChevronDownIcon } from 'lucide-react';
 import {
   Collapsible,
@@ -22,13 +21,13 @@ import { SubMenuButtonSwitchToggle } from './SubMenuButtonSwitchToggle';
 import { SubMenuButtonLanguageSwitcher } from './SubMenuButtonLanguageSwitcher';
 import { SidebarSwitchToggleIcon } from './SidebarSwitchToggleIcon';
 import { SidebarLanguageSwitcherIcon } from './SidebarLanguageSwitcherIcon';
+import { useLocale } from '@/lib/i18n/utils';
 
 export function PublicCollapsibleSettings() {
   const { open, state, isMobile } = useSidebar();
-  const pathname = usePathname();
+  const lng = useLocale();
   const [localOpen, setLocalOpen] = useState<boolean>(false);
 
-  const lng = pathname.split('/')[1] || 'en';
   const { t } = useTranslation(lng, 'header');
 
   const isCollapsed = state === 'collapsed';

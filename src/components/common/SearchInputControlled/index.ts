@@ -1,1 +1,0 @@
-export { SearchInputControlled } from './SearchInputControlled';

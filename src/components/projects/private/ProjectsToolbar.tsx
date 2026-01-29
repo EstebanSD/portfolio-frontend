@@ -3,7 +3,7 @@
 import { useCallback } from 'react';
 import { XIcon } from 'lucide-react';
 import { Button } from '@/components/ui';
-import { SearchInputControlled, SelectFilter } from '@/components/common';
+import { SearchInput, SelectFilter } from '@/components/common';
 import { ProjectStatus, ProjectType, RequiredProjectFilters } from '@/types-portfolio/project';
 
 const TYPE_OPTIONS: { label: string; value: ProjectType | 'all' }[] = [
@@ -35,8 +35,8 @@ export function ProjectsToolbar({ filters, setFilters }: Props) {
   return (
     <div className="p-2 md:p-4 w-full overflow-hidden space-y-4 border rounded-md">
       <div className="flex flex-wrap gap-2">
-        <SearchInputControlled
-          paramKey="title"
+        <SearchInput
+          id="title"
           label="Title"
           placeholder="Search by title..."
           value={filters.title}

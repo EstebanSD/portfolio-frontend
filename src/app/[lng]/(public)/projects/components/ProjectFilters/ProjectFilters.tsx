@@ -1,30 +1,21 @@
 'use client';
 
-import { useCallback } from 'react';
-import { useRouter } from 'next/navigation';
 import { XIcon } from 'lucide-react';
-import { Button, Card, CardContent } from '../ui';
-import { SearchInputFromUrl, SelectFilterFromUrl } from '../common';
-import { ProjectQueryFilters, ProjectStatus, ProjectType } from '@/types-portfolio/project';
 import { useTranslation } from '@/lib/i18n/client';
-
-type Filters = Required<ProjectQueryFilters>;
+import { ProjectStatus, ProjectType } from '@/types-portfolio/project';
+import { Button, Card, CardContent } from '@/components/ui';
+import { SearchInput, SelectFilter } from '@/components/common';
+import { useProjectsFilters } from './useProjectsFilters';
 
 interface ProjectFiltersProps {
   lng: string;
-  currentFilters: Filters;
 }
 
-export function ProjectFilters({ lng, currentFilters }: ProjectFiltersProps) {
-  const router = useRouter();
+export function ProjectFilters({ lng }: ProjectFiltersProps) {
   const { t } = useTranslation(lng, 'projects');
-
-  const clearFilters = useCallback(() => {
-    router.push(`/${lng}/projects`);
-  }, [router, lng]);
-
-  const hasActiveFilters =
-    currentFilters.title !== '' || currentFilters.status !== 'all' || currentFilters.type !== 'all';
+  const { filters, setType, setStatus, setTitle, resetAll, hasActiveFilters } = useProjectsFilters({
+    lng,
+  });
 
   const TYPE_OPTIONS: { label: string; value: ProjectType | 'all' }[] = [
     { label: t('page.filter.labelAll'), value: 'all' },
@@ -45,33 +36,37 @@ export function ProjectFilters({ lng, currentFilters }: ProjectFiltersProps) {
       <Card>
         <CardContent className="p-6">
           <div className="flex flex-wrap gap-4 items-end">
-            <SelectFilterFromUrl
-              paramKey="type"
+            <SelectFilter
+              id={'type'}
               label={t('page.filter.type')}
               placeholder={t('page.filter.typePlaceholder')}
-              basePath={`/${lng}/projects`}
               className="min-w-[150px]"
+              value={filters.type}
+              onValueChange={setType}
               options={TYPE_OPTIONS}
             />
-            <SelectFilterFromUrl
-              paramKey="status"
+
+            <SelectFilter
+              id={'status'}
               label={t('page.filter.status')}
               placeholder={t('page.filter.statusPlaceholder')}
-              basePath={`/${lng}/projects`}
               className="min-w-[150px]"
+              value={filters.status}
+              onValueChange={setStatus}
               options={STATUS_OPTIONS}
             />
 
-            <SearchInputFromUrl
-              paramKey="title"
+            <SearchInput
+              id={'title'}
               label={t('page.filter.search')}
               placeholder={t('page.filter.searchPlaceholder')}
               className="flex-1 min-w-[200px]"
-              basePath={`/${lng}/projects`}
+              value={filters.title}
+              onChange={setTitle}
             />
 
             {hasActiveFilters && (
-              <Button variant="outline" size="sm" onClick={clearFilters} className="mb-0">
+              <Button variant="outline" size="sm" onClick={resetAll} className="mb-0">
                 <XIcon className="h-4 w-4 mr-2" />
                 {t('page.filter.cleanFilters')}
               </Button>

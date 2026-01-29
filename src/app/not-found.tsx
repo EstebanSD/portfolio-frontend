@@ -1,12 +1,10 @@
 'use client';
 
 import NotFound from '@/components/not-found/NotFound';
-import { usePathname } from 'next/navigation';
+import { useLocale } from '@/lib/i18n/utils';
 
 export default function Page() {
-  const pathname = usePathname();
+  const lng = useLocale();
 
-  const locale = pathname.startsWith('/es') ? 'es' : 'en';
-
-  return <NotFound lng={locale} />;
+  return <NotFound lng={lng} />;
 }

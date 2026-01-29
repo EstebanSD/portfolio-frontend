@@ -4,10 +4,7 @@ import { serverTranslation } from '@/lib/i18n/server';
 import { ButtonBack } from '@/components/common';
 import Link from 'next/link';
 
-interface Props {
-  params: Promise<{ lng: string }>;
-}
-export default async function Page({ params }: Props) {
+export default async function Page({ params }: PageProps<'/[lng]/unauthorized'>) {
   const { lng } = await params;
   const { t } = await serverTranslation(lng, 'unauthorized');
 

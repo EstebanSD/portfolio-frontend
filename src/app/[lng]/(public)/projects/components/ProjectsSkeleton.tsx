@@ -6,7 +6,7 @@ import {
   CardHeader,
   CardTitle,
   Skeleton,
-} from '../ui';
+} from '@/components/ui';
 
 export function ProjectsSkeleton() {
   return (

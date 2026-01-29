@@ -12,10 +12,7 @@ import {
 } from '@/components/ui';
 import { FolderIcon, GlobeIcon } from 'lucide-react';
 
-interface Props {
-  params: Promise<{ id: string }>;
-}
-export default async function page({ params }: Props) {
+export default async function page({ params }: PageProps<'/[lng]/admin/projects/[id]'>) {
   const { id } = await params;
   const projectData = await fetchProjectIdAction(id);
   const tCount = projectData.translations.length;

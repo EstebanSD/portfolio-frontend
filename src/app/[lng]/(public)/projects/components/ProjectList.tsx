@@ -1,10 +1,8 @@
 import { use } from 'react';
-import { ProjectQueryFilters, Project } from '@/types-portfolio/project';
-import { ProjectCard } from './ProjectCard';
-import { EmptyStatePage } from '../common';
 import { serverTranslation } from '@/lib/i18n/server';
-
-type Filters = Required<ProjectQueryFilters>;
+import { Project, ProjectQueryFilters } from '@/types-portfolio/project';
+import { EmptyStatePage } from '@/components/common';
+import { ProjectCard } from '@/components/projects';
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL!;
 
@@ -32,7 +30,7 @@ async function getProjects(lng: string, filters: ProjectQueryFilters) {
 
 interface Props {
   lng: string;
-  filters: Filters;
+  filters: ProjectQueryFilters;
 }
 
 export function ProjectList({ lng, filters }: Props) {
