@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 import { Metadata } from 'next';
-import { ProjectFilters, ProjectList, ProjectsSkeleton } from '@/components/projects';
 import { ProjectQueryFilters } from '@/types-portfolio/project';
+import { ProjectFilters, ProjectList, ProjectsSkeleton } from './components';
 
 export const metadata: Metadata = {
   title: 'List of Projects',
@@ -25,7 +25,7 @@ export default async function page({ params, searchParams }: Props) {
 
   return (
     <div className="min-h-screen px-2 md:px-6 lg:px-10">
-      <ProjectFilters lng={lng} currentFilters={filters} />
+      <ProjectFilters lng={lng} />
 
       <Suspense fallback={<ProjectsSkeleton />}>
         <ProjectList lng={lng} filters={filters} />

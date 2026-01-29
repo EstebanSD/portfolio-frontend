@@ -1,8 +1,8 @@
 import { use } from 'react';
-import { ProjectQueryFilters, Project } from '@/types-portfolio/project';
-import { ProjectCard } from './ProjectCard';
-import { EmptyStatePage } from '../common';
 import { serverTranslation } from '@/lib/i18n/server';
+import { Project, ProjectQueryFilters } from '@/types-portfolio/project';
+import { EmptyStatePage } from '@/components/common';
+import { ProjectCard } from '@/components/projects';
 
 type Filters = Required<ProjectQueryFilters>;
 
