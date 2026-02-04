@@ -4,9 +4,9 @@ import { useState, useTransition } from 'react';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Form, Button } from '../ui';
-import { FormInput, Spinner } from '../common';
-import { loginFormSchema, LoginFormValues } from '@/lib/validations';
+import { FormInput, Spinner } from '@/components/common';
+import { Button, Form } from '@/components/ui';
+import { loginFormSchema, type LoginFormValues } from '@/lib/validations';
 import { loginAction } from '@/actions/auth';
 
 export function LoginForm() {

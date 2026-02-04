@@ -1,5 +1,5 @@
-import { LoginForm } from '@/components/auth';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui';
+import { LoginForm } from './components/LoginForm';
 
 export default async function page() {
   return (
