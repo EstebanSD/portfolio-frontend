@@ -2,6 +2,8 @@
 
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import { CalendarIcon, ClockIcon, ExternalLinkIcon, ImageIcon } from 'lucide-react';
+import { SiGithub } from 'react-icons/si';
 import {
   Badge,
   Button,
@@ -11,11 +13,9 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '../ui';
-import { CalendarIcon, ClockIcon, ExternalLinkIcon, ImageIcon } from 'lucide-react';
-import { SiGithub } from 'react-icons/si';
-import { Project } from '@/types-portfolio/project';
+} from '@/components/ui';
 import { useTranslation } from '@/lib/i18n/client';
+import { Project } from '@/types-portfolio/project';
 import { formatDate, getStatusColor, getTypeColor } from '@/utils';
 
 interface ProductCardProps {

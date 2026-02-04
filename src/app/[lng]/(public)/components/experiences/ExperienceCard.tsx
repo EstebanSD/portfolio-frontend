@@ -1,3 +1,4 @@
+import { CalendarIcon, MapPinIcon } from 'lucide-react';
 import {
   Avatar,
   AvatarFallback,
@@ -8,8 +9,7 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from '../ui';
-import { CalendarIcon, MapPinIcon } from 'lucide-react';
+} from '@/components/ui';
 import { Experience } from '@/types-portfolio/experience';
 import { getMonthYearDate } from '@/utils';
 

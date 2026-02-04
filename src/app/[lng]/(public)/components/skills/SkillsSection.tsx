@@ -1,15 +1,16 @@
+import { EmptyStateCard } from '@/components/common';
+import { publicEnv } from '@/config/env.public';
 import { serverTranslation } from '@/lib/i18n/server';
 import { Skill, SkillCategory } from '@/types-portfolio/skill';
 import { SkillCard } from './SkillCard';
-import { EmptyStateCard } from '../common';
 
-const apiUrl = process.env.NEXT_PUBLIC_API_URL!;
+const API_URL = publicEnv.NEXT_PUBLIC_API_URL;
 
-export async function PublicSkills({ lng }: { lng: string }) {
+export async function SkillsSection({ lng }: { lng: string }) {
   const { t } = await serverTranslation(lng, 'skills');
 
   try {
-    const catResp = await fetch(`${apiUrl}/portfolio/skills/categories/${lng}`, {
+    const catResp = await fetch(`${API_URL}/portfolio/skills/categories/${lng}`, {
       cache: 'force-cache',
       next: {
         revalidate: 3600,
@@ -28,7 +29,7 @@ export async function PublicSkills({ lng }: { lng: string }) {
     const categoryWithSkills = await Promise.all(
       categories.map(async (category) => {
         const skillResp = await fetch(
-          `${apiUrl}/portfolio/skills/categories/${category.general._id}/items`,
+          `${API_URL}/portfolio/skills/categories/${category.general._id}/items`,
           {
             cache: 'force-cache',
             next: {

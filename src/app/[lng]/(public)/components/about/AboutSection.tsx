@@ -1,16 +1,16 @@
 import Image from 'next/image';
-
+import { Badge } from '@/components/ui';
+import { publicEnv } from '@/config/env.public';
 import { serverTranslation } from '@/lib/i18n/server';
 import { About } from '@/types-portfolio/about';
-import { Badge } from '../ui';
 
-const apiUrl = process.env.NEXT_PUBLIC_API_URL!;
+const API_URL = publicEnv.NEXT_PUBLIC_API_URL;
 
-export async function PublicAbout({ lng }: { lng: string }) {
+export async function AboutSection({ lng }: { lng: string }) {
   const { t } = await serverTranslation(lng, 'about');
 
   try {
-    const response = await fetch(`${apiUrl}/portfolio/about/${lng}`, {
+    const response = await fetch(`${API_URL}/portfolio/about/${lng}`, {
       cache: 'force-cache',
       next: {
         revalidate: 3600,

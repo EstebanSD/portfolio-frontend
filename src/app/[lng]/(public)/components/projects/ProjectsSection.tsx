@@ -1,17 +1,18 @@
+import Link from 'next/link';
+import { CustomCarousel, EmptyStateCard } from '@/components/common';
+import { Button } from '@/components/ui';
+import { publicEnv } from '@/config/env.public';
 import { serverTranslation } from '@/lib/i18n/server';
 import { Project } from '@/types-portfolio/project';
 import { ProjectCard } from './ProjectCard';
-import { CustomCarousel, EmptyStateCard } from '../common';
-import { Button } from '../ui';
-import Link from 'next/link';
 
-const apiUrl = process.env.NEXT_PUBLIC_API_URL!;
+const API_URL = publicEnv.NEXT_PUBLIC_API_URL;
 
-export async function PublicProjects({ lng }: { lng: string }) {
+export async function ProjectsSection({ lng }: { lng: string }) {
   const { t } = await serverTranslation(lng, 'projects');
 
   try {
-    const response = await fetch(`${apiUrl}/portfolio/projects?locale=${lng}`, {
+    const response = await fetch(`${API_URL}/portfolio/projects?locale=${lng}`, {
       cache: 'force-cache',
       next: {
         revalidate: 3600,

@@ -1,15 +1,16 @@
+import { EmptyStateCard } from '@/components/common';
+import { publicEnv } from '@/config/env.public';
 import { serverTranslation } from '@/lib/i18n/server';
 import { Experience } from '@/types-portfolio/experience';
-import { EmptyStateCard } from '../common';
 import { ExperienceCard } from './ExperienceCard';
 
-const apiUrl = process.env.NEXT_PUBLIC_API_URL!;
+const API_URL = publicEnv.NEXT_PUBLIC_API_URL;
 
-export async function PublicExperiences({ lng }: { lng: string }) {
+export async function ExperiencesSection({ lng }: { lng: string }) {
   const { t } = await serverTranslation(lng, 'experiences');
 
   try {
-    const response = await fetch(`${apiUrl}/portfolio/experiences?locale=${lng}`, {
+    const response = await fetch(`${API_URL}/portfolio/experiences?locale=${lng}`, {
       cache: 'force-cache',
       next: {
         revalidate: 3600,

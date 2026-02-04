@@ -1,16 +1,18 @@
 'use server';
 
-import { auth } from '@/auth';
 import { revalidateTag } from 'next/cache';
+import { ZodError } from 'zod';
+import { auth } from '@/auth';
+import { publicEnv } from '@/config/env.public';
+import { ProjectFormValues } from '@/lib/validations';
 import {
   ProjectIdWithTranslations,
   ProjectTranslation,
   ProjectWithTranslations,
 } from '@/types-portfolio/project';
-import { ProjectFormValues } from '@/lib/validations';
-import { ZodError } from 'zod';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL!;
+const API_URL = publicEnv.NEXT_PUBLIC_API_URL;
+
 export async function fetchProjectsAction() {
   const session = await auth();
 

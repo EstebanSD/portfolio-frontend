@@ -1,10 +1,13 @@
 import Link from 'next/link';
 import { GlobeIcon, LinkedinIcon } from 'lucide-react';
 import { SiGithub, SiX, SiInstagram } from 'react-icons/si';
-import { Contact, SocialPlatformType } from '@/types-portfolio/contact';
+import { publicEnv } from '@/config/env.public';
 import { serverTranslation } from '@/lib/i18n/server';
+import { Contact, SocialPlatformType } from '@/types-portfolio/contact';
 import { ButtonCopy } from '../common';
 import { ButtonScrollToTop } from './ButtonScrollToTop';
+
+const API_URL = publicEnv.NEXT_PUBLIC_API_URL;
 
 const SOCIAL_ICONS: Record<SocialPlatformType, React.ComponentType<{ className?: string }>> = {
   github: SiGithub,
@@ -14,13 +17,11 @@ const SOCIAL_ICONS: Record<SocialPlatformType, React.ComponentType<{ className?:
   website: GlobeIcon,
 };
 
-const apiUrl = process.env.NEXT_PUBLIC_API_URL!;
-
 export async function PublicFooter({ lng }: { lng: string }) {
   const { t } = await serverTranslation(lng, 'footer');
 
   try {
-    const response = await fetch(`${apiUrl}/portfolio/contact`, {
+    const response = await fetch(`${API_URL}/portfolio/contact`, {
       cache: 'force-cache',
       next: {
         revalidate: 3600,

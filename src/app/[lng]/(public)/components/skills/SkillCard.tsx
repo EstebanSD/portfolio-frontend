@@ -12,7 +12,7 @@ import {
   WrenchIcon,
 } from 'lucide-react';
 import { Skill, SkillCategory } from '@/types-portfolio/skill';
-import { Badge, Card, CardContent, CardHeader, CardTitle } from '../ui';
+import { Badge, Card, CardContent, CardHeader, CardTitle } from '@/components/ui';
 
 const getCategoryIcon = (categoryKey: string): React.ElementType => {
   const iconMap: Record<string, React.ElementType> = {

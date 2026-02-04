@@ -5,14 +5,16 @@ import { toast } from 'sonner';
 import { Session } from 'next-auth';
 import { DownloadIcon, Trash2Icon } from 'lucide-react';
 import { deleteTranslationAction, editTranslationAction } from '@/actions/about';
-import { AboutTranslation } from '@/types-portfolio/about';
-import { AVAILABLE_LOCALES } from '@/lib/i18n';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui';
-import { DialogAboutTranslationEdit } from './DialogAboutTranslationEdit';
-import { type AboutTranslationFormValues } from '@/lib/validations';
 import { ConfirmDialog } from '@/components/common';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui';
+import { publicEnv } from '@/config/env.public';
+import { AVAILABLE_LOCALES } from '@/lib/i18n';
+import { type AboutTranslationFormValues } from '@/lib/validations';
+import { AboutTranslation } from '@/types-portfolio/about';
+import { DialogAboutTranslationEdit } from './DialogAboutTranslationEdit';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL!;
+const API_URL = publicEnv.NEXT_PUBLIC_API_URL;
+
 const getLocaleInfo = (code: string) => AVAILABLE_LOCALES.find((l) => l.code === code);
 const handleDownload = (lng: string) => {
   try {

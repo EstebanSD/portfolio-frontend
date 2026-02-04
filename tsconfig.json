@@ -25,6 +25,7 @@
     "paths": {
       "@/actions/*":["./src/actions/*"],
       "@/components/*":["./src/components/*"],
+      "@/config/*":["./src/config/*"],
       "@/constants/*":["./src/constants/*"],
       "@/hooks/*":["./src/hooks/*"],
       "@/lib/*":["./src/lib/*"],

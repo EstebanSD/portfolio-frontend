@@ -1,11 +1,17 @@
 import NextAuth from 'next-auth';
 import type { NextAuthConfig } from 'next-auth';
-import Credentials from 'next-auth/providers/credentials';
-import { MINUTE } from './constants/times';
 import { JWT } from 'next-auth/jwt';
+import Credentials from 'next-auth/providers/credentials';
+import { getAuthEnv } from './config/env.auth';
+import { publicEnv } from './config/env.public';
+import { MINUTE } from './constants/times';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000/api';
-const TOKEN_EXPIRES_IN = parseInt(process.env.TOKEN_EXPIRES_IN ?? '15', 10) * MINUTE;
+const API_URL = publicEnv.NEXT_PUBLIC_API_URL;
+
+function getTokenTtlMs() {
+  const { TOKEN_EXPIRES_IN } = getAuthEnv();
+  return TOKEN_EXPIRES_IN * MINUTE;
+}
 
 export const config = {
   providers: [
@@ -59,7 +65,7 @@ export const config = {
         token.accessToken = user.accessToken;
         token.refreshToken = user.refreshToken;
         token.role = user.role;
-        token.accessTokenExpires = Date.now() + TOKEN_EXPIRES_IN;
+        token.accessTokenExpires = Date.now() + getTokenTtlMs();
         token.error = undefined;
         return token;
       }
@@ -116,7 +122,7 @@ async function refreshAccessToken(token: JWT): Promise<JWT> {
       ...token,
       accessToken: refreshedTokens.access_token,
       refreshToken: refreshedTokens.refresh_token,
-      accessTokenExpires: Date.now() + TOKEN_EXPIRES_IN,
+      accessTokenExpires: Date.now() + getTokenTtlMs(),
       error: undefined,
     };
   } catch (error) {

@@ -7,9 +7,9 @@ import {
   CardHeader,
   CardTitle,
   Skeleton,
-} from '../ui';
+} from '@/components/ui';
 
-export async function PublicProjectsSkeleton({ lng }: { lng: string }) {
+export async function ProjectsSkeletonSection({ lng }: { lng: string }) {
   const { t } = await serverTranslation(lng, 'projects');
   return (
     <section

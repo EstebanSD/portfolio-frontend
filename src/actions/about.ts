@@ -3,10 +3,12 @@
 import { ZodError } from 'zod';
 import { auth } from '@/auth';
 import { revalidateTag } from 'next/cache';
-import { AboutAll } from '@/types-portfolio/about';
+import { publicEnv } from '@/config/env.public';
 import { aboutGeneralFormServerSchema, aboutTranslationFormServerSchema } from '@/lib/validations';
+import { AboutAll } from '@/types-portfolio/about';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL!;
+const API_URL = publicEnv.NEXT_PUBLIC_API_URL;
+
 export async function fetchAboutAction() {
   const session = await auth();
   try {

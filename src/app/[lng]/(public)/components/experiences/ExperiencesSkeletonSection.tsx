@@ -1,7 +1,14 @@
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+  Skeleton,
+} from '@/components/ui';
 import { serverTranslation } from '@/lib/i18n/server';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle, Skeleton } from '../ui';
 
-export async function PublicExperiencesSkeleton({ lng }: { lng: string }) {
+export async function ExperiencesSkeletonSection({ lng }: { lng: string }) {
   const { t } = await serverTranslation(lng, 'experiences');
   return (
     <section

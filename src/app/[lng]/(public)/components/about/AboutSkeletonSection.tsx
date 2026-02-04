@@ -1,7 +1,7 @@
 import { serverTranslation } from '@/lib/i18n/server';
-import { Skeleton } from '../ui';
+import { Skeleton } from '@/components/ui';
 
-export async function PublicAboutSkeleton({ lng }: { lng: string }) {
+export async function AboutSkeletonSection({ lng }: { lng: string }) {
   const { t } = await serverTranslation(lng, 'about');
 
   return (
