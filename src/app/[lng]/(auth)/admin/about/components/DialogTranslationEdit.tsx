@@ -61,12 +61,7 @@ interface Props {
     | undefined;
   isLoading: boolean;
 }
-export function DialogAboutTranslationEdit({
-  translation,
-  localeInfo,
-  handleEdit,
-  isLoading,
-}: Props) {
+export function DialogTranslationEdit({ translation, localeInfo, handleEdit, isLoading }: Props) {
   const [open, setOpen] = useState(false);
   const isMobile = useIsMobile();
 

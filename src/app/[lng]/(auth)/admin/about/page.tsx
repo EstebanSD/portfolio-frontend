@@ -1,6 +1,4 @@
 import { GlobeIcon, UserIcon } from 'lucide-react';
-import { fetchAboutAction } from '@/actions/about';
-import { AboutGeneralForm, AboutTranslations } from '@/components/about/private';
 import {
   Card,
   CardDescription,
@@ -11,6 +9,9 @@ import {
   TabsList,
   TabsTrigger,
 } from '@/components/ui';
+import { fetchAboutAction } from './actions';
+import { GeneralForm } from './components/GeneralForm';
+import { Translations } from './components/Translations';
 
 export default async function page() {
   const initialData = await fetchAboutAction();
@@ -46,10 +47,10 @@ export default async function page() {
           </TabsTrigger>
         </TabsList>
         <TabsContent value="general">
-          <AboutGeneralForm initialData={initialData.general} />
+          <GeneralForm initialData={initialData.general} />
         </TabsContent>
         <TabsContent value="translations">
-          <AboutTranslations initialData={initialData.translations} />
+          <Translations initialData={initialData.translations} />
         </TabsContent>
       </Tabs>
     </div>

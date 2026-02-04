@@ -17,14 +17,14 @@ import {
   Form,
 } from '@/components/ui';
 import { FormImageUpload, FormInput, FormTagsInput, Spinner } from '@/components/common';
-import { aboutGeneralFormSchema, type AboutGeneralFormValues } from '@/lib/validations';
-import { updateGeneralInfoAction } from '@/actions/about';
+import { aboutGeneralFormSchema, type AboutGeneralFormValues } from '../validations';
+import { updateGeneralInfoAction } from '../actions';
 
 interface Props {
   initialData?: Partial<AboutGeneralFormValues>;
 }
 
-export function AboutGeneralForm({ initialData = {} }: Props) {
+export function GeneralForm({ initialData = {} }: Props) {
   const { data: session } = useSession();
   const submitRef = useRef<HTMLButtonElement | null>(null);
   const [isPending, startTransition] = useTransition();

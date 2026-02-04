@@ -16,15 +16,15 @@ import {
 } from 'lucide-react';
 import { Button, Card, CardContent, CardHeader, CardTitle, Form } from '@/components/ui';
 import { FormFileUpload, FormInput, FormSelect, FormTextArea, Spinner } from '@/components/common';
-import { addNewTranslationAction } from '@/actions/about';
-import { aboutTranslationFormSchema, type AboutTranslationFormValues } from '@/lib/validations';
+import { aboutTranslationFormSchema, type AboutTranslationFormValues } from '../validations';
+import { addNewTranslationAction } from '../actions';
 
 interface Props {
   session: Session | null;
   cancelNew: () => void;
   locales: Array<{ code: string; name: string; flag: string }>;
 }
-export function AddTranslationAboutForm({ cancelNew, locales, session }: Props) {
+export function AddTranslationForm({ cancelNew, locales, session }: Props) {
   const [isPending, startTransition] = useTransition();
   const form = useForm<AboutTranslationFormValues>({
     resolver: zodResolver(aboutTranslationFormSchema),

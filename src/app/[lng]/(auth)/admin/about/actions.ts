@@ -4,8 +4,8 @@ import { ZodError } from 'zod';
 import { auth } from '@/auth';
 import { revalidateTag } from 'next/cache';
 import { publicEnv } from '@/config/env.public';
-import { aboutGeneralFormServerSchema, aboutTranslationFormServerSchema } from '@/lib/validations';
 import { AboutAll } from '@/types-portfolio/about';
+import { aboutGeneralFormServerSchema, aboutTranslationFormServerSchema } from './validations';
 
 const API_URL = publicEnv.NEXT_PUBLIC_API_URL;
 

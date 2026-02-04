@@ -4,14 +4,14 @@ import { useTransition } from 'react';
 import { toast } from 'sonner';
 import { Session } from 'next-auth';
 import { DownloadIcon, Trash2Icon } from 'lucide-react';
-import { deleteTranslationAction, editTranslationAction } from '@/actions/about';
 import { ConfirmDialog } from '@/components/common';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui';
 import { publicEnv } from '@/config/env.public';
 import { AVAILABLE_LOCALES } from '@/lib/i18n';
-import { type AboutTranslationFormValues } from '@/lib/validations';
 import { AboutTranslation } from '@/types-portfolio/about';
-import { DialogAboutTranslationEdit } from './DialogAboutTranslationEdit';
+import type { AboutTranslationFormValues } from '../validations';
+import { deleteTranslationAction, editTranslationAction } from '../actions';
+import { DialogTranslationEdit } from './DialogTranslationEdit';
 
 const API_URL = publicEnv.NEXT_PUBLIC_API_URL;
 
@@ -28,7 +28,7 @@ interface Props {
   session: Session | null;
   translation: AboutTranslation;
 }
-export function TranslationAboutCard({ session, translation }: Props) {
+export function TranslationCard({ session, translation }: Props) {
   const [isPending, startTransition] = useTransition();
   const localeInfo = getLocaleInfo(translation.locale);
 
@@ -88,7 +88,7 @@ export function TranslationAboutCard({ session, translation }: Props) {
         </div>
 
         <div className="flex gap-2">
-          <DialogAboutTranslationEdit
+          <DialogTranslationEdit
             translation={translation}
             localeInfo={localeInfo}
             handleEdit={handleEdit}

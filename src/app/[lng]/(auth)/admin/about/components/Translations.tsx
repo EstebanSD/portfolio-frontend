@@ -6,13 +6,13 @@ import { useSession } from 'next-auth/react';
 import { AboutTranslation } from '@/types-portfolio/about';
 import { getAvailableLocales } from '@/utils';
 import { Button, Card, CardContent } from '@/components/ui';
-import { AddTranslationAboutForm } from './AddTranslationAboutForm';
-import { TranslationAboutCard } from './TranslationAboutCard';
+import { AddTranslationForm } from './AddTranslationForm';
+import { TranslationCard } from './TranslationCard';
 
 interface Props {
   initialData?: AboutTranslation[];
 }
-export function AboutTranslations({ initialData }: Props) {
+export function Translations({ initialData }: Props) {
   const { data: session } = useSession();
   const [translations, setTranslations] = useState<AboutTranslation[]>([]);
   const [isAddNew, setIsAddNew] = useState<boolean>(false);
@@ -40,7 +40,7 @@ export function AboutTranslations({ initialData }: Props) {
 
       {/* Add New Translation */}
       {isAddNew && (
-        <AddTranslationAboutForm
+        <AddTranslationForm
           cancelNew={() => setIsAddNew(false)}
           locales={locales}
           session={session}
@@ -58,11 +58,7 @@ export function AboutTranslations({ initialData }: Props) {
           </Card>
         ) : (
           translations.map((translation) => (
-            <TranslationAboutCard
-              key={translation._id}
-              translation={translation}
-              session={session}
-            />
+            <TranslationCard key={translation._id} translation={translation} session={session} />
           ))
         )}
       </div>
