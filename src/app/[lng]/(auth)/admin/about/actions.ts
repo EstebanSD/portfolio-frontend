@@ -2,7 +2,6 @@
 
 import { ZodError } from 'zod';
 import { auth } from '@/auth';
-import { revalidateTag } from 'next/cache';
 import { publicEnv } from '@/config/env.public';
 import { AboutAll } from '@/types-portfolio/about';
 import { aboutGeneralFormServerSchema, aboutTranslationFormServerSchema } from './validations';
@@ -13,11 +12,7 @@ export async function fetchAboutAction() {
   const session = await auth();
   try {
     const res = await fetch(`${API_URL}/portfolio/about`, {
-      cache: 'force-cache',
-      next: {
-        revalidate: 3600,
-        tags: ['about-all'],
-      },
+      cache: 'no-store',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${session?.accessToken}`,
@@ -98,8 +93,6 @@ export async function updateGeneralInfoAction(formData: FormData, accessToken: s
 
     const result = await res.json();
 
-    revalidateTag('about-all', 'max');
-
     return {
       success: true,
       message: 'General information updated successfully',
@@ -166,8 +159,6 @@ export async function addNewTranslationAction(formData: FormData, accessToken: s
 
     const result = await res.json();
 
-    revalidateTag('about-all', 'max');
-
     return { success: true, message: 'Translation added successfully', data: result };
   } catch (error) {
     if (error instanceof ZodError) {
@@ -230,8 +221,6 @@ export async function editTranslationAction(formData: FormData, accessToken: str
 
     const result = await res.json();
 
-    revalidateTag('about-all', 'max');
-
     return { success: true, message: 'Translation edited successfully', data: result };
   } catch (error) {
     if (error instanceof ZodError) {
@@ -263,8 +252,6 @@ export async function deleteTranslationAction(locale: string, accessToken: strin
       console.error('Error deleting translation:', errorData);
       throw new Error(`Error HTTP: ${res.status}`);
     }
-
-    revalidateTag('about-all', 'max');
 
     return { success: true, message: 'Translation deleted successfully', data: null };
   } catch (error) {
