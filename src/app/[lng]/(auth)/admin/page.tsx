@@ -1,12 +1,23 @@
-import { serverTranslation } from '@/lib/i18n/server';
+import Link from 'next/link';
+import { Button } from '@/components/ui';
+import { HomeIcon } from 'lucide-react';
 
-export default async function HomePage({ params }: PageProps<'/[lng]/admin'>) {
-  const { lng } = await params;
-  const { t } = await serverTranslation(lng, 'common');
-
+export default function HomePage() {
   return (
-    <div className="flex h-screen items-center justify-center">
-      <h1>{t('welcome')}</h1>
+    <div className="flex flex-col items-center mt-10 space-y-8">
+      <section>
+        <h1 className="text-2xl font-semibold">Dashboard</h1>
+        <p className="text-muted-foreground">Overview of your portfolio administration</p>
+      </section>
+
+      <div>
+        <Button asChild>
+          <Link href="/">
+            <HomeIcon className="w-5 h-5 mr-2" />
+            <span>Go to Public Page</span>
+          </Link>
+        </Button>
+      </div>
     </div>
   );
 }

@@ -1,8 +1,8 @@
-import { PlusIcon } from 'lucide-react';
-import { ProjectsManagement } from '@/components/projects/private';
-import { fetchProjectsAction } from '@/actions/projects';
-import { Button } from '@/components/ui';
 import Link from 'next/link';
+import { PlusIcon } from 'lucide-react';
+import { Button } from '@/components/ui';
+import { fetchProjectsAction } from './actions';
+import { ProjectsManagement } from './components/ProjectsManagement';
 
 export default async function page() {
   const projects = await fetchProjectsAction();

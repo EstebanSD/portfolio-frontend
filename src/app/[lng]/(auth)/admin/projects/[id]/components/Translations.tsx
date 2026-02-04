@@ -2,18 +2,18 @@
 
 import { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
+import { FolderXIcon, PlusIcon } from 'lucide-react';
 import { Button, Card, CardContent } from '@/components/ui';
 import { ProjectTranslation } from '@/types-portfolio/project';
-import { FolderXIcon, PlusIcon } from 'lucide-react';
 import { getAvailableLocales } from '@/utils';
-import { AddTranslationProjectForm } from './AddTranslationProjectForm';
-import { TranslationProjectCard } from './TranslationProjectCard';
+import { AddTranslationForm } from './AddTranslationForm';
+import { TranslationCard } from './TranslationCard';
 
 interface Props {
   projectId: string;
   initialData?: ProjectTranslation[];
 }
-export function ProjectTranslations({ projectId, initialData }: Props) {
+export function Translations({ projectId, initialData }: Props) {
   const { data: session } = useSession();
   const [translations, setTranslations] = useState<ProjectTranslation[]>([]);
   const [isAddNew, setIsAddNew] = useState<boolean>(false);
@@ -41,7 +41,7 @@ export function ProjectTranslations({ projectId, initialData }: Props) {
 
       {/* Add New Translation */}
       {isAddNew && (
-        <AddTranslationProjectForm
+        <AddTranslationForm
           projectId={projectId}
           cancelNew={() => setIsAddNew(false)}
           locales={locales}
@@ -60,7 +60,7 @@ export function ProjectTranslations({ projectId, initialData }: Props) {
           </Card>
         ) : (
           translations.map((translation) => (
-            <TranslationProjectCard
+            <TranslationCard
               projectId={projectId}
               key={translation._id}
               translation={translation}

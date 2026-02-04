@@ -9,7 +9,7 @@ import { SiGithub } from 'react-icons/si';
 import { getStatusColor, getTypeColor } from '@/utils';
 import { ProjectWithTranslations } from '@/types-portfolio/project';
 import { ConfirmDialog } from '@/components/common';
-import { deleteProjectAction } from '@/actions/projects';
+import { deleteProjectAction } from '../actions';
 
 const PROJECT_TYPES = {
   personal: 'Personal',
@@ -29,7 +29,7 @@ interface Props {
 }
 
 // MOBILE
-export function PrivProjectCard({ session, project }: Props) {
+export function ProjectCard({ session, project }: Props) {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
 

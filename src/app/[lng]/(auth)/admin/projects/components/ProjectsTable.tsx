@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import { format } from 'date-fns';
 import { ExternalLinkIcon, EyeIcon, MoreHorizontalIcon, Trash2Icon } from 'lucide-react';
 import { SiGithub } from 'react-icons/si';
+import { ConfirmDialog } from '@/components/common';
 import {
   Badge,
   Button,
@@ -23,8 +24,7 @@ import {
 } from '@/components/ui';
 import { ProjectWithTranslations } from '@/types-portfolio/project';
 import { getStatusColor, getTypeColor } from '@/utils';
-import { deleteProjectAction } from '@/actions/projects';
-import { ConfirmDialog } from '@/components/common';
+import { deleteProjectAction } from '../actions';
 
 interface Props {
   session: Session | null;

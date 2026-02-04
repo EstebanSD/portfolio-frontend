@@ -3,14 +3,14 @@
 import { useTransition } from 'react';
 import { toast } from 'sonner';
 import { Session } from 'next-auth';
-import { ProjectTranslation } from '@/types-portfolio/project';
-import { AVAILABLE_LOCALES } from '@/lib/i18n';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui';
-import { type ProjectTranslationFormValues } from '@/lib/validations';
-import { ConfirmDialog } from '@/components/common';
-import { deleteTranslationAction, editTranslationAction } from '@/actions/projects';
-import { DialogProjectTranslationEdit } from './DialogProjectTranslationEdit';
 import { Trash2Icon } from 'lucide-react';
+import { AVAILABLE_LOCALES } from '@/lib/i18n';
+import { ConfirmDialog } from '@/components/common';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui';
+import { ProjectTranslation } from '@/types-portfolio/project';
+import { type ProjectTranslationFormValues } from '../../validations';
+import { deleteTranslationAction, editTranslationAction } from '../../actions';
+import { DialogTranslationEdit } from './DialogTranslationEdit';
 
 const getLocaleInfo = (code: string) => AVAILABLE_LOCALES.find((l) => l.code === code);
 
@@ -19,7 +19,7 @@ interface Props {
   session: Session | null;
   translation: ProjectTranslation;
 }
-export function TranslationProjectCard({ projectId, session, translation }: Props) {
+export function TranslationCard({ projectId, session, translation }: Props) {
   const [isPending, startTransition] = useTransition();
   const localeInfo = getLocaleInfo(translation.locale);
 
@@ -69,7 +69,7 @@ export function TranslationProjectCard({ projectId, session, translation }: Prop
         </div>
 
         <div className="flex gap-2">
-          <DialogProjectTranslationEdit
+          <DialogTranslationEdit
             translation={translation}
             localeInfo={localeInfo}
             handleEdit={handleEdit}

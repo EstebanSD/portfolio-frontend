@@ -8,8 +8,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { BriefcaseIcon, FileTextIcon, GlobeIcon, SaveIcon, XIcon } from 'lucide-react';
 import { Button, Card, CardContent, CardHeader, CardTitle, Form } from '@/components/ui';
 import { FormInput, FormSelect, FormTextArea, Spinner } from '@/components/common';
-import { addNewTranslationAction } from '@/actions/projects';
-import { projectTranslationFormSchema, type ProjectTranslationFormValues } from '@/lib/validations';
+import { projectTranslationFormSchema, type ProjectTranslationFormValues } from '../../validations';
+import { addNewTranslationAction } from '../../actions';
 
 interface Props {
   projectId: string;
@@ -17,7 +17,7 @@ interface Props {
   cancelNew: () => void;
   locales: Array<{ code: string; name: string; flag: string }>;
 }
-export function AddTranslationProjectForm({ projectId, cancelNew, locales, session }: Props) {
+export function AddTranslationForm({ projectId, cancelNew, locales, session }: Props) {
   const [isPending, startTransition] = useTransition();
   const form = useForm<ProjectTranslationFormValues>({
     resolver: zodResolver(projectTranslationFormSchema),

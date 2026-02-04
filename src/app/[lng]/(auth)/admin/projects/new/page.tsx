@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import { ProjectForm } from '@/components/projects/private';
+import { ProjectForm } from './components/ProjectForm';
 
 export const metadata: Metadata = {
   title: 'Add Project',

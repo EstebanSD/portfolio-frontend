@@ -1,5 +1,4 @@
-import { fetchProjectIdAction } from '@/actions/projects';
-import { ProjectGeneral, ProjectTranslations } from '@/components/projects/private';
+import { FolderIcon, GlobeIcon } from 'lucide-react';
 import {
   Card,
   CardDescription,
@@ -10,7 +9,9 @@ import {
   TabsList,
   TabsTrigger,
 } from '@/components/ui';
-import { FolderIcon, GlobeIcon } from 'lucide-react';
+import { fetchProjectIdAction } from '../actions';
+import { GeneralForm } from './components/GeneralForm';
+import { Translations } from './components/Translations';
 
 export default async function page({ params }: PageProps<'/[lng]/admin/projects/[id]'>) {
   const { id } = await params;
@@ -47,10 +48,10 @@ export default async function page({ params }: PageProps<'/[lng]/admin/projects/
           </TabsTrigger>
         </TabsList>
         <TabsContent value="general">
-          <ProjectGeneral projectId={id} initialData={projectData.general} />
+          <GeneralForm projectId={id} initialData={projectData.general} />
         </TabsContent>
         <TabsContent value="translations">
-          <ProjectTranslations projectId={id} initialData={projectData.translations} />
+          <Translations projectId={id} initialData={projectData.translations} />
         </TabsContent>
       </Tabs>
     </div>

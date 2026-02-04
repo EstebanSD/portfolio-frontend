@@ -1,11 +1,20 @@
 'use client';
 
-import { useRef, useTransition } from 'react';
-import { toast } from 'sonner';
+import { useEffect, useRef, useTransition } from 'react';
 import { useSession } from 'next-auth/react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, Card, CardContent, CardFooter, Form } from '@/components/ui';
+import { toast } from 'sonner';
+import {
+  Button,
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+  Form,
+} from '@/components/ui';
 import {
   FormDatePicker,
   FormImageUpload,
@@ -14,10 +23,15 @@ import {
   FormTagsInput,
   Spinner,
 } from '@/components/common';
-import { projectFormSchema, ProjectFormValues } from '@/lib/validations';
-import { addNewProjectAction } from '@/actions/projects';
+import { projectFormSchema, ProjectFormValues } from '../../validations';
+import { updateGeneralInfoAction } from '../../actions';
 
-export function ProjectForm() {
+interface Props {
+  projectId: string;
+  initialData?: Partial<ProjectFormValues>;
+}
+
+export function GeneralForm({ projectId, initialData = {} }: Props) {
   const { data: session } = useSession();
   const submitRef = useRef<HTMLButtonElement | null>(null);
   const [isPending, startTransition] = useTransition();
@@ -25,17 +39,17 @@ export function ProjectForm() {
   const form = useForm<ProjectFormValues>({
     resolver: zodResolver(projectFormSchema),
     defaultValues: {
-      title: '',
-      type: 'personal',
-      status: 'completed',
-      startDate: '',
-      endDate: '',
-      technologies: [],
+      title: initialData?.title || '',
+      status: initialData?.status || 'completed',
+      type: initialData?.type || 'personal',
+      startDate: initialData?.startDate || '',
+      endDate: initialData?.endDate || '',
+      technologies: initialData?.technologies || [],
       links: {
-        github: '',
-        website: '',
+        github: initialData?.links?.github || '',
+        website: initialData?.links?.website || '',
       },
-      files: [],
+      files: undefined,
     },
   });
 
@@ -67,31 +81,52 @@ export function ProjectForm() {
           cleanData.links = undefined;
         }
 
-        await addNewProjectAction(cleanData, session.accessToken);
+        await updateGeneralInfoAction(projectId, cleanData, session.accessToken);
 
-        toast.success('Project added successfully');
-        form.reset();
+        toast.success('General Information updated successfully');
+        form.reset(values);
       } catch (error) {
-        const errorMessage =
-          error instanceof Error ? error.message : 'An unexpected error occurred';
-        if (errorMessage.includes('409')) {
-          toast.error('Project with this title already exists');
-        } else {
-          toast.error(errorMessage);
-        }
+        toast.error('Failed to update General Information');
         console.error('Submit error:', error);
       }
     });
   }
 
+  useEffect(() => {
+    if (initialData) {
+      form.reset({
+        title: initialData.title || '',
+        status: initialData.status || 'completed',
+        type: initialData.type || 'personal',
+        startDate: initialData.startDate || '',
+        endDate: initialData.endDate || '',
+        technologies: initialData.technologies || [],
+        links: {
+          github: initialData.links?.github || '',
+          website: initialData.links?.website || '',
+        },
+        files: undefined,
+      });
+    }
+  }, [initialData, form]);
+
   return (
     <Card>
+      <CardHeader>
+        <CardTitle>General Information</CardTitle>
+        <CardDescription>
+          Make changes to the general information here. Click Save when you&apos;re done.
+        </CardDescription>
+      </CardHeader>
       <CardContent>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="grid grid-cols-1 gap-4 lg:gap-6">
-            <FormInput required name={'title'} label={'Title'} placeholder={'Project Title'} />
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="grid grid-cols-1 lg:grid-cols-2 gap-6"
+          >
+            <FormInput required name="title" label={'Title'} placeholder="Project Title" />
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
+            <div className="grid grid-cols-2 gap-6">
               <FormRadioGroup
                 required
                 name={'type'}
@@ -113,7 +148,8 @@ export function ProjectForm() {
                   { label: 'Paused', value: 'paused' },
                 ]}
               />
-
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <FormDatePicker
                 required={watchedStatus === 'completed'}
                 name="startDate"
@@ -130,7 +166,6 @@ export function ProjectForm() {
                 fromYear={2000}
               />
             </div>
-
             <FormTagsInput
               name="technologies"
               label="Technologies"
@@ -164,12 +199,7 @@ export function ProjectForm() {
         </Form>
       </CardContent>
       <CardFooter>
-        <Button
-          type={'submit'}
-          variant={'success'}
-          onClick={() => submitRef.current?.click()}
-          disabled={isPending}
-        >
+        <Button variant={'success'} onClick={() => submitRef.current?.click()} disabled={isPending}>
           <Spinner loading={isPending} text={'Save changes'} loadingText={'Saving...'} />
         </Button>
       </CardFooter>

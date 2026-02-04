@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { FormInput, Spinner } from '@/components/common';
 import { Button, Form } from '@/components/ui';
-import { loginFormSchema, type LoginFormValues } from '@/lib/validations';
+import { loginFormSchema, type LoginFormValues } from '@/lib/validations/auth';
 import { loginAction } from '@/actions/auth';
 
 export function LoginForm() {

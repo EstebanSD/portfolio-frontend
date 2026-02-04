@@ -26,8 +26,8 @@ import {
   SheetClose,
 } from '@/components/ui';
 import { useIsMobile } from '@/hooks/useIsMobile';
-import { ProjectTranslation } from '@/types-portfolio/project';
 import { FormInput, FormTextArea, Spinner } from '@/components/common';
+import { ProjectTranslation } from '@/types-portfolio/project';
 
 const translationFormSchema = z.object({
   locale: z.string().nonempty('This field is required.'),
@@ -48,12 +48,7 @@ interface Props {
     | undefined;
   isLoading: boolean;
 }
-export function DialogProjectTranslationEdit({
-  translation,
-  localeInfo,
-  handleEdit,
-  isLoading,
-}: Props) {
+export function DialogTranslationEdit({ translation, localeInfo, handleEdit, isLoading }: Props) {
   const [open, setOpen] = useState(false);
   const isMobile = useIsMobile();
 

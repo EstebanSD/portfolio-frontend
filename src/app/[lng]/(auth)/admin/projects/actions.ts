@@ -4,12 +4,12 @@ import { revalidateTag } from 'next/cache';
 import { ZodError } from 'zod';
 import { auth } from '@/auth';
 import { publicEnv } from '@/config/env.public';
-import { ProjectFormValues } from '@/lib/validations';
 import {
   ProjectIdWithTranslations,
   ProjectTranslation,
   ProjectWithTranslations,
 } from '@/types-portfolio/project';
+import { type ProjectFormValues } from './validations';
 
 const API_URL = publicEnv.NEXT_PUBLIC_API_URL;
 
