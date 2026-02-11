@@ -18,7 +18,7 @@ export function PrivateSidebar() {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton asChild>
-              <Link href={'/en/admin'}>
+              <Link href={'/admin'}>
                 <HomeIcon />
                 <span>Dashboard</span>
               </Link>

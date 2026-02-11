@@ -2,10 +2,10 @@ import { Suspense } from 'react';
 import Link from 'next/link';
 import { ChevronsDownIcon } from 'lucide-react';
 import { serverTranslation } from '@/lib/i18n/server';
-import { PublicProjects, PublicProjectsSkeleton } from '@/components/projects';
-import { PublicAbout, PublicAboutSkeleton } from '@/components/about';
-import { PublicSkills, PublicSkillsSkeleton } from '@/components/skills';
-import { PublicExperiences, PublicExperiencesSkeleton } from '@/components/experiences';
+import { AboutSection, AboutSkeletonSection } from './components/about';
+import { ProjectsSection, ProjectsSkeletonSection } from './components/projects';
+import { SkillsSection, SkillsSkeletonSection } from './components/skills';
+import { ExperiencesSkeletonSection, ExperiencesSection } from './components/experiences';
 
 export default async function HomePage({ params }: PageProps<'/[lng]'>) {
   const { lng } = await params;
@@ -34,20 +34,20 @@ export default async function HomePage({ params }: PageProps<'/[lng]'>) {
         </div>
       </section>
 
-      <Suspense fallback={<PublicAboutSkeleton lng={lng} />}>
-        <PublicAbout lng={lng} />
+      <Suspense fallback={<AboutSkeletonSection lng={lng} />}>
+        <AboutSection lng={lng} />
       </Suspense>
 
-      <Suspense fallback={<PublicProjectsSkeleton lng={lng} />}>
-        <PublicProjects lng={lng} />
+      <Suspense fallback={<ProjectsSkeletonSection lng={lng} />}>
+        <ProjectsSection lng={lng} />
       </Suspense>
 
-      <Suspense fallback={<PublicSkillsSkeleton lng={lng} />}>
-        <PublicSkills lng={lng} />
+      <Suspense fallback={<SkillsSkeletonSection lng={lng} />}>
+        <SkillsSection lng={lng} />
       </Suspense>
 
-      <Suspense fallback={<PublicExperiencesSkeleton lng={lng} />}>
-        <PublicExperiences lng={lng} />
+      <Suspense fallback={<ExperiencesSkeletonSection lng={lng} />}>
+        <ExperiencesSection lng={lng} />
       </Suspense>
     </div>
   );

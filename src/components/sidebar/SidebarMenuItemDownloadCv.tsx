@@ -2,12 +2,13 @@
 
 import { useState, useEffect } from 'react';
 import { FileIcon, AlertCircleIcon } from 'lucide-react';
-import { cn } from '@/lib/shadcn/utils';
+import { publicEnv } from '@/config/env.public';
 import { MINUTE } from '@/constants/times';
-import { SidebarMenuButton, SidebarMenuItem, useSidebar } from '../ui';
 import { useTranslation } from '@/lib/i18n/client';
+import { cn } from '@/lib/shadcn/utils';
+import { SidebarMenuButton, SidebarMenuItem, useSidebar } from '../ui';
 
-const apiUrl = process.env.NEXT_PUBLIC_API_URL!;
+const API_URL = publicEnv.NEXT_PUBLIC_API_URL;
 
 // Cache simple in memory
 const cvAvailabilityCache = new Map<string, { available: boolean; timestamp: number }>();
@@ -37,7 +38,7 @@ export function SidebarMenuItemDownloadCv({ lng, className }: SidebarMenuItemDow
 
     setIsChecking(true);
     try {
-      const response = await fetch(`${apiUrl}/portfolio/about/resume/download?locale=${lng}`, {
+      const response = await fetch(`${API_URL}/portfolio/about/resume/download?locale=${lng}`, {
         method: 'HEAD',
         signal: AbortSignal.timeout(5000), // 5s timeout
       });
@@ -60,7 +61,7 @@ export function SidebarMenuItemDownloadCv({ lng, className }: SidebarMenuItemDow
 
   const handleDownload = () => {
     if (isAvailable) {
-      window.open(`${apiUrl}/portfolio/about/resume/download?locale=${lng}`, '_blank');
+      window.open(`${API_URL}/portfolio/about/resume/download?locale=${lng}`, '_blank');
     } else {
       checkAvailability(); // Retry
     }

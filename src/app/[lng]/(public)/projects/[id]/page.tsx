@@ -9,6 +9,7 @@ import {
   GlobeIcon,
 } from 'lucide-react';
 import { SiGithub } from 'react-icons/si';
+import { CustomCarousel, EmptyStateCard } from '@/components/common';
 import {
   Badge,
   Button,
@@ -18,23 +19,24 @@ import {
   CardTitle,
   Separator,
 } from '@/components/ui';
+import { publicEnv } from '@/config/env.public';
+import { serverTranslation } from '@/lib/i18n/server';
 import { Project } from '@/types-portfolio/project';
 import { formatDate, getStatusColor, getTypeIcon } from '@/utils';
-import { serverTranslation } from '@/lib/i18n/server';
-import { CustomCarousel, EmptyStateCard } from '@/components/common';
+
+const API_URL = publicEnv.NEXT_PUBLIC_API_URL;
 
 export const metadata: Metadata = {
   title: 'Project Details',
   description: 'Detailed view of a specific project in the portfolio',
 };
 
-const apiUrl = process.env.NEXT_PUBLIC_API_URL!;
 export default async function page({ params }: PageProps<'/[lng]/projects/[id]'>) {
   const { lng, id } = await params;
   const { t } = await serverTranslation(lng, 'projects');
 
   try {
-    const response = await fetch(`${apiUrl}/portfolio/projects/${id}/locale/${lng}`, {
+    const response = await fetch(`${API_URL}/portfolio/projects/${id}/locale/${lng}`, {
       cache: 'no-store',
       headers: {
         'Content-Type': 'application/json',

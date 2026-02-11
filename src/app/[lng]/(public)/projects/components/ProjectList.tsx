@@ -1,10 +1,11 @@
 import { use } from 'react';
+import { EmptyStatePage } from '@/components/common';
+import { publicEnv } from '@/config/env.public';
 import { serverTranslation } from '@/lib/i18n/server';
 import { Project, ProjectQueryFilters } from '@/types-portfolio/project';
-import { EmptyStatePage } from '@/components/common';
-import { ProjectCard } from '@/components/projects';
+import { ProjectCard } from '../../components/projects';
 
-const apiUrl = process.env.NEXT_PUBLIC_API_URL!;
+const API_URL = publicEnv.NEXT_PUBLIC_API_URL;
 
 async function getProjects(lng: string, filters: ProjectQueryFilters) {
   const params = new URLSearchParams();
@@ -14,7 +15,7 @@ async function getProjects(lng: string, filters: ProjectQueryFilters) {
   if (filters.status && filters.status !== 'all') params.append('status', filters.status);
   if (filters.type && filters.type !== 'all') params.append('type', filters.type);
 
-  const response = await fetch(`${apiUrl}/portfolio/projects?${params}`, {
+  const response = await fetch(`${API_URL}/portfolio/projects?${params}`, {
     cache: 'no-store',
     headers: {
       'Content-Type': 'application/json',
