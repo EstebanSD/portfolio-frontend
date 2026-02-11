@@ -1,7 +1,7 @@
 'use server';
 
 import { ZodError } from 'zod';
-import { CredentialsSignin } from 'next-auth';
+import { AuthError } from 'next-auth';
 import { auth, signIn, signOut } from '@/auth';
 import { LoginFormValues } from '@/lib/validations/auth';
 
@@ -13,15 +13,21 @@ export async function loginAction(data: LoginFormValues) {
       redirect: false,
     });
   } catch (error) {
+    if (error instanceof AuthError) {
+      if (error.type === 'CredentialsSignin') {
+        throw new Error('Invalid credentials');
+      }
+
+      throw new Error('Authentication failed');
+    }
+
     if (error instanceof ZodError) {
-      const errorMessages = error.errors.map((e) => `${e.path.join('.')}: ${e.message}`);
-      throw new Error(`Validation errors: ${errorMessages.join(', ')}`);
+      const message = error.errors.map((e) => `${e.path.join('.')}: ${e.message}`).join(', ');
+      throw new Error(`Validation errors: ${message}`);
     }
-    if (error instanceof CredentialsSignin) {
-      throw new Error('Invalid Credentials');
-    }
-    console.error('Error in login action:', error);
-    throw new Error('An unexpected error occurred trying to login.');
+
+    console.error('Unexpected login error:', error);
+    throw new Error('Unexpected error during login.');
   }
 }
 
