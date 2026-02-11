@@ -3,7 +3,7 @@
 import { ZodError } from 'zod';
 import { CredentialsSignin } from 'next-auth';
 import { auth, signIn, signOut } from '@/auth';
-import { LoginFormValues } from '@/lib/validations';
+import { LoginFormValues } from '@/lib/validations/auth';
 
 export async function loginAction(data: LoginFormValues) {
   try {

@@ -21,27 +21,27 @@ import {
 const items = [
   {
     title: 'About',
-    url: '/en/admin/about',
+    url: '/admin/about',
     icon: ContactIcon,
   },
   {
     title: 'Projects',
-    url: '/en/admin/projects',
+    url: '/admin/projects',
     icon: FolderCodeIcon,
   },
   {
     title: 'Skills',
-    url: '/en/admin/skills',
+    url: '/admin/skills',
     icon: BrainCircuitIcon,
   },
   {
     title: 'Experiences',
-    url: '/en/admin/experiences',
+    url: '/admin/experiences',
     icon: BriefcaseIcon,
   },
   {
     title: 'Contact',
-    url: '/en/admin/contact',
+    url: '/admin/contact',
     icon: MailIcon,
   },
 ];
