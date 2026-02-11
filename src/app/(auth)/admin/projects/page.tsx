@@ -37,7 +37,7 @@ export default async function page() {
         </div>
 
         <Button asChild>
-          <Link href={'/en/admin/projects/new'}>
+          <Link href={'/admin/projects/new'}>
             <PlusIcon className="mr-2 h-4 w-4" />
             Add Project
           </Link>

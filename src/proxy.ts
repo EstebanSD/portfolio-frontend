@@ -4,70 +4,62 @@ import { auth as middleware } from './auth';
 import { languages, fallbackLng, i18CookieName } from './lib/i18n/settings';
 import { Language } from './lib/i18n';
 
+const NON_I18N_ROUTES = ['/admin', '/auth'];
+
 export default middleware((req: NextRequest) => {
   const pathname = req.nextUrl.pathname;
 
-  // 1. FIRST: Manage i18n
-  const pathnameHasLocale = languages.some(
-    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`,
+  // 0. Skip i18n for non-localized routes
+  const isNonI18nRoute = NON_I18N_ROUTES.some(
+    (route) => pathname === route || pathname.startsWith(`${route}/`),
   );
 
-  if (!pathnameHasLocale) {
-    let locale = fallbackLng;
+  // 1. i18n handling (ONLY for localized public routes)
+  if (!isNonI18nRoute) {
+    const pathnameHasLocale = languages.some(
+      (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`,
+    );
 
-    // Check language cookie
-    const cookieLocale = req.cookies.get(i18CookieName)?.value as Language | undefined;
-    if (cookieLocale && languages.includes(cookieLocale)) {
-      locale = cookieLocale;
-    } else {
-      // Use Accept-Language header
-      const acceptLanguage = req.headers.get('accept-language');
-      if (acceptLanguage) {
-        const preferredLocale = acceptLanguage
-          .split(',')
-          .map((lang) => lang.split(';')[0].trim())
-          .find((lang) => languages.includes(lang as Language));
+    if (!pathnameHasLocale) {
+      let locale = fallbackLng;
 
-        if (preferredLocale) {
-          locale = preferredLocale as Language;
+      // Cookie
+      const cookieLocale = req.cookies.get(i18CookieName)?.value as Language | undefined;
+      if (cookieLocale && languages.includes(cookieLocale)) {
+        locale = cookieLocale;
+      } else {
+        // Accept-Language
+        const acceptLanguage = req.headers.get('accept-language');
+        if (acceptLanguage) {
+          const preferredLocale = acceptLanguage
+            .split(',')
+            .map((lang) => lang.split(';')[0].trim())
+            .find((lang) => languages.includes(lang as Language));
+
+          if (preferredLocale) {
+            locale = preferredLocale as Language;
+          }
         }
       }
-    }
 
-    // Redirect with the language in the URL
-    const redirectUrl = new URL(`/${locale}${pathname}`, req.url);
-    return NextResponse.redirect(redirectUrl);
+      return NextResponse.redirect(new URL(`/${locale}${pathname}`, req.url));
+    }
   }
 
-  // 2. SECOND: Handling authentication
-
-  // Extract the path without language to verify if it is a protected path.
-  const pathWithoutLocale = pathname.replace(/^\/[a-z]{2}(\/|$)/, '/');
-
-  // Define routes that require authentication
-  const protectedRoutes = ['/admin'];
-  const isProtectedRoute = protectedRoutes.some((route) => pathWithoutLocale.startsWith(route));
-
-  if (isProtectedRoute) {
-    const currentLocale = pathname.split('/')[1];
-    // Check for token errors
+  // 2. Authentication / Authorization (admin only)
+  if (pathname === '/admin' || pathname.startsWith('/admin/')) {
     if (req.auth?.error === 'RefreshAccessTokenError' || req.auth?.error === 'InvalidTokenError') {
-      const loginUrl = new URL(`/${currentLocale}/auth/login`, req.url);
-      // Optional: add query param to display session expired message
+      const loginUrl = new URL('/auth/login', req.url);
       loginUrl.searchParams.set('error', 'SessionExpired');
       return NextResponse.redirect(loginUrl);
     }
-    // Verify if the user is authenticated
+
     if (!req.auth) {
-      // Extract current language from the URL for the redirect
-      const loginUrl = new URL(`/${currentLocale}/auth/login`, req.url);
-      return NextResponse.redirect(loginUrl);
+      return NextResponse.redirect(new URL('/auth/login', req.url));
     }
 
-    // Optional: Check admin role
     if (req.auth.user?.role !== 'Admin') {
-      const unauthorizedUrl = new URL(`/${currentLocale}/unauthorized`, req.url);
-      return NextResponse.redirect(unauthorizedUrl);
+      return NextResponse.redirect(new URL('/unauthorized', req.url));
     }
   }
 

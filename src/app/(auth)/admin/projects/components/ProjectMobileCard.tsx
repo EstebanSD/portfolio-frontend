@@ -29,7 +29,7 @@ interface Props {
 }
 
 // MOBILE
-export function ProjectCard({ session, project }: Props) {
+export function ProjectMobileCard({ session, project }: Props) {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
 
@@ -49,7 +49,7 @@ export function ProjectCard({ session, project }: Props) {
   };
 
   const handleEdit = (project: ProjectWithTranslations) => {
-    router.push(`/en/admin/projects/${project._id}`);
+    router.push(`/admin/projects/${project._id}`);
   };
 
   return (

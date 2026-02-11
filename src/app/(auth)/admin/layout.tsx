@@ -1,7 +1,7 @@
+import { cookies } from 'next/headers';
 import { PrivateSidebar } from '@/components/auth';
 import { AuthSessionProvider } from '@/components/providers';
 import { SidebarProvider, SidebarTrigger } from '@/components/ui';
-import { cookies } from 'next/headers';
 
 export default async function PrivateLayout({ children }: { children: React.ReactNode }) {
   const cookieStore = await cookies();

@@ -13,7 +13,7 @@ import { fetchProjectIdAction } from '../actions';
 import { GeneralForm } from './components/GeneralForm';
 import { Translations } from './components/Translations';
 
-export default async function page({ params }: PageProps<'/[lng]/admin/projects/[id]'>) {
+export default async function page({ params }: PageProps<'/admin/projects/[id]'>) {
   const { id } = await params;
   const projectData = await fetchProjectIdAction(id);
   const tCount = projectData.translations.length;

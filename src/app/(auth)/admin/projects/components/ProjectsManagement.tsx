@@ -5,7 +5,7 @@ import { useSession } from 'next-auth/react';
 import { CalendarIcon, CheckCircleIcon, ClockIcon, FolderOpenIcon } from 'lucide-react';
 import { ProjectWithTranslations, RequiredProjectFilters } from '@/types-portfolio/project';
 import { ProjectsToolbar } from './ProjectsToolbar';
-import { ProjectCard } from './ProjectCard';
+import { ProjectMobileCard } from './ProjectMobileCard';
 import { StatsCard } from './StatsCard';
 import { ProjectsTable } from './ProjectsTable';
 
@@ -83,7 +83,7 @@ export function ProjectsManagement({ projectsCounts, projects }: Props) {
 
       <div className="grid grid-cols-1 md:hidden gap-4">
         {filteredProjects.map((project) => (
-          <ProjectCard key={project._id} project={project} session={session} />
+          <ProjectMobileCard key={project._id} project={project} session={session} />
         ))}
       </div>
     </div>

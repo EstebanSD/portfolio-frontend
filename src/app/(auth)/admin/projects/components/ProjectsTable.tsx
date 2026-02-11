@@ -52,7 +52,7 @@ export function ProjectsTable({ session, projects }: Props) {
   };
 
   const handleView = (project: ProjectWithTranslations) => {
-    router.push(`/en/admin/projects/${project._id}`);
+    router.push(`/admin/projects/${project._id}`);
   };
 
   if (!projects || projects.length === 0) {

@@ -28,7 +28,7 @@ export function LoginForm() {
       try {
         await loginAction(values);
 
-        router.replace('/en/admin');
+        router.replace('/admin');
       } catch (error) {
         const errorMessage =
           error instanceof Error ? error.message : 'An unexpected error occurred';
