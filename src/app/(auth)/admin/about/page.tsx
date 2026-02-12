@@ -21,14 +21,8 @@ export default async function page() {
     <div className="space-y-6 max-w-7xl mx-auto">
       <Card>
         <CardHeader>
-          <div className="flex justify-between items-center">
-            <div>
-              <CardTitle className="text-2xl">Manage About</CardTitle>
-              <CardDescription>
-                Administer your personal information and translations
-              </CardDescription>
-            </div>
-          </div>
+          <CardTitle className="text-2xl">Manage About</CardTitle>
+          <CardDescription>Administer your personal information and translations</CardDescription>
         </CardHeader>
       </Card>
 
