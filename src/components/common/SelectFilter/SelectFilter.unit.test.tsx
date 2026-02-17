@@ -13,7 +13,6 @@ describe('<SelectFilter /> (unit)', () => {
   test('renders label', () => {
     render(
       <SelectFilter
-        id="tech"
         label="Tech"
         placeholder="Select tech"
         options={OPTIONS}
@@ -30,7 +29,6 @@ describe('<SelectFilter /> (unit)', () => {
 
     render(
       <SelectFilter
-        id="tech"
         label="Tech"
         placeholder="Select tech"
         options={OPTIONS}
@@ -51,7 +49,6 @@ describe('<SelectFilter /> (unit)', () => {
 
     render(
       <SelectFilter
-        id="tech"
         label="Tech"
         placeholder="Select tech"
         options={OPTIONS}
