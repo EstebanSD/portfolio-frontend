@@ -1,3 +1,9 @@
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Skills Management',
+};
+
 export default function page() {
   return (
     <div className="space-y-6 max-w-7xl mx-auto">

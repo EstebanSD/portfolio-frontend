@@ -1,5 +1,12 @@
+import { Metadata } from 'next';
+import { Suspense } from 'react';
 import { fetchContactAction } from './actions';
 import { ContactForm } from './components/ContactForm';
+import { ContactFormSkeleton } from './components/ContactFormSkeleton';
+
+export const metadata: Metadata = {
+  title: 'Contact Management',
+};
 
 export default async function page() {
   const result = await fetchContactAction();
@@ -13,7 +20,9 @@ export default async function page() {
 
       <div className="flex items-center justify-center">
         <div className="max-w-md w-full p-4 border rounded-2xl">
-          <ContactForm initialValues={result.data || undefined} />
+          <Suspense fallback={<ContactFormSkeleton />}>
+            <ContactForm initialValues={result.data || undefined} />
+          </Suspense>
         </div>
       </div>
     </div>

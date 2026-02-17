@@ -13,4 +13,3 @@ export type Language = (typeof AVAILABLE_LANGUAGES)[number];
 export const DEFAULT_LOCALE: Language = 'en';
 
 export type Locale = (typeof AVAILABLE_LOCALES)[number];
-export type LocaleCode = Locale['code'];

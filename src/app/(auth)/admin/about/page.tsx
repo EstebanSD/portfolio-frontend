@@ -1,3 +1,4 @@
+import { Metadata } from 'next';
 import { GlobeIcon, UserIcon } from 'lucide-react';
 import {
   Card,
@@ -12,6 +13,10 @@ import {
 import { fetchAboutAction } from './actions';
 import { GeneralForm } from './components/GeneralForm';
 import { Translations } from './components/Translations';
+
+export const metadata: Metadata = {
+  title: 'Manage About',
+};
 
 export default async function page() {
   const initialData = await fetchAboutAction();

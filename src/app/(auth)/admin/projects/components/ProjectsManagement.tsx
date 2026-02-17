@@ -8,6 +8,7 @@ import { ProjectsToolbar } from './ProjectsToolbar';
 import { ProjectMobileCard } from './ProjectMobileCard';
 import { StatsCard } from './StatsCard';
 import { ProjectsTable } from './ProjectsTable';
+import { useIsMobile } from '@/hooks/useIsMobile';
 
 interface Props {
   projectsCounts: {
@@ -20,6 +21,7 @@ interface Props {
 }
 export function ProjectsManagement({ projectsCounts, projects }: Props) {
   const { data: session } = useSession();
+  const isMobile = useIsMobile();
   const [filters, setFilters] = useState<RequiredProjectFilters>({
     title: '',
     status: 'all',
@@ -73,19 +75,19 @@ export function ProjectsManagement({ projectsCounts, projects }: Props) {
         />
       </div>
 
-      <div className="hidden md:block rounded-lg border bg-card">
-        <div className="p-6">
+      {isMobile ? (
+        <div className="grid grid-cols-1 gap-4">
+          {filteredProjects.map((project) => (
+            <ProjectMobileCard key={project._id} project={project} session={session} />
+          ))}
+        </div>
+      ) : (
+        <div className="rounded-lg border bg-card p-6">
           <h2 className="text-xl font-semibold mb-4">Projects</h2>
 
           <ProjectsTable projects={filteredProjects} session={session} />
         </div>
-      </div>
-
-      <div className="grid grid-cols-1 md:hidden gap-4">
-        {filteredProjects.map((project) => (
-          <ProjectMobileCard key={project._id} project={project} session={session} />
-        ))}
-      </div>
+      )}
     </div>
   );
 }

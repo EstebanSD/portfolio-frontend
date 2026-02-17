@@ -2,8 +2,9 @@ import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import { Toaster } from 'sonner';
 import { languages } from '@/lib/i18n/settings';
-import './globals.css';
 import { ThemeProvider } from '@/components/providers';
+import { publicEnv } from '@/config/env.public';
+import './globals.css';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -15,7 +16,7 @@ const geistMono = Geist_Mono({
   subsets: ['latin'],
 });
 
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL!;
+const BASE_URL = publicEnv.NEXT_PUBLIC_BASE_URL;
 export const metadata: Metadata = {
   title: 'Esteban S.D. | Fullstack Developer Portfolio',
   description:
@@ -36,17 +37,17 @@ export const metadata: Metadata = {
     'Backend Developer',
     'Portfolio',
   ],
-  authors: [{ name: 'Esteban S.D.', url: baseUrl }],
+  authors: [{ name: 'Esteban S.D.', url: BASE_URL }],
   creator: 'Esteban S.D.',
   openGraph: {
     title: 'Esteban S.D. | Fullstack Developer Portfolio',
     description:
       'A personal portfolio showcasing projects, skills, and experience in web software development.',
-    url: baseUrl,
+    url: BASE_URL,
     siteName: 'Esteban S.D. Portfolio',
     images: [
       {
-        url: `${baseUrl}/og-image.png`,
+        url: `${BASE_URL}/og-image.png`,
         width: 1200,
         height: 630,
         alt: 'Esteban S.D. Portfolio',
@@ -71,7 +72,13 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  metadataBase: new URL(baseUrl),
+  alternates: {
+    languages: {
+      en: `${BASE_URL}/en`,
+      es: `${BASE_URL}/es`,
+    },
+  },
+  metadataBase: new URL(BASE_URL),
 };
 
 export async function generateStaticParams() {
