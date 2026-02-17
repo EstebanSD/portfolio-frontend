@@ -122,7 +122,7 @@ export async function addNewProjectAction(
 
     revalidateTag('projects-all', 'max');
 
-    return { success: true, message: 'Translation added successfully', data: result };
+    return { success: true, message: 'Project added successfully', data: result };
   } catch (error) {
     console.error('Error trying to add the project', error);
     throw error;
