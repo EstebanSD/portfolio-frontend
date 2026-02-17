@@ -1,7 +1,19 @@
+import { Metadata } from 'next';
 import { cookies } from 'next/headers';
 import { PrivateSidebar } from '@/components/auth';
 import { AuthSessionProvider } from '@/components/providers';
 import { SidebarProvider, SidebarTrigger } from '@/components/ui';
+
+export const metadata: Metadata = {
+  title: {
+    template: '%s | Admin Panel',
+    default: 'Admin Panel',
+  },
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 export default async function PrivateLayout({ children }: { children: React.ReactNode }) {
   const cookieStore = await cookies();

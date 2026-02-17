@@ -1,0 +1,1 @@
+export { EntityEditorTabs } from './EntityEditorTabs';

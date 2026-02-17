@@ -1,3 +1,4 @@
+import { Metadata } from 'next';
 import { FolderIcon, GlobeIcon } from 'lucide-react';
 import {
   Card,
@@ -12,6 +13,10 @@ import {
 import { fetchProjectIdAction } from '../actions';
 import { GeneralForm } from './components/GeneralForm';
 import { Translations } from './components/Translations';
+
+export const metadata: Metadata = {
+  title: 'Project Management',
+};
 
 export default async function page({ params }: PageProps<'/admin/projects/[id]'>) {
   const { id } = await params;

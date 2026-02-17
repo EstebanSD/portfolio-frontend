@@ -4,6 +4,9 @@ import { ZodError } from 'zod';
 import { AuthError } from 'next-auth';
 import { auth, signIn, signOut } from '@/auth';
 import { LoginFormValues } from '@/lib/validations/auth';
+import { publicEnv } from '@/config/env.public';
+
+const API_URL = publicEnv.NEXT_PUBLIC_API_URL;
 
 export async function loginAction(data: LoginFormValues) {
   try {
@@ -36,7 +39,7 @@ export async function logoutAction() {
 
   try {
     if (session?.accessToken) {
-      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/logout`, {
+      await fetch(`${API_URL}/auth/logout`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
