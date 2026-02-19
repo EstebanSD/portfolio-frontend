@@ -19,3 +19,10 @@ export interface Skill {
   icon?: FileMetadata;
   category: Category;
 }
+
+export interface CategoriesWithTranslations {
+  _id: string;
+  key: string;
+  order: number;
+  translations: { locale: string; name: string }[];
+}
