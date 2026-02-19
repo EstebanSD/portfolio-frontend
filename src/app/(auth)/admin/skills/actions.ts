@@ -72,3 +72,30 @@ export async function createCategoryAction(data: CategoryFormValues) {
     throw error;
   }
 }
+
+export async function deleteCategoryAction(id: string) {
+  const session = await auth();
+  try {
+    if (!session?.accessToken) {
+      throw new Error('Unauthorized');
+    }
+
+    const res = await fetch(`${API_URL}/portfolio/skills/categories/${id}`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${session.accessToken}`,
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (!res.ok) {
+      const errorData = await res.json().catch(() => null);
+      const message = errorData?.message || errorData?.error || `Error HTTP: ${res.status}`;
+
+      throw new Error(message);
+    }
+  } catch (error) {
+    console.error('Error trying to delete the Category', error);
+    throw error;
+  }
+}
