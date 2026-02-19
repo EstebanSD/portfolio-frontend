@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 import type { CategoryFormValues } from '../validations';
+import { createCategoryAction } from '../actions';
 
 function useAddCategory() {
   const [isLoading, setIsLoading] = useState(false);
@@ -13,9 +14,7 @@ function useAddCategory() {
     setIsLoading(true);
 
     try {
-      console.log(values);
-
-      // await createCategoryAction(values);
+      await createCategoryAction(values);
       toast.success('Skill Category successfully created');
       router.refresh();
     } catch (error) {
