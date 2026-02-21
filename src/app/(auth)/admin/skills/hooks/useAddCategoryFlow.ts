@@ -15,11 +15,11 @@ function useAddCategory() {
 
     try {
       await createCategoryAction(values);
-      toast.success('Skill Category successfully created');
+      toast.success('Category successfully created');
       router.refresh();
     } catch (error) {
-      toast.error('Failed to create skill category');
-      console.error('Create skill category error:', error);
+      toast.error('Failed to create category');
+      console.error('Create category error:', error);
     } finally {
       setIsLoading(false);
     }

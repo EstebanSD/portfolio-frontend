@@ -14,12 +14,12 @@ export function useDeleteCategory() {
 
     try {
       await deleteCategoryAction(id);
-      toast.success('Skill Category successfully deleted');
+      toast.success('Category successfully deleted');
       router.refresh();
     } catch (error) {
       const errorMsg = error instanceof Error ? error.message : 'Failed to delete category';
       toast.error(errorMsg);
-      console.error('Delete skill category error:', error);
+      console.error('Delete category error:', error);
     } finally {
       setIsEliminating(false);
     }

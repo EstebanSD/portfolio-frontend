@@ -7,12 +7,12 @@ import { categoryFormSchema, type CategoryFormValues } from '../../validations';
 import { Button, DialogClose, Form } from '@/components/ui';
 import { FormInput, Spinner } from '@/components/common';
 
-interface CategoryFormProps {
+interface CategoryFormDialogProps {
   onSubmit: (values: CategoryFormValues) => Promise<void>;
   isLoading: boolean;
 }
 
-export function CategoryForm({ onSubmit, isLoading }: CategoryFormProps) {
+export function CategoryFormDialog({ onSubmit, isLoading }: CategoryFormDialogProps) {
   const submitRef = useRef<HTMLButtonElement | null>(null);
 
   const form = useForm<CategoryFormValues>({

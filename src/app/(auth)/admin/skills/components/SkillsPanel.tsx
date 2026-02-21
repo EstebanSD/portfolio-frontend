@@ -15,7 +15,7 @@ export function SkillsPanel({ category, isMobile }: SkillsPanelProps) {
         <CardTitle className="flex items-center justify-between">
           <span>Skills</span>
 
-          <Button variant={'secondary'}>
+          <Button variant={'secondary'} className="cursor-pointer">
             {isMobile ? (
               <PlusIcon className="h-4 w-4 text-blue-600" />
             ) : (
