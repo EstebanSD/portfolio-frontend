@@ -10,7 +10,7 @@ export const categoryFormSchema = z.object({
 
 export type CategoryFormValues = z.infer<typeof categoryFormSchema>;
 
-const translationFormSchema = z.object({
+export const translationFormSchema = z.object({
   locale: z.string().min(1, 'This field is required.'),
   name: z.string().min(1, 'This field is required.'),
 });

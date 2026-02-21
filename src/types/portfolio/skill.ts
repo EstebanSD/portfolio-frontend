@@ -26,3 +26,18 @@ export interface CategoriesWithTranslations {
   order: number;
   translations: { locale: string; name: string }[];
 }
+
+export interface SkillItem {
+  _id: string;
+  name: string;
+  icon?: FileMetadata;
+  // category: {
+  //   _id: string;
+  //   key: string;
+  //   order: number;
+  //   createdAt: string;
+  //   updatedAt: string;
+  // };
+  createdAt: string;
+  updatedAt: string;
+}

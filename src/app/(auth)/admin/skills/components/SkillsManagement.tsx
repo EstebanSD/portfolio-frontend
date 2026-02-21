@@ -29,7 +29,7 @@ export function SkillsManagement({ categories }: SkillsManagementProps) {
       <div className="grid grid-cols-1 md:grid-cols-[auto_1fr] gap-4 h-full">
         <Control categories={categories} selected={selectedCategory._id} onSelect={setCategoryId} />
 
-        <SkillsPanel category={selectedCategory} isMobile={isMobile} />
+        <SkillsPanel category={selectedCategory} />
       </div>
 
       <CategoryConfigCard category={selectedCategory} />

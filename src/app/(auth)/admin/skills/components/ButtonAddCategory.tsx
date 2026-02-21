@@ -19,7 +19,7 @@ export function ButtonAddCategory({ withText = true }: ButtonAddCategoryProps) {
         <Button variant={'secondary'} className="cursor-pointer">
           {withText ? (
             <>
-              <PlusIcon className="mr-2 h-4 w-4 text-blue-600" />
+              <PlusIcon className="h-4 w-4 text-blue-600" />
               <span className="text-blue-600">Add Category</span>
             </>
           ) : (

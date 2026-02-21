@@ -194,3 +194,34 @@ export async function addTranslationAction(id: string, data: TranslationFormValu
     throw error;
   }
 }
+
+////// Items
+export async function fetchSkillItemsAction(id: string) {
+  const session = await auth();
+  try {
+    if (!session?.accessToken) {
+      throw new Error('Unauthorized');
+    }
+
+    const res = await fetch(`${API_URL}/portfolio/skills/categories/${id}/items`, {
+      cache: 'no-store',
+      headers: {
+        Authorization: `Bearer ${session.accessToken}`,
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (!res.ok) {
+      const errorData = await res.json().catch(() => null);
+      const message = errorData?.message || errorData?.error || `Error HTTP: ${res.status}`;
+
+      throw new Error(message);
+    }
+
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.error('Error during fetching data', error);
+    throw error;
+  }
+}
