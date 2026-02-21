@@ -61,7 +61,7 @@ export function AddTranslationForm({ experienceId, cancelNew, onSubmit, locales,
               labelIcon={<FileTextIcon className="w-4 h-4" />}
               placeholder="Write a description"
               rows={4}
-              maxLength={500}
+              maxLength={2000}
             />
 
             <div className="flex gap-2">

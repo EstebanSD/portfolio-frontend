@@ -1,5 +1,6 @@
 'use client';
 
+import { useId } from 'react';
 import { cn } from '@/lib/shadcn/utils';
 import { Label, Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../ui';
 
@@ -9,7 +10,6 @@ interface Option<T extends string> {
 }
 
 interface SelectFilterProps<T extends string> {
-  id: string;
   label: string;
   placeholder: string;
   options: readonly Option<T>[];
@@ -19,7 +19,6 @@ interface SelectFilterProps<T extends string> {
 }
 
 export function SelectFilter<T extends string>({
-  id,
   label,
   placeholder,
   options,
@@ -27,6 +26,8 @@ export function SelectFilter<T extends string>({
   value,
   onValueChange,
 }: SelectFilterProps<T>) {
+  const id = useId();
+
   return (
     <div className={cn('w-fit', className)}>
       <Label htmlFor={id}>{label}</Label>

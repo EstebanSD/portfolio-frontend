@@ -45,7 +45,6 @@ export function ProjectsToolbar({ filters, setFilters }: Props) {
         />
 
         <SelectFilter
-          id={'type'}
           label={'Type'}
           placeholder={'Select a type...'}
           options={TYPE_OPTIONS}
@@ -55,7 +54,6 @@ export function ProjectsToolbar({ filters, setFilters }: Props) {
         />
 
         <SelectFilter
-          id={'status'}
           label={'Status'}
           placeholder={'Select a status...'}
           options={STATUS_OPTIONS}
