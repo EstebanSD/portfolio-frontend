@@ -119,7 +119,7 @@ export function DialogTranslationEdit({ translation, localeInfo, handleEdit, isL
           labelIcon={<FileTextIcon className="w-4 h-4" />}
           placeholder="Write your biography"
           rows={4}
-          maxLength={500}
+          maxLength={1000}
         />
 
         <FormFileUpload
