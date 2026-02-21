@@ -1,0 +1,1 @@
+export { getExperienceTypeColor } from './getExperienceTypeColor';

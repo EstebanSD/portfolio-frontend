@@ -1,3 +1,4 @@
+import { Metadata } from 'next';
 import { GlobeIcon, UserIcon } from 'lucide-react';
 import {
   Card,
@@ -13,6 +14,10 @@ import { fetchAboutAction } from './actions';
 import { GeneralForm } from './components/GeneralForm';
 import { Translations } from './components/Translations';
 
+export const metadata: Metadata = {
+  title: 'Manage About',
+};
+
 export default async function page() {
   const initialData = await fetchAboutAction();
   const tCount = initialData.translations.length;
@@ -21,14 +26,8 @@ export default async function page() {
     <div className="space-y-6 max-w-7xl mx-auto">
       <Card>
         <CardHeader>
-          <div className="flex justify-between items-center">
-            <div>
-              <CardTitle className="text-2xl">Manage About</CardTitle>
-              <CardDescription>
-                Administer your personal information and translations
-              </CardDescription>
-            </div>
-          </div>
+          <CardTitle className="text-2xl">Manage About</CardTitle>
+          <CardDescription>Administer your personal information and translations</CardDescription>
         </CardHeader>
       </Card>
 

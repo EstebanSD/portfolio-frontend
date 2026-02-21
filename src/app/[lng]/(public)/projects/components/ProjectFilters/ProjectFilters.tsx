@@ -37,7 +37,6 @@ export function ProjectFilters({ lng }: ProjectFiltersProps) {
         <CardContent className="p-6">
           <div className="flex flex-wrap gap-4 items-end">
             <SelectFilter
-              id={'type'}
               label={t('page.filter.type')}
               placeholder={t('page.filter.typePlaceholder')}
               className="min-w-[150px]"
@@ -47,7 +46,6 @@ export function ProjectFilters({ lng }: ProjectFiltersProps) {
             />
 
             <SelectFilter
-              id={'status'}
               label={t('page.filter.status')}
               placeholder={t('page.filter.statusPlaceholder')}
               className="min-w-[150px]"

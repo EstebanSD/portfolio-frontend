@@ -1,8 +1,13 @@
+import { Metadata } from 'next';
 import Link from 'next/link';
 import { PlusIcon } from 'lucide-react';
 import { Button } from '@/components/ui';
 import { fetchProjectsAction } from './actions';
 import { ProjectsManagement } from './components/ProjectsManagement';
+
+export const metadata: Metadata = {
+  title: 'Projects',
+};
 
 export default async function page() {
   const projects = await fetchProjectsAction();
@@ -28,7 +33,7 @@ export default async function page() {
 
   return (
     <div className="space-y-6 max-w-7xl mx-auto">
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-end">
         <div>
           <h1 className="text-3xl font-bold">Project Management</h1>
           <p className="text-muted-foreground">
