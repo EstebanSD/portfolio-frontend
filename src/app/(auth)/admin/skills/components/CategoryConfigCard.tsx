@@ -139,7 +139,7 @@ export function CategoryConfigCard({ category }: CategoryConfigCardProps) {
           }
           description={
             <>
-              Are you sure you want to delete {formatKey(category.key)}?
+              Are you sure you want to delete <strong>{formatKey(category.key)}</strong>?
               <br />
               If the category has translations, they will also be deleted.
               <br />

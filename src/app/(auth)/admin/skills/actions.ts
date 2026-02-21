@@ -4,6 +4,7 @@ import { auth } from '@/auth';
 import { publicEnv } from '@/config/env.public';
 import type {
   CategoryFormValues,
+  SkillItemFormValues,
   TranslationFormValues,
   UpdateCategoryCleanRequest,
 } from './validations';
@@ -222,6 +223,99 @@ export async function fetchSkillItemsAction(id: string) {
     return data;
   } catch (error) {
     console.error('Error during fetching data', error);
+    throw error;
+  }
+}
+
+export async function addSkillItemAction(id: string, data: SkillItemFormValues) {
+  const session = await auth();
+  try {
+    if (!session?.accessToken) {
+      throw new Error('Unauthorized');
+    }
+
+    const formData = new FormData();
+    formData.append('name', data.name);
+    if (data.file) {
+      formData.append('file', data.file);
+    }
+
+    const res = await fetch(`${API_URL}/portfolio/skills/categories/${id}/items`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${session.accessToken}`,
+      },
+      body: formData,
+    });
+
+    if (!res.ok) {
+      const errorData = await res.json().catch(() => null);
+      const message = errorData?.message || errorData?.error || `Error HTTP: ${res.status}`;
+
+      throw new Error(message);
+    }
+  } catch (error) {
+    console.error('Error trying to add the skill item', error);
+    throw error;
+  }
+}
+
+export async function deleteSkillItemAction(id: string) {
+  const session = await auth();
+  try {
+    if (!session?.accessToken) {
+      throw new Error('Unauthorized');
+    }
+
+    const res = await fetch(`${API_URL}/portfolio/skills/items/${id}`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${session.accessToken}`,
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (!res.ok) {
+      const errorData = await res.json().catch(() => null);
+      const message = errorData?.message || errorData?.error || `Error HTTP: ${res.status}`;
+
+      throw new Error(message);
+    }
+  } catch (error) {
+    console.error('Error trying to delete the skill item', error);
+    throw error;
+  }
+}
+
+export async function updateSkillItemAction(id: string, data: SkillItemFormValues) {
+  const session = await auth();
+  try {
+    if (!session?.accessToken) {
+      throw new Error('Unauthorized');
+    }
+
+    const formData = new FormData();
+    formData.append('name', data.name);
+    if (data.file) {
+      formData.append('file', data.file);
+    }
+
+    const res = await fetch(`${API_URL}/portfolio/skills/items/${id}`, {
+      method: 'PATCH',
+      headers: {
+        Authorization: `Bearer ${session.accessToken}`,
+      },
+      body: formData,
+    });
+
+    if (!res.ok) {
+      const errorData = await res.json().catch(() => null);
+      const message = errorData?.message || errorData?.error || `Error HTTP: ${res.status}`;
+
+      throw new Error(message);
+    }
+  } catch (error) {
+    console.error('Error trying to edit the skill item', error);
     throw error;
   }
 }

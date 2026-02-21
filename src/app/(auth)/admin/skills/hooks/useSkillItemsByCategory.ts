@@ -10,7 +10,6 @@ export function useSkillItemsByCategory(id: string) {
 
   const fetchItems = useCallback(async () => {
     setIsLoading(true);
-    setItems([]);
 
     try {
       const data = await fetchSkillItemsAction(id);
@@ -28,5 +27,5 @@ export function useSkillItemsByCategory(id: string) {
     fetchItems();
   }, [fetchItems]);
 
-  return { items, isLoading };
+  return { items, isLoading, refetch: fetchItems, setItems };
 }

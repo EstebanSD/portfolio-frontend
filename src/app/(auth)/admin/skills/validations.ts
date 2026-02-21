@@ -33,3 +33,10 @@ export type UpdateCategoryCleanRequest = {
     name: string;
   }[];
 };
+
+export const skillItemFormSchema = z.object({
+  name: z.string().min(1, 'This field is required.'),
+  file: z.instanceof(File).optional(),
+});
+
+export type SkillItemFormValues = z.infer<typeof skillItemFormSchema>;

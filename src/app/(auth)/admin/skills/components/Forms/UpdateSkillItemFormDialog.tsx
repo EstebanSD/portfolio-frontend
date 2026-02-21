@@ -3,23 +3,28 @@
 import { useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { categoryFormSchema, type CategoryFormValues } from '../../validations';
 import { Button, DialogClose, Form } from '@/components/ui';
-import { FormInput, Spinner } from '@/components/common';
+import { FormImageUpload, FormInput, Spinner } from '@/components/common';
+import { skillItemFormSchema, type SkillItemFormValues } from '../../validations';
 
-interface CategoryFormDialogProps {
-  onSubmit: (values: CategoryFormValues) => Promise<void>;
+interface UpdateSkillItemFormDialogProps {
+  name: string;
+  onSubmit: (values: SkillItemFormValues) => Promise<void>;
   isLoading: boolean;
 }
 
-export function CategoryFormDialog({ onSubmit, isLoading }: CategoryFormDialogProps) {
+export function UpdateSkillItemFormDialog({
+  name,
+  onSubmit,
+  isLoading,
+}: UpdateSkillItemFormDialogProps) {
   const submitRef = useRef<HTMLButtonElement | null>(null);
 
-  const form = useForm<CategoryFormValues>({
-    resolver: zodResolver(categoryFormSchema),
+  const form = useForm<SkillItemFormValues>({
+    resolver: zodResolver(skillItemFormSchema),
     defaultValues: {
-      key: '',
-      order: 0,
+      name,
+      file: undefined,
     },
   });
 
@@ -27,9 +32,16 @@ export function CategoryFormDialog({ onSubmit, isLoading }: CategoryFormDialogPr
     <>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 p-2">
-          <FormInput required name="key" label="Key" />
+          <FormInput required name="name" label="Name" />
 
-          <FormInput name="order" label="Order" />
+          <FormImageUpload
+            maxFiles={1}
+            name="file"
+            label="Icon"
+            accept="image/jpeg,image/png,image/webp,image/svg+xml"
+            showImagePreview={true}
+            previewSize="sm"
+          />
 
           <button ref={submitRef} type="submit" className="hidden" />
         </form>
@@ -48,7 +60,7 @@ export function CategoryFormDialog({ onSubmit, isLoading }: CategoryFormDialogPr
           onClick={() => submitRef.current?.click()}
           className="flex-1"
         >
-          <Spinner loading={isLoading} text="Create Category" loadingText="Creating..." />
+          <Spinner loading={isLoading} text="Save" loadingText="Saving..." />
         </Button>
       </div>
     </>
