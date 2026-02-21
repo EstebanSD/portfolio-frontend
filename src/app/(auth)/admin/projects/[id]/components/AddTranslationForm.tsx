@@ -81,7 +81,7 @@ export function AddTranslationForm({ projectId, cancelNew, locales, session }: P
               labelIcon={<FileTextIcon className="w-4 h-4" />}
               placeholder="Write a full description"
               rows={4}
-              maxLength={500}
+              maxLength={2000}
             />
 
             <div className="flex gap-2">

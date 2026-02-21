@@ -13,11 +13,11 @@ export async function ProjectsSection({ lng }: { lng: string }) {
 
   try {
     const response = await fetch(`${API_URL}/portfolio/projects?locale=${lng}`, {
-      cache: 'force-cache',
-      next: {
-        revalidate: 3600,
-        tags: ['projects'],
-      },
+      cache: 'no-store',
+      // next: {
+      //   revalidate: 3600,
+      //   tags: ['projects'],
+      // },
       headers: {
         'Content-Type': 'application/json',
       },

@@ -50,7 +50,7 @@ export function TranslationForm({ defaultValues, onSubmit, isLoading }: Translat
             label="Description"
             labelIcon={<FileTextIcon className="w-4 h-4" />}
             rows={4}
-            maxLength={500}
+            maxLength={2000}
           />
 
           <button ref={submitRef} type="submit" className="hidden" />
